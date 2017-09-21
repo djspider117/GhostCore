@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace GhostCore.Math
 {
@@ -127,6 +128,7 @@ namespace GhostCore.Math
         #endregion
 
         #region Binary Operators
+
         public static Vector2D operator +(Vector2D c1, Vector2D c2)
         {
             return new Vector2D(c1.X + c2.X, c1.Y + c2.Y);
@@ -193,7 +195,6 @@ namespace GhostCore.Math
 
             return !c1.Equals(c2);
         }
-
         public static bool operator <(Vector2D c1, Vector2D c2)
         {
             var origin = new Vector2D();
@@ -201,7 +202,6 @@ namespace GhostCore.Math
             var d2 = MathUtils.Distance(c2, origin);
             return d1 < d2;
         }
-
         public static bool operator >(Vector2D c1, Vector2D c2)
         {
             var origin = new Vector2D();
@@ -217,6 +217,22 @@ namespace GhostCore.Math
         public static implicit operator Vector2D(double d)
         {
             return new Vector2D(d, d);
+        }
+        public static implicit operator PointF(Vector2D v)
+        {
+            return new PointF((float)v.X, (float)v.Y);
+        }
+        public static implicit operator Point(Vector2D v)
+        {
+            return new Point((int)v.X, (int)v.Y);
+        }
+        public static implicit operator Vector2D(PointF v)
+        {
+            return new Vector2D(v.X, v.Y);
+        }
+        public static implicit operator Vector2D(Point v)
+        {
+            return new Vector2D(v.X, v.Y);
         }
 
         #endregion
