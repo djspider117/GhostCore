@@ -37,6 +37,71 @@ namespace GhostCore.Math
             value = Clamp(value, min, max);
         }
 
+        public static bool IsInInterval(this double value, double min, double max, bool inclusiveMin = true, bool inclusiveMax = false)
+        {
+            if (inclusiveMin && inclusiveMax)
+                return value >= min && value <= max;
+
+            if (!inclusiveMin && !inclusiveMax)
+                return value > min && value < max;
+
+            if (inclusiveMin && !inclusiveMax)
+                return value >= min && value < max;
+
+            if (!inclusiveMin && inclusiveMax)
+                return value > min && value <= max;
+
+            return false;
+        }
+        public static bool IsInInterval(this int value, double min, double max, bool inclusiveMin = true, bool inclusiveMax = false)
+        {
+            if (inclusiveMin && inclusiveMax)
+                return value >= min && value <= max;
+
+            if (!inclusiveMin && !inclusiveMax)
+                return value > min && value < max;
+
+            if (inclusiveMin && !inclusiveMax)
+                return value >= min && value < max;
+
+            if (!inclusiveMin && inclusiveMax)
+                return value > min && value <= max;
+
+            return false;
+        }
+        public static bool IsInInterval(this float value, double min, double max, bool inclusiveMin = true, bool inclusiveMax = false)
+        {
+            if (inclusiveMin && inclusiveMax)
+                return value >= min && value <= max;
+
+            if (!inclusiveMin && !inclusiveMax)
+                return value > min && value < max;
+
+            if (inclusiveMin && !inclusiveMax)
+                return value >= min && value < max;
+
+            if (!inclusiveMin && inclusiveMax)
+                return value > min && value <= max;
+
+            return false;
+        }
+        public static bool IsInInterval(this decimal value, decimal min, decimal max, bool inclusiveMin = true, bool inclusiveMax = false)
+        {
+            if (inclusiveMin && inclusiveMax)
+                return value >= min && value <= max;
+
+            if (!inclusiveMin && !inclusiveMax)
+                return value > min && value < max;
+
+            if (inclusiveMin && !inclusiveMax)
+                return value >= min && value < max;
+
+            if (!inclusiveMin && inclusiveMax)
+                return value > min && value <= max;
+
+            return false;
+        }
+
         public static bool EpsilonEquals(this double a, double b)
         {
             return SysMath.Abs(a - b) <= Epsilon;
