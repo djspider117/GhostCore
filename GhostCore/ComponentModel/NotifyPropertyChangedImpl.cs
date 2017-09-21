@@ -32,5 +32,12 @@ namespace GhostCore.ComponentModel
         {
             PropertyChanged -= handler;
         }
+
+        public void RunWithDisableINPC(Action a)
+        {
+            DisableINPC = true;
+            a();
+            DisableINPC = false;
+        }
     }
 }
