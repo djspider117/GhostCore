@@ -39,4 +39,5 @@ namespace GhostCore.Utility
             return fnfo.IsFileLocked();
         }
     }
+
 }
