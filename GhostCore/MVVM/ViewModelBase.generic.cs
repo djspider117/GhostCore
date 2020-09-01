@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GhostCore.ComponentModel;
+using Newtonsoft.Json;
 
 namespace GhostCore.MVVM
 {
@@ -36,11 +37,12 @@ namespace GhostCore.MVVM
             set { _model = value; OnPropertyChanged("Model"); }
         }
 
-        public int ObjectId
+        public int InternalObjectId
         {
             get { return _OBJECT_ID_; }
         }
 
+        [JsonIgnore]
         public object Parent
         {
             get { return _parent; }
@@ -71,6 +73,12 @@ namespace GhostCore.MVVM
         }
 
         #endregion
+
+
+        public TType ModelAs<TType>() where TType : class
+        {
+            return Model as TType;
+        }
     }
 
 }

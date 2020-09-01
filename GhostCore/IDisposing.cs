@@ -7,5 +7,6 @@ namespace GhostCore
     {
         event EventHandler Disposing;
     }
+
 }
 

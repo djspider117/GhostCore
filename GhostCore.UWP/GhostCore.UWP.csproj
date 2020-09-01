@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A59C4AEF-75F7-42CD-892A-B02604D1E7EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GhostCore.UWP</RootNamespace>
+    <AssemblyName>GhostCore.UWP</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AutoFormGeneration\BrowseFormItemAttribute.cs" />
+    <Compile Include="AutoFormGeneration\ColorPickerFormItemAttribute.cs" />
+    <Compile Include="AutoFormGeneration\ExpandClassAsGroupAttribute.cs" />
+    <Compile Include="AutoFormGeneration\FormGroupAttribute.cs" />
+    <Compile Include="AutoFormGeneration\FormGroupBehaviourAttribute.cs" />
+    <Compile Include="AutoFormGeneration\FormGroupMode.cs" />
+    <Compile Include="AutoFormGeneration\FormItemAttribute.cs" />
+    <Compile Include="AutoFormGeneration\FormItemDataSource.cs" />
+    <Compile Include="AutoFormGeneration\HiddenFormItemAttribute.cs" />
+    <Compile Include="AutoFormGeneration\InFormGroupAttribute.cs" />
+    <Compile Include="AutoFormGeneration\ItemsControlFormItemAttribute.cs" />
+    <Compile Include="AutoFormGeneration\ItemsControlType.cs" />
+    <Compile Include="AutoFormGeneration\SliderFormItemAttribute.cs" />
+    <Compile Include="AutoFormGeneration\TextBoxFormItemAttribute.cs" />
+    <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\Chain\ChainConverter.cs" />
+    <Compile Include="Converters\Chain\Resolvers\ConverterResolver.cs" />
+    <Compile Include="Converters\Chain\Resolvers\IConverterResolver.cs" />
+    <Compile Include="Converters\DebugPassThroughConverter.cs" />
+    <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
+    <Compile Include="Converters\IntToColorConverter.cs" />
+    <Compile Include="Converters\IntToSolidColorBrushConverter.cs" />
+    <Compile Include="Converters\MultiBinder.cs" />
+    <Compile Include="Converters\NegationConverter.cs" />
+    <Compile Include="Converters\NegationVisisbilityConvertor.cs" />
+    <Compile Include="Converters\NullOrEmptyStringToVisibilityConverter.cs" />
+    <Compile Include="Converters\NullToBoolConverter.cs" />
+    <Compile Include="Converters\NullToColorConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToTimeSpanConverter.cs" />
+    <Compile Include="Converters\TimeSpanToStringConverter.cs" />
+    <Compile Include="Converters\ToUpperConvertor.cs" />
+    <Compile Include="Converters\UriToStringConverter.cs" />
+    <Compile Include="DependecyPropertyHelper.cs" />
+    <Compile Include="EventArgs.cs" />
+    <Compile Include="Extensions\ListViewExtensions.cs" />
+    <Compile Include="Extensions\VisualTreeHelperExtensions.cs" />
+    <Compile Include="Helpers\CanvasCoordinatesBindingHelper.cs" />
+    <Compile Include="Helpers\FileHelpers.cs" />
+    <Compile Include="Helpers\UIHelper.cs" />
+    <Compile Include="Helpers\WidthHeightBindingHelper.cs" />
+    <Compile Include="Helpers\ZIndexBindingHelper.cs" />
+    <Compile Include="Input\IdleDetector.cs" />
+    <Compile Include="Media\Animation.cs" />
+    <Compile Include="Media\Composition\Composition.cs" />
+    <Compile Include="Media\Composition\CompositionEasings.cs" />
+    <Compile Include="Media\Composition\CompositionFactory.cs" />
+    <Compile Include="Media\Composition\CompositionProperty.cs" />
+    <Compile Include="Media\Composition\CompositionStoryboard.cs" />
+    <Compile Include="Media\Composition\CompositionTimeline.cs" />
+    <Compile Include="Media\Composition\ICompositionTimeline.cs" />
+    <Compile Include="Media\Composition\ISupportsAlphaMask.cs" />
+    <Compile Include="Media\DependentTargetProperty.cs" />
+    <Compile Include="Media\KeySplines.cs" />
+    <Compile Include="Media\Presets.cs" />
+    <Compile Include="Media\Properties.cs" />
+    <Compile Include="Media\RenderTransform.cs" />
+    <Compile Include="Media\TargetProperty.cs" />
+    <Compile Include="Media\VisualStateUtilities.cs" />
+    <Compile Include="ObjectModel\BindingModeConverter.cs" />
+    <Compile Include="Panels\DynamicLayout.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateSelectors\XamlTemplateSelector.cs" />
+    <Compile Include="Utils\DialogUtils.cs" />
+    <Compile Include="Utils\ListViewHelpers.cs" />
+    <Compile Include="Utils\PickerUtils.cs" />
+    <Compile Include="Utils\SelectedItemsBinder.cs" />
+    <Compile Include="Utils\StorageFileUtils.cs" />
+    <EmbeddedResource Include="Properties\GhostCore.UWP.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CsvHelper">
+      <Version>15.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Win2D.uwp">
+      <Version>1.24.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj">
+      <Project>{5187556b-a7ed-4efe-91f6-1dc981376424}</Project>
+      <Name>GhostCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Style\ListStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

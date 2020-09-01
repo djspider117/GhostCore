@@ -7,19 +7,27 @@ using System.Threading.Tasks;
 
 namespace GhostCore.ComponentModel
 {
-    public class NotifyPropertyChangedImpl : INotifyPropertyChanged
+    public class NotifyPropertyChangedImpl : INotifyPropertyChanged, INotifyPropertyChanging
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<PropertyChangingEventArgs> PropertyChanging;
 
         public bool DisableINPC { get; set; }
 
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged == null || DisableINPC)
+            if (DisableINPC)
                 return;
 
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected virtual void OnPropertyChanging(string propertyName, object oldValue, object newValue)
+        {
+            if (DisableINPC)
+                return;
+
+            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(oldValue, newValue, propertyName));
         }
 
         protected void ExternalAttachPropertyChanged(PropertyChangedEventHandler handler)
@@ -27,7 +35,6 @@ namespace GhostCore.ComponentModel
             if (PropertyChanged == null)
                 PropertyChanged += handler;
         }
-
         protected void ExternalDetachPropertyChanged(PropertyChangedEventHandler handler)
         {
             PropertyChanged -= handler;

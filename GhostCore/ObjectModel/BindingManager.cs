@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace GhostCore.ObjectModel
             binding.Disposing += binding_Disposing;
             _bindings.Add(binding);
 
-            Debug.Log("Added binding: " + binding);
+            Debug.WriteLine($"Added binding: {binding}");
 
             return binding;
         }
@@ -30,7 +31,7 @@ namespace GhostCore.ObjectModel
 
         private static void binding_Disposing(object sender, EventArgs e)
         {
-            Debug.Log("Removed and disposed binding: " + sender);
+            Debug.WriteLine($"Removed and disposed binding: {sender}");
             _bindings.Remove(sender as PropertyBinding);
         }
     }

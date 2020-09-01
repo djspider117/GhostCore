@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -15,11 +16,14 @@ namespace GhostCore.ObjectModel
         //from source to target
         OneWay = 0x01,
 
-        //from target to source
-        OneWayToSource = 0x02,
+        OneTime = 0x02,
 
         //from source to target AND from target to source
-        TwoWay = 0x03
+        TwoWay = 0x03,
+
+        //from target to source
+        OneWayToSource = 0x04,
+        None = 0
     }
 
     public class PropertyBinding : IDisposable, IDisposing
@@ -154,7 +158,7 @@ namespace GhostCore.ObjectModel
                 catch (Exception ex)
                 {
                     string format = "[Binding Error] Source: {3}, Target: {4}, SourcePropertyName: {1}, TargetPropertyName: {2}, Exception: {0}";
-                    Debug.Log(string.Format(format, ex.Message, SourcePropertyName, TargetPropertyName, Source, Target));
+                    Debug.WriteLine(string.Format(format, ex.Message, SourcePropertyName, TargetPropertyName, Source, Target));
                 }
 
             }

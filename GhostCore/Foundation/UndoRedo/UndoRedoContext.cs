@@ -74,6 +74,8 @@ namespace GhostCore.Foundation.UndoRedo
                 return;
             RegisterCommand(_currentBulkCommand);
         }
+
+
         public void CancelBulkCommand()
         {
             IsBulking = false;
@@ -200,5 +202,14 @@ namespace GhostCore.Foundation.UndoRedo
         }
 
         #endregion
+
+        public void Cleanup()
+        {
+            _undoStack.Clear();
+            _redoStack.Clear();
+
+            _undoStack = null;
+            _redoStack = null;
+        }
     }
 }

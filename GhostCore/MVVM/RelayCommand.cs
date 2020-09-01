@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace GhostCore.MVVM
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand : ICommand, IDisposable
     {
         #region Events
 
@@ -33,12 +33,15 @@ namespace GhostCore.MVVM
 
         public RelayCommand(Action<object> executeHandler, Func<object, bool> canExecute = null)
         {
-            _executeHandler = executeHandler ?? throw new ArgumentException("Execute handler cannot be null");
+            _executeHandler = executeHandler;// ?? throw new ArgumentException("Execute handler cannot be null");
             _canExecuteHandler = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
+            if (_executeHandler == null)
+                return false;
+
             if (_canExecuteHandler == null)
                 return true;
 
@@ -47,7 +50,18 @@ namespace GhostCore.MVVM
 
         public void Execute(object parameter)
         {
-            _executeHandler(parameter);
+            _executeHandler?.Invoke(parameter);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            OnCanExecuteChanged();
+        }
+
+        public void Dispose()
+        {
+            _executeHandler = null;
+            _canExecuteHandler = null;
         }
     }
 }

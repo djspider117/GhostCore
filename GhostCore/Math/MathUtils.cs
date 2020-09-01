@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 using SysMath = System.Math;
@@ -14,6 +15,21 @@ namespace GhostCore.Math
         {
             return start + proc * (end - start);
         }
+        /// <summary>
+        /// Calculates a percentage of a number within a range
+        /// </summary>
+        /// <param name="value">Value to calculate</param>
+        /// <param name="min">Minimum value</param>
+        /// <param name="max">Maximum value</param>
+        /// <returns>A decimal between 0 and 1 representing the percentage of the value in the range</returns>
+        public static double InverseLerp(this double value, double min, double max)
+        {
+            return (value - min) / (max - min);
+        }
+        public static double Average(params double[] value)
+        {
+            return value.Average();
+        }
         public static double AsRadian(this double angle)
         {
             return angle * SysMath.PI / 180;
@@ -21,6 +37,15 @@ namespace GhostCore.Math
         public static double AsAngle(this double rad)
         {
             return rad * 180 / SysMath.PI;
+        }
+
+        public static float AsRadian(this float angle)
+        {
+            return angle * (float)SysMath.PI / 180;
+        }
+        public static float AsAngle(this float rad)
+        {
+            return rad * 180 / (float)SysMath.PI;
         }
         public static double Clamp(this double value, double min, double max)
         {

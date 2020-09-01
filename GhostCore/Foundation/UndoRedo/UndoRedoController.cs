@@ -56,6 +56,12 @@ namespace GhostCore.Foundation.UndoRedo
         public void Cleanup()
         {
             _activeContext = null;
+
+            foreach (var item in _contextMapping.Values)
+            {
+                item?.Cleanup();
+            }
+
             _contextMapping.Clear();
         }
         public void SetActiveContext(object contextSource)
@@ -137,6 +143,7 @@ namespace GhostCore.Foundation.UndoRedo
             CheckActiveContext();
             _activeContext.Redo();
         }
+
         #endregion
 
         private void CheckActiveContext()

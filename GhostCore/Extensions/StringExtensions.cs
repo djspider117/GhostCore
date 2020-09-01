@@ -24,5 +24,23 @@ namespace GhostCore.Extensions
             }
             return result.ToString();
         }
+
+        public static bool IsInteger(this string value, out long val)
+        {
+            return long.TryParse(value, out val);
+        }
+        public static bool IsInteger(this string value)
+        {
+            return long.TryParse(value, out long dummy);
+        }
+
+        public static bool IsReal(this string value, out double val)
+        {
+            return double.TryParse(value, out val);
+        }
+        public static bool IsReal(this string value)
+        {
+            return double.TryParse(value, out double dummy);
+        }
     }
 }
