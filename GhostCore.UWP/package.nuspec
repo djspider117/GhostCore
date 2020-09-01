@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>GhostCore.UWP</id>
+    <!--*-->
+    <version>1.0.0</version>
+    <title>GhostCore.UWP</title>
+    <!--*-->
+    <authors>Ionut Popovici</authors>
+    <owners>Ionut Popovici</owners>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/djspider117/GhostCore</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/djspider117/GhostCore/master/Icons/GhostCoreUWPIcon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>A set of utilities for UWP projects</description>
+    <!--*-->
+    <releaseNotes>2020 Release</releaseNotes>
+    <tags>mvvm uwp helpers</tags>
+    <dependencies>
+      <dependency id="CsvHelper" version="15.0.3" />
+      <dependency id="Win2d.uwp" version="1.24.0" />
+    </dependencies>
+  </metadata>
+</package>
