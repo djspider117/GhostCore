@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
-namespace GhostCore.Math
+namespace GhostCore.Numerics
 {
     public class TransformData
     {

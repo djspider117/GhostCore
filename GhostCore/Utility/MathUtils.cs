@@ -1,19 +1,25 @@
-﻿using System;
+﻿using GhostCore.Numerics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 using SysMath = System.Math;
 
-namespace GhostCore.Math
+namespace GhostCore.Utility
 {
     public static class MathUtils
     {
         public const double Epsilon = 9.0E-7;
 
-        public static double Lerp(this double proc, double start, double end)
+        public static double Lerp(this double t, double start, double end)
         {
-            return start + proc * (end - start);
+            return start + t * (end - start);
+        }
+
+        public static float Lerp(this float t, float start, float end)
+        {
+            return start + t * (end - start);
         }
         /// <summary>
         /// Calculates a percentage of a number within a range

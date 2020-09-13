@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace GhostCore.Math
+namespace GhostCore.Numerics
 {
     public class Vector2D : ICloneable, IEquatable<Vector2D>
     {
