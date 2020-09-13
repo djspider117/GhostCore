@@ -1,5 +1,5 @@
-﻿using System;
-using System.Drawing;
+﻿using GhostCore.Utility;
+using System;
 
 namespace GhostCore.Numerics
 {
@@ -217,22 +217,6 @@ namespace GhostCore.Numerics
         public static implicit operator Vector2D(double d)
         {
             return new Vector2D(d, d);
-        }
-        public static implicit operator PointF(Vector2D v)
-        {
-            return new PointF((float)v.X, (float)v.Y);
-        }
-        public static implicit operator Point(Vector2D v)
-        {
-            return new Point((int)v.X, (int)v.Y);
-        }
-        public static implicit operator Vector2D(PointF v)
-        {
-            return new Vector2D(v.X, v.Y);
-        }
-        public static implicit operator Vector2D(Point v)
-        {
-            return new Vector2D(v.X, v.Y);
         }
 
         #endregion
