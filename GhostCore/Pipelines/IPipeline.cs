@@ -10,6 +10,7 @@ namespace GhostCore.Pipelines
 
         string Name { get; }
         IReadOnlyCollection<IPipelineProcessor> Processors { get; }
+        IPipelineEndpoint Endpoint { get; }
 
         void Start(object sender);
         void Start(object sender, object sourceObject);
