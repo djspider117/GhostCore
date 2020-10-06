@@ -37,7 +37,9 @@ namespace GhostCore.Pipelines
                     return;
                 }
 
-                await Process(ipp, _pdata);
+                var procResult = await Process(ipp, _pdata);
+                if (procResult.IsFaulted)
+                    return;
             }
 
             if (_pdata.CancellationToken.IsCancellationRequested)
