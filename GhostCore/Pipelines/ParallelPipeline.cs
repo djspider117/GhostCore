@@ -19,6 +19,10 @@ namespace GhostCore.Pipelines
         public ParallelPipelineFinishOptions FinishOptions { get; set; }
         public ParallelPipelineTaskFailHandling TaskFailHandling { get; set; }
 
+        public ParallelPipeline(string name = null) : base(name)
+        {
+        }
+
         public override async void Start(object sender, object sourceObject, params object[] pipelineArguments)
         {
             if (TaskFailHandling == ParallelPipelineTaskFailHandling.SucceedAll && FinishOptions != ParallelPipelineFinishOptions.FinishWhenAll)

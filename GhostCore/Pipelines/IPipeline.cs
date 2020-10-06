@@ -2,6 +2,9 @@
 using GhostCore.Foundation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace GhostCore.Pipelines
@@ -86,7 +89,7 @@ namespace GhostCore.Pipelines
         /// If the pipeline is currently running, a <see cref="InvalidOperationException"/> will be thrown.
         /// </remarks>
         /// <param name="pipelineProcessor">The processor to be removed.</param>
-        bool RemoveProcessor(IPipelineProcessor pipelineProcessor); 
+        bool RemoveProcessor(IPipelineProcessor pipelineProcessor);
 
         /// <summary>
         /// Adds a <see cref="RelayPipelineProcessor"/> based on the <paramref name="processMethod"/> func provided to the current list of pipeline processors.
@@ -101,5 +104,11 @@ namespace GhostCore.Pipelines
         /// <inheritdoc cref="AddProcessor(Func{PipelineProcessData, Task{ISafeTaskResult}})"/>
         /// <param name="rollbackMethod">A callback to a rollback method.</param>
         RelayPipelineProcessor AddProcessor(Func<PipelineProcessData, Task<ISafeTaskResult>> processMethod, Func<PipelineProcessData, Task<ISafeTaskResult>> rollbackMethod);
+    }
+
+    public enum DefaultPipelineType
+    {
+        Serial,
+        Parallel
     }
 }

@@ -13,6 +13,10 @@ namespace GhostCore.Pipelines
     {
         private PipelineProcessData _pdata;
 
+        public SerialPipeline(string name = null) : base(name)
+        {
+        }
+
         /// <inheritdoc />
         public override async void Start(object sender, object sourceObject, params object[] pipelineArguments)
         {
