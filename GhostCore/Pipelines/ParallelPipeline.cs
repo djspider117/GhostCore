@@ -9,7 +9,7 @@ namespace GhostCore.Pipelines
 {
     /// <summary>
     /// This pipeline will execute the processors in parallel (more than one at a time).
-    /// Internall this uses <see cref="Parallel.ForEach{TSource}(System.Collections.Generic.IEnumerable{TSource}, Action{TSource})"/>.
+    /// Internally this uses <see cref="Parallel.ForEach{TSource}(System.Collections.Generic.IEnumerable{TSource}, Action{TSource})"/>.
     /// </summary>
     /// <remarks>
     /// This pipeline type does not support rollbacks.

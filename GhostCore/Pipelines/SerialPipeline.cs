@@ -1,7 +1,6 @@
 ﻿using GhostCore.Foundation;
 using GhostCore.Services.Logging;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace GhostCore.Pipelines
@@ -23,7 +22,7 @@ namespace GhostCore.Pipelines
             LogPipelineMessage("Starting pipeline.");
             _isRunning = true;
 
-            LogPipelineMessage("Initializing cancelletion token", LoggingLevel.Verbose);
+            LogPipelineMessage("Initializing cancellation token", LoggingLevel.Verbose);
             InitializeCancellationToken();
 
             _pdata = CreatePipelineProcessData(sourceObject, pipelineArguments);
@@ -33,7 +32,7 @@ namespace GhostCore.Pipelines
             {
                 if (_pdata.CancellationToken.IsCancellationRequested)
                 {
-                    LogPipelineMessage($"Cancelletion was requested. Ending pipeline.", LoggingLevel.Information);
+                    LogPipelineMessage($"Cancellation was requested. Ending pipeline.", LoggingLevel.Information);
                     FinishPipeline(_pdata, isSuccess: false);
                     return;
                 }
@@ -43,7 +42,7 @@ namespace GhostCore.Pipelines
 
             if (_pdata.CancellationToken.IsCancellationRequested)
             {
-                LogPipelineMessage($"Cancelletion was requested. Ending pipeline.", LoggingLevel.Information);
+                LogPipelineMessage($"Cancellation was requested. Ending pipeline.", LoggingLevel.Information);
                 FinishPipeline(_pdata, isSuccess: false);
                 return;
             }
@@ -52,8 +51,6 @@ namespace GhostCore.Pipelines
 
             FinishPipeline(_pdata, isSuccess: true);
         }
-
-
 
         /// <inheritdoc />
         public override async Task Stop(object sender, bool rollback = false)
@@ -106,8 +103,7 @@ namespace GhostCore.Pipelines
 
         public void Dispose()
         {
-            if (_cancellationSource != null)
-                _cancellationSource.Dispose();
+            _cancellationSource?.Dispose();
         }
     }
 }

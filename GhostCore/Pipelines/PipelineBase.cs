@@ -23,7 +23,7 @@ namespace GhostCore.Pipelines
         public IReadOnlyCollection<IPipelineProcessor> Processors => _processors;
         public IPipelineEndpoint Endpoint { get; set; }
 
-        public PipelineBase(string name = null)
+        protected PipelineBase(string name = null)
         {
             _name = name ?? GetType().Name;
             _processors = new List<IPipelineProcessor>();

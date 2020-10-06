@@ -1,10 +1,6 @@
-﻿using GhostCore.Delegates;
-using GhostCore.Foundation;
+﻿using GhostCore.Foundation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace GhostCore.Pipelines
