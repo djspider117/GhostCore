@@ -12,7 +12,6 @@ namespace GhostCore.Pipelines
         public event EventHandler<PipelineFinishedEventArgs> Finished;
         public event EventHandler<double> Progress;
 
-
         protected CancellationTokenSource _cancellationSource;
         protected CancellationToken _cancellationToken;
         protected string _name;
@@ -153,9 +152,9 @@ namespace GhostCore.Pipelines
         protected virtual void LogPipelineMessage(string msg, LoggingLevel level = LoggingLevel.Information)
         {
             if (string.IsNullOrWhiteSpace(_name))
-                Logger.LogInfo($"[{nameof(SerialPipeline)}] Starting pipeline.");
+                Logger.LogInfo($"[{nameof(SerialPipeline)}] {msg}");
             else
-                Logger.LogInfo($"[{nameof(SerialPipeline)}, Name = {_name}] Starting pipeline.");
+                Logger.LogInfo($"[{nameof(SerialPipeline)}, Name = {_name}] {msg}");
         }
 
         protected void FinishPipeline(PipelineProcessData pdata, bool isSuccess) => FinishPipeline(pdata.SourceObject, pdata.ProcessedObject, pdata.PipelineArguments, isSuccess);

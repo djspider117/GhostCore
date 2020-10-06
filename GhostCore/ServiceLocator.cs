@@ -149,7 +149,7 @@ namespace GhostCore
                 return (T)instance;
 
             if (!_objectFactories.ContainsKey(type))
-                throw new ArgumentException("Type is not registered.");
+                throw new ArgumentException($"Type {type.Name} is not registered.");
 
             var fact = _objectFactories[type];
 
