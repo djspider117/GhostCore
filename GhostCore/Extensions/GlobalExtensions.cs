@@ -6,9 +6,35 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using GhostCore;
+using GhostCore.Foundation;
 
 public static class GlobalExtensions
 {
+
+    public static ISafeTaskResult SafeTry(this object any, Func<ISafeTaskResult> executor)
+    {
+        try
+        {
+            return executor();
+        }
+        catch (Exception ex)
+        {
+            return new SafeTaskResult(ex.Message, ex);
+        }
+    }
+
+    public static async Task<ISafeTaskResult> SafeTry(this object any, Func<Task<ISafeTaskResult>> executor)
+    {
+        try
+        {
+            return await executor();
+        }
+        catch (Exception ex)
+        {
+            return new SafeTaskResult(ex.Message, ex);
+        }
+    }
+
     public static void TryOrSkip(this object any, Action callback)
     {
         try

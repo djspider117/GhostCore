@@ -10,5 +10,10 @@ namespace GhostCore.Pipelines
         public object ProcessedObject { get; set; }
         public object[] PipelineArguments { get; set; }
         public CancellationToken CancellationToken { get; set; }
+
+        public T DataAs<T>()
+        {
+            return (T)ProcessedObject;
+        }
     }
 }
