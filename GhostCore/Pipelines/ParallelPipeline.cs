@@ -16,6 +16,9 @@ namespace GhostCore.Pipelines
     /// </remarks>
     public class ParallelPipeline : PipelineBase
     {
+        private const string E_PARALLEL_FAIL = "Processors failed when executing in parallel.";
+        private const string E_PIPELINE_CANCELED = "The pipeline task was canceled and halted.";
+
         public ParallelPipelineFinishOptions FinishOptions { get; set; }
         public ParallelPipelineTaskFailHandling TaskFailHandling { get; set; }
 
@@ -63,9 +66,9 @@ namespace GhostCore.Pipelines
                         if (TaskFailHandling == ParallelPipelineTaskFailHandling.SucceedAll && taskResults.Any(x => x.IsFaulted) ||
                             TaskFailHandling == ParallelPipelineTaskFailHandling.SucceedAny && taskResults.All(x => x.IsFaulted))
                         {
-                            LogPipelineMessage("Processors failed when executing in parallel.", LoggingLevel.Warning);
+                            LogPipelineMessage(E_PARALLEL_FAIL, LoggingLevel.Warning);
 
-                            FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false);
+                            FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false, E_PARALLEL_FAIL);
                             return;
                         }
 
@@ -99,9 +102,9 @@ namespace GhostCore.Pipelines
 
                         if (TaskFailHandling == ParallelPipelineTaskFailHandling.SucceedAny && taskResult.IsFaulted)
                         {
-                            LogPipelineMessage("Processors failed when executing in parallel.", LoggingLevel.Warning);
+                            LogPipelineMessage(E_PARALLEL_FAIL, LoggingLevel.Warning);
 
-                            FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false);
+                            FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false, E_PARALLEL_FAIL);
                             return;
                         }
 
@@ -117,16 +120,17 @@ namespace GhostCore.Pipelines
             }
             catch (TaskCanceledException)
             {
-                LogPipelineMessage($"The pipeline task was canceled and halted.", LoggingLevel.Information);
+                LogPipelineMessage(E_PIPELINE_CANCELED, LoggingLevel.Information);
 
-                FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false);
+                FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false, E_PIPELINE_CANCELED);
                 return;
             }
             catch (Exception ex)
             {
-                LogPipelineMessage($"Critical pipeline failure! Details: {ex}", LoggingLevel.Critical);
+                var msg = $"Critical pipeline failure! Details: {ex}";
+                LogPipelineMessage(msg, LoggingLevel.Critical);
 
-                FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false);
+                FinishPipeline(sourceObject, Array.Empty<object>(), pipelineArguments, isSuccess: false, msg);
                 return;
             }
         }

@@ -19,6 +19,11 @@ namespace GhostCore.Pipelines
         event EventHandler<PipelineFinishedEventArgs> Finished;
 
         /// <summary>
+        /// Event that is triggered when the pipeline status has changed.
+        /// </summary>
+        event EventHandler<string> StatusChanged;
+
+        /// <summary>
         /// Event that is triggered when the progress status of the pipeline has changed.
         /// </summary>
         event EventHandler<double> Progress;

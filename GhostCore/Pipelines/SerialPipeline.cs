@@ -10,6 +10,7 @@ namespace GhostCore.Pipelines
     /// </summary>
     public class SerialPipeline : PipelineBase, IDisposable
     {
+        private const string E_PIPELINE_CANCEL = "Cancellation was requested. Ending pipeline.";
         private PipelineProcessData _pdata;
 
         public SerialPipeline(string name = null) : base(name)
@@ -32,8 +33,8 @@ namespace GhostCore.Pipelines
             {
                 if (_pdata.CancellationToken.IsCancellationRequested)
                 {
-                    LogPipelineMessage($"Cancellation was requested. Ending pipeline.", LoggingLevel.Information);
-                    FinishPipeline(_pdata, isSuccess: false);
+                    LogPipelineMessage(E_PIPELINE_CANCEL, LoggingLevel.Information);
+                    FinishPipeline(_pdata, isSuccess: false, E_PIPELINE_CANCEL);
                     return;
                 }
 
@@ -44,8 +45,8 @@ namespace GhostCore.Pipelines
 
             if (_pdata.CancellationToken.IsCancellationRequested)
             {
-                LogPipelineMessage($"Cancellation was requested. Ending pipeline.", LoggingLevel.Information);
-                FinishPipeline(_pdata, isSuccess: false);
+                LogPipelineMessage(E_PIPELINE_CANCEL, LoggingLevel.Information);
+                FinishPipeline(_pdata, isSuccess: false, E_PIPELINE_CANCEL);
                 return;
             }
 
@@ -81,20 +82,22 @@ namespace GhostCore.Pipelines
                     }
                     catch (Exception ex)
                     {
-                        LogPipelineMessage($"Critical rollback pipeline failure! Details: {ex}", LoggingLevel.Critical);
+                        string msg = $"Critical rollback pipeline failure! Details: {ex}";
+                        LogPipelineMessage(msg, LoggingLevel.Critical);
 
-                        FinishPipeline(_pdata, isSuccess: false);
+                        FinishPipeline(_pdata, isSuccess: false, msg);
                         return;
                     }
 
                     if (result.IsFaulted)
                     {
-                        LogPipelineMessage($"Rollback for processor {ipp.Name} has failed because: {result.FailReason}. For more details, change the logging mode to {nameof(LoggingLevel.Information)}.", LoggingLevel.Warning);
+                        var msg = $"Rollback for processor {ipp.Name} has failed because: {result.FailReason}.";
+                        LogPipelineMessage($"{msg} For more details, change the logging mode to {nameof(LoggingLevel.Information)}.", LoggingLevel.Warning);
 
                         if (result.DetailedException != null)
                             LogPipelineMessage($"Details: {result.DetailedException}", LoggingLevel.Information);
 
-                        FinishPipeline(_pdata, isSuccess: false);
+                        FinishPipeline(_pdata, isSuccess: false, msg);
                         return;
                     }
                 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 namespace GhostCore.Pipelines
 {
     public delegate void PipelineProgressEventHandler(IPipelineProcessor sender, double value);
+    public delegate void PipelineStatusEventHandler(IPipelineProcessor sender, string status);
 
     public interface IPipelineProcessor
     {
@@ -11,6 +12,11 @@ namespace GhostCore.Pipelines
         /// Triggered when the progress of the processor changes.
         /// </summary>
         event PipelineProgressEventHandler ProgressChanged;
+
+        /// <summary>
+        /// Triggered when the status of the processor has changed.
+        /// </summary>
+        event PipelineStatusEventHandler StatusChanged;
 
         /// <summary>
         /// Gets the name of the processor.

@@ -54,6 +54,18 @@ namespace GhostCore.Pipelines
                 return CreateParallelPipeline(name);
         }
 
+        public IPipeline GetPipeline(string name)
+        {
+            var existing = _pipelines.FirstOrDefault(x => x.Name == name);
+            if (existing == null)
+            {
+                Logger.LogError($"[PipelineManager] No pipeline named {name} is registered");
+                throw new InvalidOperationException($"No pipeline named {name} is registered.");
+            }
+
+            return existing;
+        }
+
         public SerialPipeline CreateSerialPipeline(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -97,7 +109,12 @@ namespace GhostCore.Pipelines
                 return false;
             }
 
-            return _pipelines.Remove(pipe);
+            var rv = _pipelines.Remove(pipe);
+
+            if (pipe is IDisposable dsp)
+                dsp.Dispose();
+
+            return rv;
         }
     }
 }
