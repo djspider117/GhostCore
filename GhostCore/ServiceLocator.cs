@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -105,13 +104,8 @@ namespace GhostCore
             Register<T>(NoFactory, data);
         }
 
-        public void Register<T>(Func<object> factory, object initialValue = null)
+        public void Register(Type type, object initialValue, Func<object> factory = null)
         {
-            var type = typeof(T);
-
-            if (type == null)
-                throw new ArgumentException("Type is null.", "type");
-
             if (factory == null)
                 throw new ArgumentException("Factory is null.", "factory");
 
@@ -140,6 +134,16 @@ namespace GhostCore
 
             if (initialValue != null)
                 _createdInstances.Add(type, initialValue);
+        }
+
+        public void Register<T>(Func<object> factory, object initialValue = null)
+        {
+            var type = typeof(T);
+
+            if (type == null)
+                throw new ArgumentException("Type is null.", "type");
+
+            Register(type, initialValue, factory);
         }
 
         public T Resolve<T>()

@@ -11,9 +11,7 @@ namespace GhostCore.Pipelines
         public object[] PipelineArguments { get; set; }
         public CancellationToken CancellationToken { get; set; }
 
-        public T DataAs<T>()
-        {
-            return (T)ProcessedObject;
-        }
+        public T SourceAs<T>() => (T)SourceObject;
+        public T DataAs<T>() => (T)ProcessedObject;
     }
 }

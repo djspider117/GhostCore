@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace GhostCore.ObjectModel
 {
+    [ServiceImplementation(typeof(IPromiseService))]
     public class PromiseService : IPromiseService
     {
         private static readonly object _lock = new object();
