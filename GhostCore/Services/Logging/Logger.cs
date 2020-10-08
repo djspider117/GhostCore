@@ -20,7 +20,7 @@ namespace GhostCore.Services.Logging
             _svc.LogMessage(msg, loggingLevel);
         }
 
-        public static void LogCritial(string msg) => LogMessage(msg, LoggingLevel.Critical);
+        public static void LogCritical(string msg) => LogMessage(msg, LoggingLevel.Critical);
         public static void LogError(string msg) => LogMessage(msg, LoggingLevel.Error);
         public static void LogWarning(string msg) => LogMessage(msg, LoggingLevel.Warning);
         public static void LogInfo(string msg) => LogMessage(msg, LoggingLevel.Information);
