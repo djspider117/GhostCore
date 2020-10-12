@@ -58,6 +58,7 @@ namespace GhostCore.Pipelines
                     {
                         var defaultCtor = pipelineStageType.GetConstructor(Type.EmptyTypes);
                         var stage = (IPipelineProcessor)defaultCtor.Invoke(null);
+                        stage.Order = psa.StageOrder;
 
                         if (_precachedStages.ContainsKey(psa.PipelineName))
                             _precachedStages[psa.PipelineName].Add(stage);
@@ -108,7 +109,7 @@ namespace GhostCore.Pipelines
 
             if (_precachedStages.ContainsKey(name))
             {
-                foreach (var proc in _precachedStages[name])
+                foreach (var proc in _precachedStages[name].OrderBy(x => x.Order))
                     pipe.AddProcessor(proc);
             }
 
@@ -128,7 +129,7 @@ namespace GhostCore.Pipelines
 
             if (_precachedStages.ContainsKey(name))
             {
-                foreach (var proc in _precachedStages[name])
+                foreach (var proc in _precachedStages[name].OrderBy(x => x.Order))
                     pipe.AddProcessor(proc);
             }
 

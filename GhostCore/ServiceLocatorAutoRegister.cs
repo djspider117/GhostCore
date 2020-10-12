@@ -6,9 +6,16 @@ namespace GhostCore
 {
     public static class ServiceLocatorAutoRegister
     {
+        private static bool _initialized;
+
         public static void AutoRegisterServices()
         {
-            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
+            if (_initialized)
+                return;
+
+            _initialized = true;
+            Assembly[] asses = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var ass in asses)
             {
                 var types = ass.GetTypes();
                 var serviceImpls = types.Where(x => x.GetCustomAttribute<ServiceImplementationAttribute>() != null);

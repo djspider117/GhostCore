@@ -23,6 +23,8 @@ namespace GhostCore.Pipelines
         /// </summary>
         string Name { get; }
 
+        int Order { get; set; }
+
         /// <summary>
         /// The entry point of a pipeline processor. It is called automatically by the pipeline. It should not be manually called outside of a pipeline.
         /// </summary>

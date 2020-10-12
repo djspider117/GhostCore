@@ -10,6 +10,7 @@ namespace GhostCore.Pipelines
         public event PipelineStatusEventHandler StatusChanged;
 
         public string Name { get; set; }
+        public int Order { get; set; }
 
         public PipelineProcessorBase()
         {
