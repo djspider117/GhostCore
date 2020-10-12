@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace GhostCore.Pipelines
 {
@@ -36,10 +37,35 @@ namespace GhostCore.Pipelines
         #endregion
 
         private List<IPipeline> _pipelines;
+        private Dictionary<string, List<IPipelineProcessor>> _precachedStages;
 
         private void Initialize()
         {
             _pipelines = new List<IPipeline>();
+            _precachedStages = new Dictionary<string, List<IPipelineProcessor>>();
+
+            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var types = ass.GetTypes();
+                var pipelineStages = types.Where(x => x.GetCustomAttribute<PipelineStageAttribute>() != null);
+
+
+                foreach (var pipelineStageType in pipelineStages)
+                {
+                    var psas = pipelineStageType.GetCustomAttributes<PipelineStageAttribute>();
+
+                    foreach (var psa in psas.OrderBy(x => x.StageOrder))
+                    {
+                        var defaultCtor = pipelineStageType.GetConstructor(Type.EmptyTypes);
+                        var stage = (IPipelineProcessor)defaultCtor.Invoke(null);
+
+                        if (_precachedStages.ContainsKey(psa.PipelineName))
+                            _precachedStages[psa.PipelineName].Add(stage);
+                        else
+                            _precachedStages.Add(psa.PipelineName, new List<IPipelineProcessor> { stage });
+                    }
+                }
+            }
         }
 
         public IPipeline GetOrCreatePipeline(string name, DefaultPipelineType type = DefaultPipelineType.Serial)
@@ -48,10 +74,14 @@ namespace GhostCore.Pipelines
             if (existing != null)
                 return existing;
 
+            IPipeline pipe = default;
+
             if (type == DefaultPipelineType.Serial)
-                return CreateSerialPipeline(name);
+                pipe = CreateSerialPipeline(name);
             else
-                return CreateParallelPipeline(name);
+                pipe = CreateParallelPipeline(name);
+
+            return pipe;
         }
 
         public IPipeline GetPipeline(string name)
@@ -74,6 +104,15 @@ namespace GhostCore.Pipelines
             var pipe = new SerialPipeline(name);
             Logger.LogInfo($"[PipelineManager] Adding serial pipeline {name}");
             _pipelines.Add(pipe);
+
+
+            if (_precachedStages.ContainsKey(name))
+            {
+                foreach (var proc in _precachedStages[name])
+                    pipe.AddProcessor(proc);
+            }
+
+
             return pipe;
         }
 
@@ -85,6 +124,15 @@ namespace GhostCore.Pipelines
             var pipe = new ParallelPipeline(name);
             Logger.LogInfo($"[PipelineManager] Adding parallel pipeline {name}");
             _pipelines.Add(pipe);
+
+
+            if (_precachedStages.ContainsKey(name))
+            {
+                foreach (var proc in _precachedStages[name])
+                    pipe.AddProcessor(proc);
+            }
+
+
             return pipe;
         }
 
