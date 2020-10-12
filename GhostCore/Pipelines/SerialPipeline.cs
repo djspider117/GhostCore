@@ -43,6 +43,11 @@ namespace GhostCore.Pipelines
                     return;
             }
 
+            if (_processors.Count == 0 && _pdata.ProcessedObject == null)
+            {
+                _pdata.ProcessedObject = _pdata.SourceObject;
+            }
+
             if (_pdata.CancellationToken.IsCancellationRequested)
             {
                 LogPipelineMessage(E_PIPELINE_CANCEL, LoggingLevel.Information);
