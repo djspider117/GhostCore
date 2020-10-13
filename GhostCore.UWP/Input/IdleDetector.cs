@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -41,7 +37,7 @@ namespace GhostCore.UWP.Input
 
         public event EventHandler Idled;
         public event EventHandler Resumed;
-       
+
         #endregion
 
         #region Fields
@@ -98,12 +94,11 @@ namespace GhostCore.UWP.Input
 
                 _timesTicked = 0;
 
-                // only start if there is a timeout set
-                if (_timeoutMinutes != null)
-                {
-                    IsStarted = true;
-                    _timer.Start();
-                }
+                if (_timeoutMinutes == null)
+                    _timeoutMinutes = 1;
+
+                IsStarted = true;
+                _timer.Start();
             }
         }
 
