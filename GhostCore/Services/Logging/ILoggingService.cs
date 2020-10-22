@@ -8,6 +8,8 @@ namespace GhostCore.Services.Logging
     /// </summary>
     public interface ILoggingService : IDisposable
     {
+        LoggingLevel DebugLoggingLevel { get; set; }
+
         /// <summary>
         /// Logs a message to the current log channel.
         /// </summary>
