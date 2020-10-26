@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GhostCore.Extensions
 {
-    public static class EntityFrameworkExtensions
+    public static class QueryableExtensions
     {
         /// <summary>
         /// Order a query by one or multiple properties by subsequent calls.
