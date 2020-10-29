@@ -90,7 +90,7 @@ namespace GhostCore.Pipelines
 
             try
             {
-                LogPipelineMessage($"Starting processor {_name}", LoggingLevel.Verbose);
+                LogPipelineMessage($"Starting processor {_name}/{ipp.GetType().Name}", LoggingLevel.Verbose);
                 result = await ipp.ProcessAsync(pdata);
             }
             catch (TaskCanceledException)
