@@ -8,28 +8,7 @@ namespace GhostCore.UWP.Input
     {
         #region Singleton
 
-        private static volatile IdleDetector _instance;
-        private static readonly object _syncRoot = new object();
-
-        public static IdleDetector Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    lock (_syncRoot)
-                    {
-                        if (_instance == null)
-                            _instance = new IdleDetector();
-                    }
-                }
-
-                return _instance;
-            }
-        }
-        private IdleDetector()
-        {
-        }
+        public static IdleDetector Instance { get; } = new IdleDetector();
 
         #endregion
 
@@ -43,9 +22,7 @@ namespace GhostCore.UWP.Input
         #region Fields
 
         private CoreWindow _window;
-        private int? _timeoutMinutes;
         private DispatcherTimer _timer;
-        private int _timesTicked;
 
         #endregion
 
@@ -58,21 +35,22 @@ namespace GhostCore.UWP.Input
 
         #region Initialization
 
-        public void Initialize(CoreWindow wnd)
+        public void Initialize(CoreWindow wnd, TimeSpan? timeout = null)
         {
             IsInitialized = true;
             _window = wnd;
-            _timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMinutes(1)
-            };
+
+            SetTimeout(timeout);
 
             _timer.Tick += Timer_Tick;
         }
 
-        public void SetTimeout(int? timeoutMinutes)
+        public void SetTimeout(TimeSpan? timeout = null)
         {
-            _timeoutMinutes = timeoutMinutes;
+            _timer = new DispatcherTimer
+            {
+                Interval = timeout ?? TimeSpan.FromMinutes(1)
+            };
         }
 
         #endregion
@@ -85,17 +63,11 @@ namespace GhostCore.UWP.Input
 
             if (!IsStarted)
             {
-
                 _window.PointerPressed += Window_PointerPressed;
                 _window.PointerReleased += Window_PointerReleased;
                 //_window.PointerMoved += window_PointerMoved;
                 _window.KeyDown += Window_KeyDown; // use KeyDown for soft keys
                 _window.CharacterReceived += Window_CharacterReceived; // text suggestions or chords
-
-                _timesTicked = 0;
-
-                if (_timeoutMinutes == null)
-                    _timeoutMinutes = 1;
 
                 IsStarted = true;
                 _timer.Start();
@@ -127,7 +99,6 @@ namespace GhostCore.UWP.Input
 
                 _timer.Stop();
                 _timer.Start();
-                _timesTicked = 0;
             }
         }
 
@@ -143,18 +114,8 @@ namespace GhostCore.UWP.Input
 
         private void Timer_Tick(object sender, object e)
         {
-            _timesTicked++;
-
-            if (_timeoutMinutes == null)
-            {
-                _timer.Stop();
-            }
-
-            if (_timesTicked >= (_timeoutMinutes ?? 1))
-            {
-                Idled?.Invoke(this, EventArgs.Empty);
-                _timer.Stop();
-            }
+            Idled?.Invoke(this, EventArgs.Empty);
+            _timer.Stop();
         }
 
         private void Window_PointerPressed(CoreWindow sender, PointerEventArgs args)
