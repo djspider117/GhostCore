@@ -150,6 +150,7 @@
     <Compile Include="Extensions\ListViewExtensions.cs" />
     <Compile Include="Extensions\VisualTreeHelperExtensions.cs" />
     <Compile Include="Helpers\CanvasCoordinatesBindingHelper.cs" />
+    <Compile Include="Helpers\ClipToBounds.cs" />
     <Compile Include="Helpers\FileHelpers.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\WidthHeightBindingHelper.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Panels\DynamicLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateSelectors\XamlTemplateSelector.cs" />
+    <Compile Include="UserControlEx.cs" />
     <Compile Include="Utils\DialogUtils.cs" />
     <Compile Include="Utils\ListViewHelpers.cs" />
     <Compile Include="Utils\PickerUtils.cs" />
