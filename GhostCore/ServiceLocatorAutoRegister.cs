@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GhostCore.Utility;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -14,21 +15,16 @@ namespace GhostCore
                 return;
 
             _initialized = true;
-            Assembly[] asses = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var ass in asses)
+
+            var typeAttributeMapping = AssemblyReflectionParser.GetTypesForAttributes<ServiceImplementationAttribute>();
+
+            foreach (var pair in typeAttributeMapping)
             {
-                var types = ass.GetTypes();
-                var serviceImpls = types.Where(x => x.GetCustomAttribute<ServiceImplementationAttribute>() != null);
+                var ctor = pair.Type.GetConstructor(Type.EmptyTypes);
 
-                foreach (var serviceImpl in serviceImpls)
+                foreach (var attribute in pair.Attributes)
                 {
-                    var sis = serviceImpl.GetCustomAttributes<ServiceImplementationAttribute>();
-
-                    foreach (var si in sis)
-                    {
-                        var defaultCtor = serviceImpl.GetConstructor(Type.EmptyTypes);
-                        ServiceLocator.Instance.Register(si.ServiceType, defaultCtor.Invoke(null), ServiceLocator.NoFactory);
-                    }
+                    ServiceLocator.Instance.Register(attribute.ServiceType, ctor.Invoke(null), ServiceLocator.NoFactory);
                 }
             }
         }
