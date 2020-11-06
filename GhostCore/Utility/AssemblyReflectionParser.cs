@@ -13,7 +13,7 @@ namespace GhostCore.Utility
             foreach (var assembly in assemblies)
             {
                 var typesInAssembly = assembly.GetTypes();
-                var typesWithCustomAttribute = typesInAssembly.Where(x => x.GetCustomAttribute<TAttrType>() != null);
+                var typesWithCustomAttribute = typesInAssembly.Where(x => x.IsDefined(typeof(TAttrType)));
 
                 foreach (var type in typesWithCustomAttribute)
                 {
@@ -29,7 +29,7 @@ namespace GhostCore.Utility
             foreach (var assembly in assemblies)
             {
                 var typesInAssembly = assembly.GetTypes();
-                var typesWithCustomAttribute = typesInAssembly.Where(x => x.GetCustomAttribute<TAttrType>() != null);
+                var typesWithCustomAttribute = typesInAssembly.Where(x => x.IsDefined(typeof(TAttrType)));
 
                 foreach (var type in typesWithCustomAttribute)
                 {

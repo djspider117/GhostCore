@@ -92,6 +92,11 @@ namespace GhostCore.UWP.TemplateSelectors
             return null;
         }
 
+        protected override DataTemplate SelectTemplateCore(object item)
+        {
+            return base.SelectTemplateCore(item);
+        }
+
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
             if (_dataTemplateMapping == null)

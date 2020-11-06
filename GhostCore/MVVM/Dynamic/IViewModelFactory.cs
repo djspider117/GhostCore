@@ -27,10 +27,9 @@ namespace GhostCore.MVVM.Dynamic
 
             foreach (var pair in typeAttributeMapping)
             {
-                var ctor = pair.Type.GetConstructor(new Type[] { typeof(TModel) });
-
                 foreach (var attribute in pair.Attributes)
                 {
+                    var ctor = pair.Type.GetConstructor(new Type[] { attribute.TargetType });
                     _typeFactory.Add(attribute.TargetType, (model) => (TViewModel)ctor.Invoke(new object[] { model }));
                 }
             }
@@ -38,7 +37,7 @@ namespace GhostCore.MVVM.Dynamic
 
         public TViewModel Create(TModel model)
         {
-            if (_isInitialized)
+            if (!_isInitialized)
                 Initialize();
 
             var actionType = model.GetType();
@@ -50,7 +49,7 @@ namespace GhostCore.MVVM.Dynamic
     {
     }
 
-   [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
+   [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
     public class ViewModelForAttribute : Attribute
     {
         public Type TargetType { get; set; }
