@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Converters;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace GhostCore
 {
@@ -36,17 +38,36 @@ namespace GhostCore
     {
         public Task<string> SerializeAsync(object data)
         {
-            return Task.Run(() => JsonConvert.SerializeObject(data));
+            return Task.Run(() =>
+            {
+                using (var textWriter = new StringWriter())
+                {
+                    XmlSerializer serializer = new XmlSerializer(data.GetType());
+                    serializer.Serialize(textWriter, data);
+
+                    return textWriter.ToString();
+                }
+            });
         }
 
         public Task<object> DeserializeAsync(string str)
         {
-            return Task.Run(() => JsonConvert.DeserializeObject(str));
+            throw new NotImplementedException();
+            //return Task.Run(() => JsonConvert.DeserializeObject(str));
         }
 
         public Task<T> DeserializeAsync<T>(string str)
         {
-            return Task.Run(() => JsonConvert.DeserializeObject<T>(str));
+            return Task.Run(() =>
+            {
+                using (var strReader = new StringReader(str))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    var obj = serializer.Deserialize(strReader);
+
+                    return (T)obj;
+                }
+            });
         }
     }
 
