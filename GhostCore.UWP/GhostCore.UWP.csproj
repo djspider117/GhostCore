@@ -135,6 +135,7 @@
     <Compile Include="Converters\Chain\ChainConverter.cs" />
     <Compile Include="Converters\Chain\Resolvers\ConverterResolver.cs" />
     <Compile Include="Converters\Chain\Resolvers\IConverterResolver.cs" />
+    <Compile Include="Converters\CountToBoolConverter.cs" />
     <Compile Include="Converters\CountToVisibilityConverter.cs" />
     <Compile Include="Converters\DebugPassThroughConverter.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
