@@ -141,6 +141,7 @@
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
     <Compile Include="Converters\IntToColorConverter.cs" />
     <Compile Include="Converters\IntToSolidColorBrushConverter.cs" />
+    <Compile Include="Converters\InverseVisibilityConverter.cs" />
     <Compile Include="Converters\MultiBinder.cs" />
     <Compile Include="Converters\NegationConverter.cs" />
     <Compile Include="Converters\NegationVisisbilityConvertor.cs" />
