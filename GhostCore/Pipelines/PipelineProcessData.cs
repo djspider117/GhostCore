@@ -7,6 +7,7 @@ namespace GhostCore.Pipelines
         public bool Cancel { get; set; }
         public IPipeline Pipeline { get; set; }
         public object SourceObject { get; set; }
+        public object PipelineStarter { get; set; }
         public object ProcessedObject { get; set; }
         public object[] PipelineArguments { get; set; }
         public CancellationToken CancellationToken { get; set; }

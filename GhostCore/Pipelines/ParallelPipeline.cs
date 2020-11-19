@@ -81,7 +81,8 @@ namespace GhostCore.Pipelines
                         endObj.ProcessedObject = validResults.ToArray();
 
                         await ProcessEndpoint(endObj);
-                        FinishPipeline(endObj, isSuccess: true);
+                        endObj.PipelineStarter = sender;
+                        FinishPipeline(endObj);
 
                         break;
                     case ParallelPipelineFinishOptions.FinishWhenAny:

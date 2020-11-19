@@ -149,7 +149,7 @@ namespace GhostCore.Pipelines
             }
         }
 
-        protected virtual void FinishPipeline(object sourceObj, object procObj, object[] pipelineArgs, bool isSuccess, string failReason = null)
+        protected virtual void FinishPipeline(object sourceObj, object procObj, object[] pipelineArgs, bool isSuccess, string failReason = null, object pipelineStarter = null)
         {
             _isRunning = false;
             _cancellationSource.Dispose();
@@ -161,10 +161,12 @@ namespace GhostCore.Pipelines
                 IsSuccess = isSuccess,
                 PipelineArguments = pipelineArgs,
                 SourceObject = sourceObj,
-                FinalObject = procObj
+                FinalObject = procObj,
+                PipelineStarter = pipelineStarter
             });
         }
         protected void FinishPipeline(PipelineProcessData pdata, bool isSuccess, string failReason = null) => FinishPipeline(pdata.SourceObject, pdata.ProcessedObject, pdata.PipelineArguments, isSuccess, failReason);
+        protected void FinishPipeline(PipelineProcessData pdata) => FinishPipeline(pdata.SourceObject, pdata.ProcessedObject, pdata.PipelineArguments, true, null, pdata.PipelineStarter);
 
         #endregion
 

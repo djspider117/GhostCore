@@ -56,8 +56,9 @@ namespace GhostCore.Pipelines
             }
 
             await ProcessEndpoint(_pdata);
+            _pdata.PipelineStarter = sender;
 
-            FinishPipeline(_pdata, isSuccess: true);
+            FinishPipeline(_pdata);
         }
 
         /// <inheritdoc />

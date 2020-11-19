@@ -9,5 +9,6 @@ namespace GhostCore.Pipelines
         public object SourceObject { get; set; }
         public object FinalObject { get; set; }
         public object[] PipelineArguments { get; set; }
+        public object PipelineStarter { get; set; }
     }
 }
