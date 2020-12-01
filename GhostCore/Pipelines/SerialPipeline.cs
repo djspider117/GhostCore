@@ -26,6 +26,14 @@ namespace GhostCore.Pipelines
             LogPipelineMessage("Initializing cancellation token", LoggingLevel.Verbose);
             InitializeCancellationToken();
 
+            // BIG HACK pls fix
+            int retryCount = 100;
+            while(_pdata != null && retryCount > 0)
+            {
+                await Task.Delay(25);
+                retryCount--;
+            }
+
             _pdata = CreatePipelineProcessData(sourceObject, pipelineArguments);
 
             LogPipelineMessage("Starting processors...", LoggingLevel.Verbose);
@@ -59,6 +67,7 @@ namespace GhostCore.Pipelines
             _pdata.PipelineStarter = sender;
 
             FinishPipeline(_pdata);
+            _pdata = null;
         }
 
         /// <inheritdoc />
