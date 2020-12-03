@@ -1,8 +1,10 @@
 ﻿using GhostCore;
+using GhostCore.Foundation;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,8 @@ namespace GhostCore.Networking
 {
     public class RestProxy
     {
+        public const int SERVER_PING_TIMEOUT_MS = 60 * 1000;
+
         protected string _baseUrl;
         protected string _urlOverride;
         protected string _endpoint;
@@ -48,6 +52,9 @@ namespace GhostCore.Networking
 
         public HttpContent CreateHttpContent(object data)
         {
+            if (data is string str)
+                return new StringContent(str, Encoding.UTF8, "application/json");
+
             var seri = JsonConvert.SerializeObject(data);
             var content = new StringContent(seri, Encoding.UTF8, "application/json");
             return content;
@@ -70,6 +77,119 @@ namespace GhostCore.Networking
             var errorData = JsonConvert.DeserializeObject<ErrorResponse>(data);
             LastErrorMessage = errorData.ServerMessage;
         }
+
+        protected async Task<ISafeTaskResult> SafePostAsync(string url, object req, bool useAuth = false)
+        {
+            using var cli = new HttpClient();
+
+            if (useAuth)
+                AuthenticationHandler.AddAuthenticationHeader(cli);
+
+            var content = CreateHttpContent(req);
+            string requestUri = url;
+            var httpResponse = await cli.PostAsync(requestUri, content);
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                if (httpResponse.Content != null)
+                {
+                    var data = await httpResponse.Content.ReadAsStringAsync();
+                    return new SafeTaskResult(data, (int)httpResponse.StatusCode);
+                }
+
+                return new SafeTaskResult($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
+            }
+            else
+            {
+                return SafeTaskResult.Ok;
+            }
+        }
+        protected async Task<ISafeTaskResult<T>> SafePostAsync<T>(string url, object req, bool useAuth = false)
+        {
+            using var cli = new HttpClient();
+
+            if (useAuth)
+            {
+                AuthenticationHandler.AddAuthenticationHeader(cli);
+            }
+
+            var content = CreateHttpContent(req);
+            string requestUri = url;
+            var httpResponse = await cli.PostAsync(requestUri, content);
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                if (httpResponse.Content != null)
+                {
+                    var data = await httpResponse.Content.ReadAsStringAsync();
+                    return new SafeTaskResult<T>(data, (int)httpResponse.StatusCode);
+                }
+
+                return new SafeTaskResult<T>($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
+            }
+            else
+            {
+                var respString = await httpResponse.Content.ReadAsStringAsync();
+                var data = await Task.Run( () => JsonConvert.DeserializeObject<T>(respString));
+
+                return new SafeTaskResult<T>(data);
+            }
+        }
+
+        protected async Task<ISafeTaskResult> SafeGetAsync(string url, bool useAuth = false)
+        {
+            using var cli = new HttpClient();
+
+            if (useAuth)
+                AuthenticationHandler.AddAuthenticationHeader(cli);
+
+            var httpResponse = await cli.GetAsync(url);
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                if (httpResponse.Content != null)
+                {
+                    var data = await httpResponse.Content.ReadAsStringAsync();
+                    return new SafeTaskResult(data, (int)httpResponse.StatusCode);
+                }
+
+                return new SafeTaskResult($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
+            }
+            else
+            {
+                return SafeTaskResult.Ok;
+            }
+        }
+        protected async Task<ISafeTaskResult<T>> SafeGetAsync<T>(string url, bool useAuth = false)
+        {
+            using var cli = new HttpClient();
+
+            if (useAuth)
+            {
+                AuthenticationHandler.AddAuthenticationHeader(cli);
+            }
+
+            var httpResponse = await cli.GetAsync(url);
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                if (httpResponse.Content != null)
+                {
+                    var data = await httpResponse.Content.ReadAsStringAsync();
+                    return new SafeTaskResult<T>(data, (int)httpResponse.StatusCode);
+                }
+
+                return new SafeTaskResult<T>($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
+            }
+            else
+            {
+                var respString = await httpResponse.Content.ReadAsStringAsync();
+                var data = await Task.Run(() => JsonConvert.DeserializeObject<T>(respString));
+
+                return new SafeTaskResult<T>(data);
+            }
+        }
+
 
         protected async Task<T> PostAsync<T>(string url, object req, bool useAuth = false)
         {
@@ -174,6 +294,13 @@ namespace GhostCore.Networking
                 cli.Dispose();
                 return data;
             }
+        }
+
+        protected virtual async Task<bool> IsServerReachable()
+        {
+            using var ping = new Ping();
+            var reply = await ping.SendPingAsync(_baseUrl, SERVER_PING_TIMEOUT_MS);
+            return reply.Status == IPStatus.Success;
         }
     }
 
