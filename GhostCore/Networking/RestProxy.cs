@@ -130,7 +130,7 @@ namespace GhostCore.Networking
             else
             {
                 var respString = await httpResponse.Content.ReadAsStringAsync();
-                var data = await Task.Run( () => JsonConvert.DeserializeObject<T>(respString));
+                var data = await Task.Run(() => JsonConvert.DeserializeObject<T>(respString));
 
                 return new SafeTaskResult<T>(data);
             }
@@ -296,11 +296,9 @@ namespace GhostCore.Networking
             }
         }
 
-        protected virtual async Task<bool> IsServerReachable()
+        protected virtual Task<bool> IsServerReachable()
         {
-            using var ping = new Ping();
-            var reply = await ping.SendPingAsync(_baseUrl, SERVER_PING_TIMEOUT_MS);
-            return reply.Status == IPStatus.Success;
+            return Task.FromResult(NetworkInterface.GetIsNetworkAvailable());
         }
     }
 
