@@ -16,12 +16,27 @@ namespace GhostCore.UWP
         public UserControlEx()
         {
             Loaded += UserControlEx_Loaded;
-            Unloaded += UserControlEx_Unloaded;
         }
 
+        private async void UserControlEx_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Loaded -= UserControlEx_Loaded;
+            try
+            {
+                await OnLoaded(sender, e, _isLoaded);
+                _isLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.ToString());
+                throw;
+            }
+
+            Unloaded += UserControlEx_Unloaded;
+        }
         private async void UserControlEx_Unloaded(object sender, RoutedEventArgs e)
         {
-            Loaded -= UserControlEx_Loaded;
             Unloaded -= UserControlEx_Unloaded;
 
             try
@@ -35,19 +50,6 @@ namespace GhostCore.UWP
             }
         }
 
-        private async void UserControlEx_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                await OnLoaded(sender, e, _isLoaded);
-                _isLoaded = true;
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex.ToString());
-                throw;
-            }
-        }
 
         protected virtual Task OnLoaded(object sender, RoutedEventArgs e, bool wasLoadedPreviously)
         {
