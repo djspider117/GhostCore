@@ -29,7 +29,7 @@ namespace GhostCore.UWP.Input
         #region Properties
 
         public bool IsInitialized { get; set; }
-        public bool IsStarted { get; set; }
+        public bool IsStarted => _timer.IsEnabled;
 
         #endregion
 
@@ -51,6 +51,8 @@ namespace GhostCore.UWP.Input
             {
                 Interval = timeout ?? TimeSpan.FromMinutes(1)
             };
+
+            _timer.Tick += Timer_Tick;
         }
 
         #endregion
@@ -69,7 +71,6 @@ namespace GhostCore.UWP.Input
                 _window.KeyDown += Window_KeyDown; // use KeyDown for soft keys
                 _window.CharacterReceived += Window_CharacterReceived; // text suggestions or chords
 
-                IsStarted = true;
                 _timer.Start();
             }
         }
@@ -87,7 +88,6 @@ namespace GhostCore.UWP.Input
                 _window.CharacterReceived -= Window_CharacterReceived;
 
                 _timer.Stop();
-                IsStarted = false;
             }
         }
 
