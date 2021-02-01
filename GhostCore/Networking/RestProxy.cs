@@ -83,7 +83,7 @@ namespace GhostCore.Networking
             using var cli = new HttpClient();
 
             if (useAuth)
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
 
             var content = CreateHttpContent(req);
             string requestUri = url;
@@ -110,7 +110,7 @@ namespace GhostCore.Networking
 
             if (useAuth)
             {
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
             }
 
             var content = CreateHttpContent(req);
@@ -141,7 +141,7 @@ namespace GhostCore.Networking
             using var cli = new HttpClient();
 
             if (useAuth)
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
 
             var httpResponse = await cli.GetAsync(url);
 
@@ -166,7 +166,7 @@ namespace GhostCore.Networking
 
             if (useAuth)
             {
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
             }
 
             var httpResponse = await cli.GetAsync(url);
@@ -197,7 +197,7 @@ namespace GhostCore.Networking
 
             if (useAuth)
             {
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
             }
 
             var content = CreateHttpContent(req);
@@ -233,7 +233,7 @@ namespace GhostCore.Networking
 
             if (useAuth)
             {
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
             }
 
             var httpResponse = await cli.GetAsync(url);
@@ -268,7 +268,7 @@ namespace GhostCore.Networking
 
             if (useAuth)
             {
-                AuthenticationHandler.AddAuthenticationHeader(cli);
+                await AuthenticationHandler.AddAuthenticationHeader(cli);
             }
 
             var httpResponse = await cli.GetAsync(url);
@@ -304,9 +304,9 @@ namespace GhostCore.Networking
 
     public class RestProxyAuthenicationHandler
     {
-        public virtual void AddAuthenticationHeader(HttpClient cli)
+        public virtual Task AddAuthenticationHeader(HttpClient cli)
         {
-
+            return Task.CompletedTask;
         }
     }
 
