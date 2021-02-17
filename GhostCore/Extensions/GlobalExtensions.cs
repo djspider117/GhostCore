@@ -72,6 +72,24 @@ public static class GlobalExtensions
         }
         while (--currentRetryCount > 0 && willRetry);
     }
+
+    public static bool RetryWithConfirm(this object any, Func<bool> action, int retryCount = 3)
+    {
+        int currentRetryCount = retryCount;
+        bool willRetry = true;
+        do
+        {
+            int curRetry = (int)(retryCount - currentRetryCount + 1);
+            string methodName = action.GetMethodInfo().Name;
+            Debug.WriteLine("Retry count: " + curRetry + ". Calling method : " + methodName);
+            willRetry = action();
+            Debug.WriteLine("Finished Retry count: " + curRetry + ". Calling method was : " + methodName);
+        }
+        while (--currentRetryCount > 0 && willRetry);
+
+        return !willRetry;
+    }
+
     public static async Task RetryAsync(this object any, Func<Task<bool>> action, int retryCount = 3)
     {
         int currentRetryCount = retryCount;
