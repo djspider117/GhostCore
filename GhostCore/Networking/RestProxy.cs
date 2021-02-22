@@ -30,7 +30,7 @@ namespace GhostCore.Networking
         public string LastErrorMessage { get; set; }
         public bool IgnoreSSL { get; set; }
 
-        public RestProxyAuthenicationHandler AuthenticationHandler { get; set; }
+        public RestProxyAuthenticationHandler AuthenticationHandler { get; set; }
 
         public virtual string CoreRequestURL
         {
@@ -46,17 +46,17 @@ namespace GhostCore.Networking
 
         #region Constructors and Initialization
 
-        public RestProxy() : this(null, null, new RestProxyAuthenicationHandler())
+        public RestProxy() : this(null, null, new RestProxyAuthenticationHandler())
         {
 
         }
 
         public RestProxy(string baseUrl, string endpoint)
-            : this(baseUrl, endpoint, new RestProxyAuthenicationHandler())
+            : this(baseUrl, endpoint, new RestProxyAuthenticationHandler())
         {
         }
 
-        public RestProxy(string baseUrl, string endpoint, RestProxyAuthenicationHandler authHandler)
+        public RestProxy(string baseUrl, string endpoint, RestProxyAuthenticationHandler authHandler)
         {
             _baseUrl = baseUrl;
             _endpoint = endpoint;
@@ -333,7 +333,7 @@ namespace GhostCore.Networking
         #endregion
     }
 
-    public class RestProxyAuthenicationHandler
+    public class RestProxyAuthenticationHandler
     {
         public virtual Task AddAuthenticationHeader(HttpClient cli)
         {
