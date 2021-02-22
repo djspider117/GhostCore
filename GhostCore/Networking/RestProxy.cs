@@ -246,7 +246,6 @@ namespace GhostCore.Networking
 
             if (httpResponse.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                cli.Dispose();
                 if (httpResponse.Content != null)
                 {
                     var data = await httpResponse.Content.ReadAsStringAsync();
@@ -260,8 +259,6 @@ namespace GhostCore.Networking
             {
                 var respString = await httpResponse.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<T>(respString);
-
-                cli.Dispose();
 
                 return data;
             }
@@ -287,7 +284,6 @@ namespace GhostCore.Networking
                 {
                     LastErrorMessage = httpResponse.StatusCode.ToString();
                 }
-                cli.Dispose();
                 return default(T);
             }
             else
@@ -295,7 +291,6 @@ namespace GhostCore.Networking
                 var respString = await httpResponse.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<T>(respString);
 
-                cli.Dispose();
                 return data;
             }
         }
