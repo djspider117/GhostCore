@@ -1,4 +1,5 @@
-﻿using GhostCore;
+﻿using System;
+using GhostCore;
 using GhostCore.Foundation;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using GhostCore.Utility;
 
 namespace GhostCore.Networking
 {
@@ -323,6 +325,43 @@ namespace GhostCore.Networking
 
                 return data;
             }
+        }
+
+        protected virtual async Task<string> DownloadFileAsync(string url, string downloadLocation, string fileNameWithoutExtension, bool useAuth = false)
+        {
+            using var cli = MakeHttpClientWrapper(IgnoreSSL);
+
+            if (useAuth)
+                await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
+
+            var httpResponse = await cli.GetAsync(url);
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                if (httpResponse.Content != null)
+                {
+                    var data = await httpResponse.Content.ReadAsStringAsync();
+                    LastErrorMessage = data;
+                }
+                else
+                {
+                    LastErrorMessage = httpResponse.StatusCode.ToString();
+                }
+
+                return null;
+            }
+
+            var responseData = await httpResponse.Content.ReadAsByteArrayAsync();
+
+            var fileExtension = httpResponse.Content.Headers.ContentType.MediaType.ResolveExtensionFromMimeType();
+            var filePath = System.IO.Path.Combine(downloadLocation, $"{fileNameWithoutExtension}{fileExtension}");
+
+            System.IO.Directory.CreateDirectory(downloadLocation);
+            System.IO.File.Create(filePath, responseData.Length).Close();
+
+            System.IO.File.WriteAllBytes(filePath, responseData);
+
+            return filePath;
         }
 
         protected virtual Task<bool> IsServerReachable()
