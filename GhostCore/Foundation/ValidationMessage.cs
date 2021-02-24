@@ -35,7 +35,7 @@
             IsError = isError;
         }
 
-        public ValidationMessage SetPrefix(string prefix)
+        public ValidationMessage WithPrefix(string prefix)
         {
             Prefix = prefix;
             return this;
