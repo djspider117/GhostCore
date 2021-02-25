@@ -28,7 +28,7 @@ namespace GhostCore.Foundation
 
                 foreach (var msgs in this)
                 {
-                    sb.AppendLine(msgs.Message);
+                    sb.AppendLine($"{msgs.Prefix}{msgs.Message}");
                 }
 
                 return sb.ToString();
