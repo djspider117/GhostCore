@@ -149,12 +149,13 @@ namespace GhostCore.Pipelines
             }
         }
 
-        protected virtual void FinishPipeline(object sourceObj, object procObj, object[] pipelineArgs, bool isSuccess, string failReason = null, object pipelineStarter = null)
+        protected virtual async void FinishPipeline(object sourceObj, object procObj, object[] pipelineArgs, bool isSuccess, string failReason = null, object pipelineStarter = null)
         {
             _isRunning = false;
             _cancellationSource.Dispose();
 
             LogPipelineMessage($"Invoking the {nameof(Finished)} event with the args being the current pipeline process data.", LoggingLevel.Verbose);
+
             OnFinished(new PipelineFinishedEventArgs()
             {
                 FailReason = failReason,
@@ -163,6 +164,15 @@ namespace GhostCore.Pipelines
                 SourceObject = sourceObj,
                 FinalObject = procObj,
                 PipelineStarter = pipelineStarter
+            });
+
+            await ProcessEndpoint(new PipelineProcessData
+            {
+                SourceObject = sourceObj,
+                ProcessedObject = procObj,
+                PipelineArguments = pipelineArgs,
+                PipelineStarter = pipelineStarter,
+                Pipeline = this,
             });
         }
         protected void FinishPipeline(PipelineProcessData pdata, bool isSuccess, string failReason = null) => FinishPipeline(pdata.SourceObject, pdata.ProcessedObject, pdata.PipelineArguments, isSuccess, failReason);
@@ -188,7 +198,7 @@ namespace GhostCore.Pipelines
 
         #region Cleanup
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             foreach (var proc in _processors)
             {
