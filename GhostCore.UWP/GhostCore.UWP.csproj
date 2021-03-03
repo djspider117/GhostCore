@@ -132,6 +132,7 @@
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToDoubleConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\BytesToHumanReadableSizeConverter.cs" />
     <Compile Include="Converters\Chain\ChainConverter.cs" />
     <Compile Include="Converters\Chain\Resolvers\ConverterResolver.cs" />
     <Compile Include="Converters\Chain\Resolvers\IConverterResolver.cs" />
