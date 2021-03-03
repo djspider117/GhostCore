@@ -28,10 +28,20 @@ namespace GhostCore.Foundation
 
                 foreach (var msgs in this)
                 {
-                    sb.AppendLine(msgs.Message);
+                    sb.AppendLine($"{msgs.Prefix}{msgs.Message}");
                 }
 
                 return sb.ToString();
+            }
+        }
+
+        public void RemoveNonErrors()
+        {
+            var src = this.ToList();
+            foreach (var item in src)
+            {
+                if (!item.IsError)
+                    Remove(item);
             }
         }
     }

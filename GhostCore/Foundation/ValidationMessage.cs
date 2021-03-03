@@ -15,6 +15,8 @@
         /// </summary>
         public string Message { get; set; }
 
+        public string Prefix { get; set; }
+
         /// <summary>
         /// Creates an instance of a <see cref="ValidationMessage"/>
         /// </summary>
@@ -32,5 +34,17 @@
         {
             IsError = isError;
         }
+
+        public ValidationMessage WithPrefix(string prefix)
+        {
+            Prefix = prefix;
+            return this;
+        }
+
+        public override string ToString()
+        {
+            return $"{Prefix}[isError={IsError}][message={Message}]";
+        }
+
     }
 }

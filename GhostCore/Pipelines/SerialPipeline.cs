@@ -49,6 +49,7 @@ namespace GhostCore.Pipelines
                 var procResult = await Process(ipp, _pdata);
                 if (procResult.IsFaulted)
                     return;
+                
             }
 
             if (_processors.Count == 0 && _pdata.ProcessedObject == null)
@@ -63,7 +64,6 @@ namespace GhostCore.Pipelines
                 return;
             }
 
-            await ProcessEndpoint(_pdata);
             _pdata.PipelineStarter = sender;
 
             FinishPipeline(_pdata);
@@ -121,8 +121,9 @@ namespace GhostCore.Pipelines
             LogPipelineMessage($"Stop complete.", LoggingLevel.Verbose);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
             _cancellationSource?.Dispose();
         }
     }

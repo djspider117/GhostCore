@@ -79,9 +79,8 @@ namespace GhostCore.Pipelines
 
                         var endObj = CreatePipelineProcessData(sourceObject, pipelineArguments);
                         endObj.ProcessedObject = validResults.ToArray();
-
-                        await ProcessEndpoint(endObj);
                         endObj.PipelineStarter = sender;
+
                         FinishPipeline(endObj);
 
                         break;
@@ -111,7 +110,6 @@ namespace GhostCore.Pipelines
 
                         var pdataObj = pdatas[finishedTask];
 
-                        await ProcessEndpoint(pdataObj);
                         FinishPipeline(sourceObject, pdatas[finishedTask].ProcessedObject, pipelineArguments, isSuccess: true);
 
                         break;
