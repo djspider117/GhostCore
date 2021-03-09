@@ -35,6 +35,7 @@ namespace GhostCore.Pipelines
             }
 
             _pdata = CreatePipelineProcessData(sourceObject, pipelineArguments);
+            _pdata.PipelineStarter = sender;
 
             LogPipelineMessage("Starting processors...", LoggingLevel.Verbose);
             foreach (var ipp in _processors)
@@ -64,7 +65,6 @@ namespace GhostCore.Pipelines
             }
 
             await ProcessEndpoint(_pdata);
-            _pdata.PipelineStarter = sender;
 
             FinishPipeline(_pdata);
             _pdata = null;
