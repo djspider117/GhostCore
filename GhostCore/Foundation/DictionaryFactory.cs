@@ -7,6 +7,7 @@ namespace GhostCore.Foundation
     public abstract class DictionaryFactory<TFactoryKey, TBaseClass>
     {
         private Dictionary<TFactoryKey, Func<TBaseClass>> _factoryMap;
+        protected IEqualityComparer<TFactoryKey> _customKeyComparer;
 
         public DictionaryFactory()
         {
@@ -18,10 +19,23 @@ namespace GhostCore.Foundation
 
         public TBaseClass Create(TFactoryKey factoryKey)
         {
-            if (!_factoryMap.ContainsKey(factoryKey))
-                return default;
+            if (_customKeyComparer != null)
+            {
+                foreach (var item in _factoryMap)
+                {
+                    if (_customKeyComparer.Equals(item.Key, factoryKey))
+                        return item.Value();
+                }
 
-            return _factoryMap[factoryKey]();
+                return default;
+            }
+            else
+            {
+                if (!_factoryMap.ContainsKey(factoryKey))
+                    return default;
+
+                return _factoryMap[factoryKey]();
+            }
         }
     }
 }
