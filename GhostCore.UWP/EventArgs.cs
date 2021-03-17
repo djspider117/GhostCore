@@ -7,7 +7,6 @@ using Windows.Foundation;
 
 namespace GhostCore.UWP
 {
-
     public class SizeEventArgs : EventArgs
     {
         public Size OldSize { get; set; }
