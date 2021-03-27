@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="GhostCoreAnimations.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GhostCoreAnimations"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:GhostCore.Animations.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Viewbox>
+            <Canvas Width="3840" Height="2160" Background="White">
+                <controls:FoundationCompositionRenderer x:Name="renderer" Width="3640" Height="2160"/>
+                <!--<controls:FoundationCompositionRenderer x:Name="renderer2" Width="3640" Height="2160"/>
+                <controls:FoundationCompositionRenderer x:Name="renderer3" Width="3640" Height="2160"/>
+                <controls:FoundationCompositionRenderer x:Name="renderer4" Width="3640" Height="2160"/>
+                <controls:FoundationCompositionRenderer x:Name="renderer5" Width="3640" Height="2160"/>-->
+            </Canvas>
+        </Viewbox>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <Button Content="Start" Click="Button_Click" Background="White" />
+            <Button Content="Go To Random Page" Click="Button_Click_1" Background="White" />
+
+        </StackPanel>
+    </Grid>
+</Page>
