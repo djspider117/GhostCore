@@ -1,4 +1,4 @@
-﻿namespace GhostCore.Services.Logging
+﻿namespace GhostCore.Logging
 {
     public enum LoggingLevel : byte
     {

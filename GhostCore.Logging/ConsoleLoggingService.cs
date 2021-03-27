@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GhostCore.Services.Logging
+namespace GhostCore.Logging
 {
     public sealed class ConsoleLoggingService : ILoggingService
     {

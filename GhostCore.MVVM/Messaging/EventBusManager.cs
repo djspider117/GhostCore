@@ -138,7 +138,7 @@ namespace GhostCore.MVVM.Messaging
             if (!_busses.ContainsKey(busName))
                 return;
 
-            var bus = _busses[busName];
+            var bus = _busses[busName] as IDisposable;
             bus.Dispose();
 
             _busses.Remove(busName);

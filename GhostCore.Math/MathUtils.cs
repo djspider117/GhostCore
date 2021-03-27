@@ -6,7 +6,7 @@ using System.Text;
 
 using SysMath = System.Math;
 
-namespace GhostCore.Utility
+namespace GhostCore.Math
 {
     public static class MathUtils
     {

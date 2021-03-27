@@ -8,4 +8,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj" />
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GhostCore.Foundation
+namespace GhostCore
 {
     public class ObservableMargin : NotifyPropertyChangedImpl, IEquatable<ObservableMargin>
     {

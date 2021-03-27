@@ -1,4 +1,4 @@
-﻿using GhostCore.MVVM.Internal;
+﻿using Internal;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +19,7 @@ namespace GhostCore.Threading
 
         public Promise(int futureObjectId, Action<T> handler = null)
         {
-            Id = __Incrementor.Value++;
+            Id = __Incrementor.GetIncrementedValue();
             FutureObjectId = futureObjectId;
             _handlers = new List<Action<T>>();
             if (handler != null)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GhostCore.Services.Logging
+namespace GhostCore.Logging
 {
     public sealed class CompositeLoggingService : ILoggingService
     {

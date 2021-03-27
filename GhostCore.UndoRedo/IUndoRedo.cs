@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GhostCore.Foundation.UndoRedo
+namespace GhostCore.UndoRedo
 {
     public interface IUndoRedo
     {

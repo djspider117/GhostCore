@@ -1,6 +1,5 @@
 ﻿using GhostCore.Math;
 using GhostCore.Math.Interpolation;
-using GhostCore.Utility;
 using System.Numerics;
 
 namespace GhostCore.Math

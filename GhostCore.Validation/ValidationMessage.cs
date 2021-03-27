@@ -1,4 +1,4 @@
-﻿namespace GhostCore.Foundation
+﻿namespace GhostCore.Validation
 {
     /// <summary>
     /// Provides data for error handling after content validation

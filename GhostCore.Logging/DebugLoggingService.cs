@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace GhostCore.Services.Logging
+namespace GhostCore.Logging
 {
     public sealed class DebugLoggingService : ILoggingService
     {
