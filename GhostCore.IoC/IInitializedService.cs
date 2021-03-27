@@ -1,4 +1,4 @@
-﻿using GhostCore.Foundation;
+﻿
 
 namespace GhostCore.IoC
 {

@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.Logging\GhostCore.Logging.csproj" />
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace GhostCore.Foundation
+namespace GhostCore.Validation
 {
     public class ValidationCollection : List<ValidationMessage>
     {

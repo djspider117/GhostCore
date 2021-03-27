@@ -16,7 +16,7 @@ namespace GhostCore.SimpleIoC
 
             _initialized = true;
 
-            var typeAttributeMapping = AssemblyReflectionParser.GetTypesForAttributes<ServiceImplementationAttribute>();
+            var typeAttributeMapping = AssemblyReflectionParser.GetTypesForAttributes<IoC.ServiceImplementationAttribute>();
 
             foreach (var pair in typeAttributeMapping)
             {

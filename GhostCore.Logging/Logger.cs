@@ -1,8 +1,7 @@
 ﻿using GhostCore;
-using GhostCore.Services;
 using System.Diagnostics;
 
-namespace GhostCore.Services.Logging
+namespace GhostCore.Logging
 {
     public static class Logger
     {

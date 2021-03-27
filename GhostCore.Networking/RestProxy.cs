@@ -1,6 +1,6 @@
 ﻿using System;
 using GhostCore;
-using GhostCore.Foundation;
+
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;

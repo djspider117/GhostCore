@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj" />
     <ProjectReference Include="..\GhostCore\GhostCore.csproj" />
   </ItemGroup>
 

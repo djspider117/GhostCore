@@ -1,5 +1,4 @@
-﻿using GhostCore.Utility;
-using System;
+﻿using System;
 
 namespace GhostCore.Math
 {

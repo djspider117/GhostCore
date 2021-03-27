@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace GhostCore.Foundation.UndoRedo
+namespace GhostCore.UndoRedo
 {
 
     public class UndoRedoContext : IUndoRedo

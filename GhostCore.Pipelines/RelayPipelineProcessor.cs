@@ -1,5 +1,5 @@
-﻿using GhostCore.Foundation;
-using GhostCore.Services.Logging;
+﻿
+using GhostCore.Logging;
 using System;
 using System.Threading.Tasks;
 
