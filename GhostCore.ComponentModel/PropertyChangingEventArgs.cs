@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GhostCore.ComponentModel
 {
-    public interface INotifyPropertyChanging
-    {
-        event EventHandler<PropertyChangingEventArgs> PropertyChanging;
-    }
-
     public class PropertyChangingEventArgs : EventArgs
     {
-        public object OldValue { get; set; }
-        public object NewValue { get; set; }
-        public string PropertyName { get; set; }
+        public object OldValue { get; private set; }
+        public object NewValue { get; private set; }
+        public string PropertyName { get; private set; }
 
         public PropertyChangingEventArgs(object oldValue, object newValue, string propertyName)
         {
