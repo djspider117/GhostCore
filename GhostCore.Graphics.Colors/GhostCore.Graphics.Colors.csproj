@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>2.0.0</Version>
     <Authors>Ionut Popovici</Authors>
     <Company>Ionut Popovici</Company>
     <Product>GhostCore</Product>
@@ -14,7 +14,8 @@
     <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>color colors rgb hsl rgba hsla conversion generation random utility</PackageTags>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 2.0
+Split from the main GhostCore package into a separate package.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

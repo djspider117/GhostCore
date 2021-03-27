@@ -4,6 +4,27 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GhostCore.Configuration.INI</AssemblyName>
     <RootNamespace>GhostCore.Configuration.INI</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Ionut Popovici</Company>
+    <Authors>Ionut Popovici</Authors>
+    <Description>Subset of the GhostCore library. 
+Ini parser and writer</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>Version 2.0
+Split from the main GhostCore package into a separate package.</PackageReleaseNotes>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>ini parser ghostcore utility</PackageTags>
+    <Version>2.0.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\GhostCoreIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
