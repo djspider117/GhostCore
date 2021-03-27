@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>2.0.0</Version>
+    <Authors>Ionut Popovici</Authors>
+    <Description>Subset of the GhostCore library. 
+Different take on IoC with a simpler version also provided for when you don't need a more advanced version.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
+    <PackageTags>ioc ghostcore utility simple</PackageTags>
+    <PackageReleaseNotes>Version 2.0
+Split from the main GhostCore package into a separate package.
+New implementation of a more advanced IoC in this version as well.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj" />
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\GhostCoreIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

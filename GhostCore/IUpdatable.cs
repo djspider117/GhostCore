@@ -4,12 +4,12 @@ namespace GhostCore
 {
     public interface IUpdatable
     {
-        void Update();
+        void Update(object param = null);
     }
 
     public interface IAsyncUpdatable
     {
-        Task UpdateAsync();
+        Task UpdateAsync(object param = null);
     }
 }
 

@@ -1,21 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Product>GhostCore</Product>
-    <Description>A set of utility classes that includes MVVM, security and more</Description>
+    <Description>Subset of the GhostCore "sdk"/library.
+The core library for all of the GhostCore library set.
+</Description>
     <PackageId>GhostCore</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Refactored some classes from the old GhostCore.Math namespace into GhostCore.Numerics
-Implemented some standard sigmoid curves to use in interpolation
-Added a class that represents three-dimensional fields to the GhostCore.Numerics namespace
-Implemented a set of noise generators based on the new field classes usable in procedural generation scenarios.
-</PackageReleaseNotes>
-    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Version 2.0
+Split from the main GhostCore package into a separate package.
+
+Some older GhostCore classes have been deleted from this to tighten the scope of the sdk.</PackageReleaseNotes>
+    <Version>2.0.0</Version>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
-    <PackageTags>mvvm utility</PackageTags>
+    <PackageTags>utility ghostcore</PackageTags>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Ionut Popovici</Company>
     <PackageIconUrl></PackageIconUrl>
@@ -24,8 +25,8 @@ Implemented a set of noise generators based on the new field classes usable in p
     <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,13 +34,15 @@ Implemented a set of noise generators based on the new field classes usable in p
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Icons\GhostCoreIcon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.ComponentModel\GhostCore.ComponentModel.csproj" />
   </ItemGroup>
 </Project>

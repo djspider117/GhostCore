@@ -2,20 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GhostCore.Configuration.INI</AssemblyName>
+    <RootNamespace>GhostCore.Configuration.INI</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
-    <Authors>Ionut Popovici</Authors>
     <Company>Ionut Popovici</Company>
-    <Product>GhostCore</Product>
-    <Description>A package to work with rgb and hsl colors.</Description>
+    <Authors>Ionut Popovici</Authors>
+    <Description>Subset of the GhostCore library. 
+Ini parser and writer</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
-    <PackageIcon>GhostCoreIcon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>color colors rgb hsl rgba hsla conversion generation random utility</PackageTags>
     <PackageReleaseNotes>Version 2.0
 Split from the main GhostCore package into a separate package.</PackageReleaseNotes>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>ini parser ghostcore utility</PackageTags>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,20 +3,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
     <Authors>Ionut Popovici</Authors>
-    <Company>Ionut Popovici</Company>
-    <Product>GhostCore</Product>
-    <Description>A package to work with rgb and hsl colors.</Description>
+    <Description>Subset of the GhostCore library. 
+Noise Field generation, vector math and other math utilities.</Description>
+    <Version>2.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
-    <PackageIcon>GhostCoreIcon.png</PackageIcon>
     <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>color colors rgb hsl rgba hsla conversion generation random utility</PackageTags>
+    <PackageTags>math ghostcore utility noise field generator</PackageTags>
     <PackageReleaseNotes>Version 2.0
 Split from the main GhostCore package into a separate package.</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\Icons\GhostCoreIcon.png">

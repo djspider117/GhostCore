@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Version 2.0
+Split from the main GhostCore package into a separate package.</PackageReleaseNotes>
+    <PackageTags>bindings mvvm utility ghostcore</PackageTags>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Description>Subset of the GhostCore library.
+Provides WPF/UWP like bindings to regular scenarios where those binding frameworks are not available.
+</Description>
+    <Authors>Ionut Popovici</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\GhostCoreIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

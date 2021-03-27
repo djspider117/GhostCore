@@ -5,17 +5,16 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>2.0.0</Version>
     <Authors>Ionut Popovici</Authors>
-    <Company>Ionut Popovici</Company>
-    <Product>GhostCore</Product>
-    <Description>A package to work with rgb and hsl colors.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
-    <PackageIcon>GhostCoreIcon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>color colors rgb hsl rgba hsla conversion generation random utility</PackageTags>
+    <Description>Subset of the GhostCore library. 
+Provides easier to work classes for security and cryptography. Such classes include AES, SHA1 and easy to use extension methods.</Description>
     <PackageReleaseNotes>Version 2.0
 Split from the main GhostCore package into a separate package.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>security aes sha1 sha3 utility crypto</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
