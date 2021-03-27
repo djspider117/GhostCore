@@ -2,16 +2,7 @@
 
 namespace GhostCore.MVVM.Messaging
 {
-    public interface IBusEvent<in T>
-    {
-        T DataObject { get; set; }
-        string EventFilter { get; set; }
-        object OriginalSource { get; set; }
-
-        void Dispose();
-    }
-
-    public class BusEvent<T> : IDisposable, IBusEvent<T>
+    public class BusEvent<T> : IDisposable
     {
         internal bool _isDisposed;
 
