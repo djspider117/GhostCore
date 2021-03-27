@@ -11,17 +11,8 @@ namespace GhostCore.MVVM
     {
         #region Events
 
-        #region CanExecuteChanged
         public event EventHandler CanExecuteChanged;
-        protected void OnCanExecuteChanged()
-        {
-            if (CanExecuteChanged == null)
-                return;
-
-            CanExecuteChanged(this, EventArgs.Empty);
-        }
-        #endregion
-
+       
         #endregion
 
         #region Fields
@@ -33,7 +24,7 @@ namespace GhostCore.MVVM
 
         public RelayCommand(Action<object> executeHandler, Func<object, bool> canExecute = null)
         {
-            _executeHandler = executeHandler;// ?? throw new ArgumentException("Execute handler cannot be null");
+            _executeHandler = executeHandler;
             _canExecuteHandler = canExecute;
         }
 
@@ -58,7 +49,15 @@ namespace GhostCore.MVVM
             OnCanExecuteChanged();
         }
 
-        public void Dispose()
+        protected virtual void OnCanExecuteChanged()
+        {
+            if (CanExecuteChanged == null)
+                return;
+
+            CanExecuteChanged(this, EventArgs.Empty);
+        }
+
+        public virtual void Dispose()
         {
             _executeHandler = null;
             _canExecuteHandler = null;

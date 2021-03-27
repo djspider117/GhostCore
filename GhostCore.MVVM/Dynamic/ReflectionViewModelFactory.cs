@@ -1,16 +1,9 @@
 ﻿using GhostCore.Utility;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GhostCore.MVVM.Dynamic
 {
-
-    public interface IViewModelFactory<TViewModel, TModel> where TViewModel : ViewModelBase<TModel>
-    {
-        TViewModel Create(TModel parameter);
-    }
-
     public class ReflectionViewModelFactory<TViewModel, TModel, TAttribute> : IViewModelFactory<TViewModel, TModel>
         where TViewModel : ViewModelBase<TModel>
         where TAttribute : ViewModelForAttribute
@@ -43,22 +36,6 @@ namespace GhostCore.MVVM.Dynamic
             var actionType = model.GetType();
             return _typeFactory[actionType](model);
         }
-    }
-
-    public class ReflectionViewModelFactory<TViewModel, TModel> : ReflectionViewModelFactory<TViewModel, TModel, ViewModelForAttribute> where TViewModel : ViewModelBase<TModel>
-    {
-    }
-
-   [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public class ViewModelForAttribute : Attribute
-    {
-        public Type TargetType { get; set; }
-
-        public ViewModelForAttribute(Type targetType)
-        {
-            TargetType = targetType;
-        }
-
     }
 
 }
