@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+    <Authors>Ionut Popovici</Authors>
+    <Description>Library full of useful things from MVVM to pipelines, ioc and more. This is a merge package that references all other packages from GhostCore.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <PackageTags>security aes sha1 sha3 utility crypto mvvm ghostcore ioc bindings inpc ini colors hsl rgb noise field undo redo validation win32</PackageTags>
+    <PackageReleaseNotes>GhostCore 2.0 Release
+This package contains references to all GhostCore netstandard2.1 packages.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.Bindings\GhostCore.Bindings.csproj" />
+    <ProjectReference Include="..\GhostCore.ComponentModel\GhostCore.ComponentModel.csproj" />
+    <ProjectReference Include="..\GhostCore.Configuration.Ini\GhostCore.Configuration.INI.csproj" />
+    <ProjectReference Include="..\GhostCore.Graphics.Colors\GhostCore.Graphics.Colors.csproj" />
+    <ProjectReference Include="..\GhostCore.IoC\GhostCore.IoC.csproj" />
+    <ProjectReference Include="..\GhostCore.Logging\GhostCore.Logging.csproj" />
+    <ProjectReference Include="..\GhostCore.Math\GhostCore.Math.csproj" />
+    <ProjectReference Include="..\GhostCore.MVVM\GhostCore.MVVM.csproj" />
+    <ProjectReference Include="..\GhostCore.Networking\GhostCore.Networking.csproj" />
+    <ProjectReference Include="..\GhostCore.Pipelines\GhostCore.Pipelines.csproj" />
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj" />
+    <ProjectReference Include="..\GhostCore.Security\GhostCore.Security.csproj" />
+    <ProjectReference Include="..\GhostCore.Threading\GhostCore.Threading.csproj" />
+    <ProjectReference Include="..\GhostCore.UndoRedo\GhostCore.UndoRedo.csproj" />
+    <ProjectReference Include="..\GhostCore.Validation\GhostCore.Validation.csproj" />
+    <ProjectReference Include="..\GhostCore.Win32\GhostCore.Win32.csproj" />
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\GhostCoreIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
