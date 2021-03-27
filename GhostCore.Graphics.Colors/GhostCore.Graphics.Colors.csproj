@@ -2,6 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.3</Version>
+    <Authors>Ionut Popovici</Authors>
+    <Company>Ionut Popovici</Company>
+    <Product>GhostCore</Product>
+    <Description>A package to work with rgb and hsl colors.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+    <PackageIcon>GhostCoreIcon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>color colors rgb hsl rgba hsla conversion generation random utility</PackageTags>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\GhostCoreIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
