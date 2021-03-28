@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace GhostCore.Graphics.Colors
 {
@@ -148,17 +149,29 @@ namespace GhostCore.Graphics.Colors
         /// <summary>
         /// Converts the current color to a css valid rgba color. Example: rgba(141,254,215,0.5)
         /// </summary>
-        public string ToCSSString() => $"rgba({R * 255},{G * 255},{B * 255},{A})";
+        public string ToCSSString()
+        {
+            FormattableString str = $"rgba({R * 255},{G * 255},{B * 255},{A})";
+            return str.ToString(CultureInfo.InvariantCulture);
+        }
 
         /// <summary>
         /// Converts the color into a valid hexstring color. Example #2ABF1E
         /// </summary>
-        public string ToHexString() => $"#{(byte)(R * 255):X2}{(byte)(G * 255):X2}{(byte)(B * 255):X2}";
+        public string ToHexString()
+        {
+            FormattableString str = $"#{(byte)(R * 255):X2}{(byte)(G * 255):X2}{(byte)(B * 255):X2}";
+            return str.ToString(CultureInfo.InvariantCulture);
+        }
 
         /// <summary>
         /// Converts the color into a valid RGBA hexstring color. Example #FF2ABF1E
         /// </summary>
-        public string ToARGBHexString() => $"#{(byte)(A * 255):X2}{(byte)(R * 255):X2}{(byte)(G * 255):X2}{(byte)(B * 255):X2}";
+        public string ToARGBHexString()
+        {
+            FormattableString str = $"#{(byte)(A * 255):X2}{(byte)(R * 255):X2}{(byte)(G * 255):X2}{(byte)(B * 255):X2}";
+            return str.ToString(CultureInfo.InvariantCulture);
+        }
 
 
         #endregion
