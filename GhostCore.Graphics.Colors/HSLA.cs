@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Numerics;
 
 namespace GhostCore.Graphics.Colors
@@ -110,12 +111,20 @@ namespace GhostCore.Graphics.Colors
         #region ToString
 
         /// <inheritdoc />
-        public override string ToString() => $"[HSLA (H={H} deg, S={S * 100}%, L={L * 100}%, A={A}))";
+        public override string ToString()
+        {
+            FormattableString str = $"[HSLA (H={H} deg, S={S * 100}%, L={L * 100}%, A={A}))";
+            return str.ToString(CultureInfo.InvariantCulture);
+        }
 
         /// <summary>
         /// Converts the current color to a css valid hsla color. Example: hsla(213, 43%, 12%, 0.3)
         /// </summary>
-        public string ToCSSString() => $"hsla({H},{S * 100}%,{L * 100}%,{A})";
+        public string ToCSSString()
+        {
+            FormattableString str = $"hsla({H},{S * 100}%,{L * 100}%,{A})";
+            return str.ToString(CultureInfo.InvariantCulture);
+        }
 
         #endregion
 
