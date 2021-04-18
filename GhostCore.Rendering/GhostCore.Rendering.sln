@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostCore.Rendering.RnD", "GhostCore.Rendering.RnD\GhostCore.Rendering.RnD.csproj", "{ECC17024-D43C-4B07-83A5-526E8178716B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECC17024-D43C-4B07-83A5-526E8178716B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC17024-D43C-4B07-83A5-526E8178716B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC17024-D43C-4B07-83A5-526E8178716B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC17024-D43C-4B07-83A5-526E8178716B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B362FDD-D22F-486B-8F8D-0832933AF1D5}
+	EndGlobalSection
+EndGlobal
