@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{DCF8202E-5902-4875-8352-D2781C63BC46}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GhostCore.Demo.UWP</RootNamespace>
+    <AssemblyName>GhostCore.Demo.UWP</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.11</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.Bindings\GhostCore.Bindings.csproj">
+      <Project>{931452c8-b8c9-4a76-bbdc-49e0366e4f72}</Project>
+      <Name>GhostCore.Bindings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.ComponentModel\GhostCore.ComponentModel.csproj">
+      <Project>{b561f020-0c8a-4902-9f92-06067578c07a}</Project>
+      <Name>GhostCore.ComponentModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Configuration.Ini\GhostCore.Configuration.INI.csproj">
+      <Project>{46d60d36-9b5e-43e6-b433-1f803f46b57d}</Project>
+      <Name>GhostCore.Configuration.INI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Graphics.Colors\GhostCore.Graphics.Colors.csproj">
+      <Project>{3b8ef2db-5789-44be-b373-450a76c780b9}</Project>
+      <Name>GhostCore.Graphics.Colors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.IoC\GhostCore.IoC.csproj">
+      <Project>{49ee16e0-f613-4f55-9b57-f804d90f31ff}</Project>
+      <Name>GhostCore.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Logging\GhostCore.Logging.csproj">
+      <Project>{8a46f0dd-ae6e-458f-a8e9-b271f009f7dc}</Project>
+      <Name>GhostCore.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Math\GhostCore.Math.csproj">
+      <Project>{5f81a3fb-44fa-4aa8-b087-45b948cadba2}</Project>
+      <Name>GhostCore.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.MVVM\GhostCore.MVVM.csproj">
+      <Project>{bb7de607-2429-45dd-aeee-66b12bc1595a}</Project>
+      <Name>GhostCore.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Networking\GhostCore.Networking.csproj">
+      <Project>{52a0cc77-a721-472b-a33b-e8ad586039b2}</Project>
+      <Name>GhostCore.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Pipelines\GhostCore.Pipelines.csproj">
+      <Project>{5a82752a-ecc7-452f-9498-681e08714de5}</Project>
+      <Name>GhostCore.Pipelines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj">
+      <Project>{10c712ec-142e-4476-8015-892f78fd9927}</Project>
+      <Name>GhostCore.SafeTaskResult</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Security\GhostCore.Security.csproj">
+      <Project>{8f898517-bcc9-4f9e-8dd1-026a883e2acc}</Project>
+      <Name>GhostCore.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Threading\GhostCore.Threading.csproj">
+      <Project>{ff722473-c7b4-4802-9b08-afc21a5eace9}</Project>
+      <Name>GhostCore.Threading</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.UndoRedo\GhostCore.UndoRedo.csproj">
+      <Project>{0183c061-83b5-4ef2-8d24-c75b1a7e2cb4}</Project>
+      <Name>GhostCore.UndoRedo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Validation\GhostCore.Validation.csproj">
+      <Project>{d76809fa-670a-453c-8052-d73e9073f2ad}</Project>
+      <Name>GhostCore.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Win32\GhostCore.Win32.csproj">
+      <Project>{a0e1c6da-af4b-4bf4-b21b-176bed1924c3}</Project>
+      <Name>GhostCore.Win32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj">
+      <Project>{e9a0b3cb-ce20-4e27-a778-a66b486b894e}</Project>
+      <Name>GhostCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
