@@ -66,13 +66,21 @@ namespace GhostCore.Graphics.Colors
         public bool Equals(HSLA other) => H == other.H && S == other.S && L == other.L && A == other.A;
 
         /// <inheritdoc />
-        public override int GetHashCode() => HashCode.Combine(H, S, L, A);
-
-        /// <inheritdoc />
         public static bool operator ==(HSLA left, HSLA right) => left.Equals(right);
 
         /// <inheritdoc />
         public static bool operator !=(HSLA left, HSLA right) => !left.Equals(right);
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            int hashCode = -2103927696;
+            hashCode = hashCode * -1521134295 + H.GetHashCode();
+            hashCode = hashCode * -1521134295 + S.GetHashCode();
+            hashCode = hashCode * -1521134295 + L.GetHashCode();
+            hashCode = hashCode * -1521134295 + A.GetHashCode();
+            return hashCode;
+        }
 
         #endregion
 

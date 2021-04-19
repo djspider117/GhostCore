@@ -74,12 +74,6 @@ namespace GhostCore.Graphics.Colors
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(R, G, B, A);
-        }
-
-        /// <inheritdoc />
         public static bool operator ==(RGBA left, RGBA right)
         {
             return left.Equals(right);
@@ -89,6 +83,17 @@ namespace GhostCore.Graphics.Colors
         public static bool operator !=(RGBA left, RGBA right)
         {
             return !(left.Equals(right));
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            int hashCode = 1960784236;
+            hashCode = hashCode * -1521134295 + R.GetHashCode();
+            hashCode = hashCode * -1521134295 + G.GetHashCode();
+            hashCode = hashCode * -1521134295 + B.GetHashCode();
+            hashCode = hashCode * -1521134295 + A.GetHashCode();
+            return hashCode;
         }
 
 
@@ -172,7 +177,6 @@ namespace GhostCore.Graphics.Colors
             FormattableString str = $"#{(byte)(A * 255):X2}{(byte)(R * 255):X2}{(byte)(G * 255):X2}{(byte)(B * 255):X2}";
             return str.ToString(CultureInfo.InvariantCulture);
         }
-
 
         #endregion
     }

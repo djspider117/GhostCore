@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ionut Popovici</Authors>
     <Company>Ionut Popovici</Company>
+	  <LangVersion>8.0</LangVersion>
     <Description>Subset of the GhostCore library. 
 RestProxy class and other useful networking classes and enums.</Description>
     <PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
