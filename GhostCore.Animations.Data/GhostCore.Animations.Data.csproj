@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GhostCore.Animations.Core\GhostCore.Animations.Core.csproj" />
+    <ProjectReference Include="..\GhostCore.Graphics.Colors\GhostCore.Graphics.Colors.csproj" />
+    <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj" />
+    <ProjectReference Include="..\GhostCore\GhostCore.csproj" />
+  </ItemGroup>
+
+</Project>

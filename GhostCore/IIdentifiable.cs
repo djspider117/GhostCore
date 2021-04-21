@@ -9,7 +9,7 @@
         string Name { get; }
     }
 
-    public interface INamedIdentified : IIdentifiable, INamed
+    public interface INamedIdentifiable : IIdentifiable, INamed
     {
     }
 }

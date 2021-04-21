@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace GhostCore.Animations
+namespace GhostCore.Animations.Core
 {
     public class TransformData
     {
