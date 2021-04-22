@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace GhostCore.Animations.Data.Layers
 {
-    public class LayerBase : ILayer
+    public abstract class LayerBase : ILayer
     {
         public string Name { get; }
         public RGBA PreviewColor { get; set; }

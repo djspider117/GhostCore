@@ -123,6 +123,9 @@
     <Compile Include="EventArgs\BitmapLoadEventArgs.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="EventArgs\FileLoadEventArgs.cs" />
+    <Compile Include="Loaders\ILayerSpecificResourceLoader.cs" />
+    <Compile Include="Loaders\ImageLayerResourceLoader.cs" />
+    <Compile Include="Loaders\LayerSpecificResourceLoaderFactory.cs" />
     <Compile Include="Renderers\CompositeLayerRenderer.cs" />
     <Compile Include="Internal\GeometryMaskFactory.cs" />
     <Compile Include="Internal\IGeometryMask.cs" />

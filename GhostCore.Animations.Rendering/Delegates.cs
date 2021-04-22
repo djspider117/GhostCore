@@ -3,5 +3,5 @@
 namespace GhostCore.Animations.Rendering
 {
 
-    public delegate Task AsyncTypedEventHandler<TSender, TResult>(TSender sender, TResult args);
+    public delegate Task AsyncTypedEventHandler<TArgs>(TArgs args);
 }

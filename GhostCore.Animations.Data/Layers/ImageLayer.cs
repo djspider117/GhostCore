@@ -1,4 +1,5 @@
 ﻿using GhostCore.Animations.Core;
+using System.Threading.Tasks;
 
 namespace GhostCore.Animations.Data.Layers
 {
@@ -10,6 +11,11 @@ namespace GhostCore.Animations.Data.Layers
 
         public int SvgViewportWidth { get; set; }
         public int SvgViewportHeight { get; set; }
+
+        public Task LoadResourceAsync()
+        {
+            return Task.CompletedTask;
+        }
     }
 
     public enum ImageType
