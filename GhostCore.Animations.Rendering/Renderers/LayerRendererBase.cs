@@ -20,7 +20,7 @@ namespace GhostCore.Animations.Rendering
         public LayerRendererBase(ILayer layer)
         {
             Layer = layer;
-            RenderTransform = layer?.Transform;
+            RenderTransform = layer?.Transform ?? new TransformData(Vector2.Zero, Vector2.Zero, Vector2.One, 0);
         }
 
         public virtual Task Initialze(ICanvasResourceCreator resourceCreator)
@@ -37,11 +37,10 @@ namespace GhostCore.Animations.Rendering
             var layer = Layer;
             foreach (var animCurve in layer.Animations)
             {
-                float curTimeInSec = time / 1000;
-                if (layer.Duration != 0 && curTimeInSec > layer.EndTime)
+                if (layer.Duration != 0 && time > layer.EndTime)
                     continue;
 
-                var val = animCurve.Evaluate(curTimeInSec, layer.StartTime);
+                var val = animCurve.Evaluate(time, layer.StartTime);
                 var splitPath = animCurve.TargetProperty.Split('.');
 
                 UpdatePerLayerAnimation(val, splitPath);

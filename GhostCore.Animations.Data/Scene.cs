@@ -6,7 +6,7 @@ namespace GhostCore.Animations.Data
 {
     public class Scene : IScene
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
         public RenderInfo RenderInfo { get; set; }
         public RGBA BackdropColor { get; set; }
@@ -14,7 +14,7 @@ namespace GhostCore.Animations.Data
 
         public IEnumerable<IResourceDependentLayer> ExtractResourceDependentLayers()
         {
-            throw new System.NotImplementedException();
+            return ResourceDependentLayerExtractionHelper.Extract(Layers);
         }
     }
 }

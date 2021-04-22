@@ -12,15 +12,17 @@ namespace GhostCore.Animations.Rendering
         private IList<ILayer> _layers;
         private List<LayerRendererBase> _renderers;
 
+
+        private float _curTime;
         public override float CurrentTime
         {
             get
             {
-                return base.CurrentTime;
+                return _curTime;
             }
             internal set
             {
-                base.CurrentTime = value;
+                _curTime = value;
                 foreach (var rnd in _renderers)
                 {
                     rnd.CurrentTime = value;
@@ -80,8 +82,8 @@ namespace GhostCore.Animations.Rendering
             var psz = Measure(ds);
             var pcpos = RenderTransform.Center * psz;
             var pTrans = Matrix3x2.CreateScale(RenderTransform.Scale, pcpos) *
-                        Matrix3x2.CreateTranslation(RenderTransform.Position) *
-                        Matrix3x2.CreateRotation(RenderTransform.Rotation, pcpos + RenderTransform.Position);
+                         Matrix3x2.CreateTranslation(RenderTransform.Position) *
+                         Matrix3x2.CreateRotation(RenderTransform.Rotation, pcpos + RenderTransform.Position);
 
 
             foreach (var rnd in _renderers)
@@ -91,7 +93,7 @@ namespace GhostCore.Animations.Rendering
                 if (!layer.IsVisible)
                     return;
 
-                if (rnd.CurrentTime >= layer.StartTime * 1000)
+                if (rnd.CurrentTime >= layer.StartTime)
                 {
                     if (layer.Duration != 0 && rnd.CurrentTime >= layer.EndTime * 1000)
                         return;

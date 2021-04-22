@@ -25,10 +25,9 @@ namespace GhostCore.Animations.Rendering
 
             var layer = _layer as TextLayer;
 
-            float curTimeInSec = time / 1000;
             if (layer.TextKeyframes != null)
             {
-                var kf = layer.TextKeyframes.LastOrDefault(x => x.Time <= curTimeInSec);
+                var kf = layer.TextKeyframes.LastOrDefault(x => x.Time <= time);
                 layer.Text = kf.Value;
             }
 

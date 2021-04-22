@@ -4,6 +4,8 @@ namespace GhostCore.Animations.Core
 {
     public class TransformData
     {
+        public readonly static TransformData Default = new TransformData(Vector2.Zero, Vector2.Zero, Vector2.One, 0);
+
         public Vector2 Center { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Scale { get; set; }

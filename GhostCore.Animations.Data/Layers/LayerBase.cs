@@ -7,18 +7,18 @@ namespace GhostCore.Animations.Data.Layers
 {
     public abstract class LayerBase : ILayer
     {
-        public string Name { get; }
-        public RGBA PreviewColor { get; set; }
+        public string Name { get; set; }
+        public RGBA PreviewColor { get; set; } = ColorGenerator.RandomRGBColor(false);
 
         public float StartTime { get; set; }
         public float Duration { get; set; }
         public float EndTime => StartTime + Duration;
 
-        public float Opacity { get; set; }
-        public bool IsVisible { get; set; }
+        public float Opacity { get; set; } = 1;
+        public bool IsVisible { get; set; } = true;
         public bool IsLocked { get; set; }
 
-        public TransformData Transform { get; set; }
+        public TransformData Transform { get; set; } = TransformData.Default;
         public Vector2 Anchor { get; set; }
 
 

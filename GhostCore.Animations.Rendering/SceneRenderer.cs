@@ -86,6 +86,8 @@ namespace GhostCore.Animations.Rendering
             }
 
             _canvas = new CanvasControl();
+            _canvas.Width = Scenes.Max(x => x.RenderInfo.RenderSize.X);
+            _canvas.Height = Scenes.Max(x => x.RenderInfo.RenderSize.Y);
             _canvas.CreateResources += Canvas_CreateResources;
             _canvas.Draw += Canvas_Draw;
 
@@ -97,7 +99,7 @@ namespace GhostCore.Animations.Rendering
             Loaded -= FoundationCompositionRenderer_Loaded;
             Unloaded += FoundationCompositionRenderer_Unloaded;
 
-            await Initialize();
+            //await Initialize();
         }
         private void FoundationCompositionRenderer_Unloaded(object sender, RoutedEventArgs e)
         {

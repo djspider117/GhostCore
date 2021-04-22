@@ -18,7 +18,7 @@ namespace GhostCore.Animations.Data.Layers
 
         public IEnumerable<IResourceDependentLayer> ExtractResourceDependentLayers()
         {
-            throw new System.NotImplementedException();
+            return ResourceDependentLayerExtractionHelper.Extract(Children);
         }
     }
 
