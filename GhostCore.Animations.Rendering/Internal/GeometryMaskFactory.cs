@@ -6,12 +6,12 @@ using Microsoft.Graphics.Canvas.Geometry;
 
 namespace GhostCore.Animations.Rendering
 {
-    internal class GeometryMaskFactory
+    internal static class GeometryMaskFactory
     {
-        public static ISafeTaskResult<IGeometryMask> TryConvert(IMask mask)
+        public static IGeometryMask TryConvert(IMask mask)
         {
             if (mask is RectMask rm)
-                return null;
+                return new GeometricRectMask(rm);
 
 
             return null;
@@ -21,6 +21,7 @@ namespace GhostCore.Animations.Rendering
     internal class GeometricRectMask : IGeometryMask
     {
         private RectMask _mask;
+        public IMask OriginalMask => _mask;
 
         internal GeometricRectMask(RectMask mask)
         {
@@ -34,5 +35,6 @@ namespace GhostCore.Animations.Rendering
 
             return CanvasGeometry.CreateRectangle(resourceCreator, trux, truy, _mask.Width, _mask.Height);
         }
+
     }
 }

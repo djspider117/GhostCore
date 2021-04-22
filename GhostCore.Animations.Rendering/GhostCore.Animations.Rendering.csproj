@@ -130,6 +130,7 @@
     <Compile Include="Internal\GeometryMaskFactory.cs" />
     <Compile Include="Internal\IGeometryMask.cs" />
     <Compile Include="Renderers\ImageLayerRenderer.cs" />
+    <Compile Include="LayerExtensions.cs" />
     <Compile Include="Renderers\LayerRendererBase.cs" />
     <Compile Include="LayerRendererFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,6 +2,6 @@
 {
     public interface IMask
     {
-        // ???
+        GhostGeometryCombine BlendMode { get; set; }
     }
 }

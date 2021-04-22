@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.UI;
 
 namespace GhostCore.Animations.Rendering
 {
@@ -121,7 +122,6 @@ namespace GhostCore.Animations.Rendering
                             var clipRect = new Rect(r.X - p.X, r.Y - p.Y, r.Width * s.X, r.Height * s.Y);
 
                             // TODO: implement clip rect rotation
-
                             drawingLayer = ds.CreateLayer(layer.Opacity * Layer.Opacity, clipRect);
                         }
                         else if (_mask != null)

@@ -9,5 +9,6 @@ namespace GhostCore.Animations.Data
         public Vector2 Anchor { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
+        public GhostGeometryCombine BlendMode { get; set; }
     }
 }

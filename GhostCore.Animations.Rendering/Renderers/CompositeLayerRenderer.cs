@@ -4,6 +4,7 @@ using Microsoft.Graphics.Canvas;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
+using Windows.UI;
 
 namespace GhostCore.Animations.Rendering
 {
@@ -115,33 +116,38 @@ namespace GhostCore.Animations.Rendering
 
                     CanvasActiveLayer drawingLayer = null;
 
-                    // TODO: proper masking
-                    //if (layer.IsMasked)
-                    //{
-                    //    if (layer.UseRectangleMask)
-                    //    {
-                    //        var r = layer.RectangleMask;
-                    //        var clipRect = new Rect(r.X - p.X, r.Y - p.Y, r.Width * s.X, r.Height * s.Y);
+                    var shouldHandleMasks = layer.Masks.Count != 0;
 
-                    //        // TODO: implement clip rect rotation
+                    if (shouldHandleMasks && rnd.Mask != null)
+                    {
+                        var maskTransform = Matrix3x2.CreateScale(new Vector2(1 / s.X, 1 / s.Y), cpos) *
+                                            Matrix3x2.CreateTranslation(-p) *
+                                            Matrix3x2.CreateRotation(rnd.RenderTransform.Rotation, cpos + p);
 
-                    //        drawingLayer = ds.CreateLayer(layer.Opacity * Layer.Opacity, clipRect);
-                    //    }
-                    //    else if (_mask != null)
-                    //    {
-                    //        drawingLayer = ds.CreateLayer(layer.Opacity * Layer.Opacity, _mask);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    drawingLayer = ds.CreateLayer(layer.Opacity * Layer.Opacity);
-                    //}
+                        if (MaskRenderMode != MaskRenderMode.Hidden)
+                        {
+                            ds.Transform = transform * maskTransform;
+
+                            if (MaskRenderMode == MaskRenderMode.Border)
+                                ds.DrawGeometry(rnd.Mask, Colors.Red, 2);
+
+                            if (MaskRenderMode == MaskRenderMode.Fill)
+                                ds.FillGeometry(rnd.Mask, Colors.Red);
+
+                            ds.Transform = transform;
+                        }
+
+                        drawingLayer = ds.CreateLayer(layer.Opacity, rnd.Mask, maskTransform);
+                    }
+                    else
+                    {
+                        drawingLayer = ds.CreateLayer(layer.Opacity);
+                    }
 
                     using (drawingLayer)
                     {
                         rnd.RenderLayerComponents(ds);
                     }
-
                 }
             }
         }

@@ -195,8 +195,10 @@ namespace GhostCore.Animations.Editor
                 Text = "Bank",
                 Color = new RGBA(0, 0, 0, 1),
                 FontSize = 25,
-                //UseRectangleMask = true,
-                //RectangleMask = new Rect(0, 54, 100, 33),
+                Masks = new List<IMask>()
+                {
+                    new RectMask { RelativeOffset = new Vector2(0, 54), Width = 100, Height = 33 }
+                },
                 Animations = new List<AnimationCurve>()
                 {
                     new AnimationCurve()
@@ -220,9 +222,10 @@ namespace GhostCore.Animations.Editor
                 Text = "11",
                 FontSize = 20,
                 Color = new RGBA(0, 0, 0, 1),
-                //IsMasked = true,
-                //UseRectangleMask = true,
-                //RectangleMask = new Rect(0, 87, 100, 33),
+                Masks = new List<IMask>()
+                {
+                    new RectMask{ RelativeOffset = new Vector2(0, 87), Width = 100, Height = 33 }
+                },
                 Animations = new List<AnimationCurve>()
                 {
                     new AnimationCurve()

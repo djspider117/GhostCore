@@ -1,21 +1,38 @@
 ﻿using GhostCore.Animations.Core;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Windows.UI.Input.Inking;
 
 namespace GhostCore.Animations.Rendering
 {
+    public enum MaskRenderMode
+    {
+        Hidden,
+        Fill,
+        Border
+    }
+
     public abstract class LayerRendererBase
     {
         protected ILayer _layer;
         protected CanvasGeometry _mask;
 
-        public ILayer Layer { get => _layer; set => _layer = value; }
+        public CanvasGeometry Mask => _mask;
+        public ILayer Layer
+        {
+            get => _layer;
+            set => _layer = value;
+        }
+
         public virtual float CurrentTime { get; internal set; }
         public TransformData RenderTransform;
         public IScene ParentScene { get; set; }
         internal int ParentSceneIndex { get; set; }
+
+        public MaskRenderMode MaskRenderMode { get; set; } = MaskRenderMode.Hidden;
 
         public LayerRendererBase(ILayer layer)
         {
@@ -25,9 +42,22 @@ namespace GhostCore.Animations.Rendering
 
         public virtual Task Initialze(ICanvasResourceCreator resourceCreator)
         {
-            // TODO: masking
-            //if (Layer.MaskSource != null)
-            //    _mask = CanvasObject.CreateGeometry(resourceCreator, Layer.MaskSource);
+            if (Layer.Masks != null)
+            {
+                var geomMasks = Layer.GetGeometryMasks().ToArray();
+                if (geomMasks.Length >= 1)
+                    _mask = geomMasks.FirstOrDefault().CreateGeometry(resourceCreator);
+
+                if (geomMasks.Length >= 2)
+                {
+                    for (int i = 1; i < geomMasks.Length; i++)
+                    {
+                        var x = geomMasks[i];
+                        var nm = x.CreateGeometry(resourceCreator);
+                        _mask = _mask.CombineWith(nm, Matrix3x2.Identity, (CanvasGeometryCombine)x.OriginalMask.BlendMode);
+                    }
+                }
+            }
 
             return Task.CompletedTask;
         }
@@ -80,27 +110,12 @@ namespace GhostCore.Animations.Rendering
 
                 CanvasActiveLayer drawingLayer = null;
 
-                // TODO: proper masking
-                //if (layer.IsMasked)
-                //{
-                //    if (layer.UseRectangleMask)
-                //    {
-                //        var r = layer.RectangleMask;
-                //        var clipRect = new Rect(r.X - p.X, r.Y - p.Y, r.Width * s.X, r.Height * s.Y);
+                var shouldHandleMasks = layer.Masks.Count != 0;
 
-                //        // TODO: implement clip rect rotation
-
-                //        drawingLayer = ds.CreateLayer(layer.Opacity, clipRect);
-                //    }
-                //    else if (_mask != null)
-                //    {
-                //        drawingLayer = ds.CreateLayer(layer.Opacity, _mask);
-                //    }
-                //}
-                //else
-                //{
-                drawingLayer = ds.CreateLayer(layer.Opacity);
-                //}
+                if (shouldHandleMasks && _mask != null)
+                    drawingLayer = ds.CreateLayer(layer.Opacity, _mask);
+                else
+                    drawingLayer = ds.CreateLayer(layer.Opacity);
 
                 using (drawingLayer)
                 {
