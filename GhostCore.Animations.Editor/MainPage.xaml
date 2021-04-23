@@ -1,13 +1,254 @@
-﻿<Page
-    x:Class="GhostCore.Animations.Editor.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GhostCore.Animations.Editor"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<Page x:Class="GhostCore.Animations.Editor.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:GhostCore.Animations.Editor"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls" xmlns:controls="using:GhostCore.Animations.Editor.Controls" xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Microsoft.UI.Xaml/DensityStyles/Compact.xaml" />
 
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="CompactAppBarSeparatorStyle" TargetType="AppBarSeparator">
+                <Setter Property="Foreground" Value="{ThemeResource AppBarSeparatorForeground}" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="AppBarSeparator">
+                            <Rectangle x:Name="SeparatorRectangle"
+                                       Width="1"
+                                       Margin="3,6"
+                                       VerticalAlignment="Stretch"
+                                       Fill="{TemplateBinding Foreground}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ApplicationViewStates">
+                                        <!--  FullSize is used when we are in landscape or filled mode  -->
+                                        <VisualState x:Name="FullSize" />
+                                        <!--  Compact is used when we are in portrait or snapped mode  -->
+                                        <VisualState x:Name="Compact" />
+                                        <VisualState x:Name="Overflow">
+
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SeparatorRectangle" Storyboard.TargetProperty="Width">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="NaN" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SeparatorRectangle" Storyboard.TargetProperty="HorizontalAlignment">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SeparatorRectangle" Storyboard.TargetProperty="Height">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SeparatorRectangle" Storyboard.TargetProperty="Margin">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="12,4,12,4" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+
+                                    </VisualStateGroup>
+
+                                </VisualStateManager.VisualStateGroups>
+                            </Rectangle>
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="250" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="320" Width="Auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid x:Name="pnlHeaderGrid" Grid.ColumnSpan="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <muxc:MenuBar x:Name="mbMainMenuBar" Background="{ThemeResource SystemChromeMediumColor}">
+                <muxc:MenuBarItem Title="File">
+                    <MenuFlyoutItem Text="New">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="N" Modifiers="Control" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Open...">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="O" Modifiers="Control" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutSubItem Text="Open Recent">
+                        <MenuFlyoutItem Text="1. c:\work\TestDocument1.gas" />
+                        <MenuFlyoutItem Text="2. d:\somewhere\sumfolder\workingAnim.gas" />
+                        <MenuFlyoutItem Text="3. c:\work\finalfinalMegafinal43.gas" />
+                    </MenuFlyoutSubItem>
+                    <MenuFlyoutSeparator />
+                    <MenuFlyoutItem Text="Close" />
+                    <MenuFlyoutItem Text="Save">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="S" Modifiers="Control" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Save As..">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="S" Modifiers="Control, Shift" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutSeparator />
+                    <MenuFlyoutItem Text="Exit" />
+                </muxc:MenuBarItem>
+
+                <muxc:MenuBarItem Title="Edit">
+                    <MenuFlyoutItem Text="Undo" />
+                    <MenuFlyoutItem Text="Cut" />
+                    <MenuFlyoutItem Text="Copy" />
+                    <MenuFlyoutItem Text="Paste" />
+                </muxc:MenuBarItem>
+
+                <muxc:MenuBarItem Title="View">
+                    <MenuFlyoutItem Text="Output" />
+                    <MenuFlyoutSeparator />
+                    <muxc:RadioMenuFlyoutItem Text="Landscape" GroupName="OrientationGroup" />
+                    <muxc:RadioMenuFlyoutItem Text="Portrait"
+                                              GroupName="OrientationGroup"
+                                              IsChecked="True" />
+                    <MenuFlyoutSeparator />
+                    <muxc:RadioMenuFlyoutItem Text="Small icons" GroupName="SizeGroup" />
+                    <muxc:RadioMenuFlyoutItem Text="Medium icons"
+                                              IsChecked="True"
+                                              GroupName="SizeGroup" />
+                    <muxc:RadioMenuFlyoutItem Text="Large icons" GroupName="SizeGroup" />
+                </muxc:MenuBarItem>
+
+                <muxc:MenuBarItem Title="Help">
+                    <MenuFlyoutItem Text="About" />
+                </muxc:MenuBarItem>
+            </muxc:MenuBar>
+
+            <Rectangle Grid.Row="1" Fill="{ThemeResource SystemChromeMediumColor}" />
+            <CommandBar Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        Background="Transparent"
+                        IsOpen="False"
+                        DefaultLabelPosition="Right"
+                        OverflowButtonVisibility="Collapsed"
+                        ClosedDisplayMode="Compact"
+                        IsSticky="True">
+                <AppBarToggleButton x:Name="btnMoveTool"
+                                    Style="{StaticResource NoBorderAppBarButtonStyle}"
+                                    ToolTipService.ToolTip="Selection Tool (V)">
+                    <AppBarToggleButton.Icon>
+                        <PathIcon Data="M434.2,344.473L92.866,3.14c-3.029-3.051-7.616-3.989-11.605-2.325c-3.989,1.643-6.592,5.547-6.592,9.856v490.667                            c0,4.395,2.688,8.32,6.763,9.92c1.259,0.512,2.581,0.747,3.904,0.747c2.901,0,5.76-1.195,7.808-3.413l135.509-145.92h198.016                            c4.309,0,8.213-2.603,9.856-6.592C438.168,352.111,437.272,347.524,434.2,344.473z" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="btnPanTool" Style="{StaticResource NoBorderAppBarButtonStyle}">
+                    <AppBarToggleButton.Icon>
+                        <PathIcon Data="M277.333,42.667C265.557,42.667,256,52.245,256,64v10.667c0,5.888-4.779,10.667-10.667,10.667                            c-5.888,0-10.667-4.779-10.667-10.667v-32c0-11.755-9.557-21.333-21.333-21.333S192,30.912,192,42.667v32                            c0,5.888-4.779,10.667-10.667,10.667s-10.667-4.779-10.667-10.667V21.333C170.667,9.579,161.109,0,149.333,0S128,9.579,128,21.333                            v53.333c0,5.888-4.779,10.667-10.667,10.667s-10.667-4.779-10.667-10.667v-32c0-11.755-9.557-21.333-21.333-21.333                            S64,30.912,64,42.667v53.312C64,96,64,96,64,96.021v42.645c0,5.888-4.779,10.667-10.667,10.667s-10.667-4.779-10.667-10.667                            v-16.917l-5.717,5.717c-10.069,10.069-15.616,23.467-15.616,37.717v32.32c0,14.229,5.547,27.627,15.616,37.717l42.688,42.667                            C106.773,305.045,142.891,320,181.312,320c64.704,0,117.355-52.629,117.355-117.333V64                            C298.667,52.245,289.109,42.667,277.333,42.667z" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="btnZoomTool" Style="{StaticResource NoBorderAppBarButtonStyle}">
+                    <AppBarToggleButton.Icon>
+                        <PathIcon Data="m378.344 332.78c25.37-34.645 40.545-77.2 40.545-123.333 0-115.484-93.961-209.445-209.445-209.445s-209.444 93.961-209.444 209.445 93.961 209.445 209.445 209.445c46.133 0 88.692-15.177 123.337-40.547l137.212 137.212 45.564-45.564c0-.001-137.214-137.213-137.214-137.213zm-168.899 21.667c-79.958 0-145-65.042-145-145s65.042-145 145-145 145 65.042 145 145-65.043 145-145 145z" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+
+                <AppBarSeparator Style="{StaticResource CompactAppBarSeparatorStyle}" />
+
+                <AppBarToggleButton x:Name="btnRotateTool"
+                                    Style="{StaticResource NoBorderAppBarButtonStyle}"
+                                    Icon="Rotate" />
+                <AppBarToggleButton x:Name="btnScaleTool" Style="{StaticResource NoBorderAppBarButtonStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE744;" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+
+                <AppBarSeparator Style="{StaticResource CompactAppBarSeparatorStyle}" />
+
+                <AppBarToggleButton x:Name="btnMaskTool" Style="{StaticResource NoBorderAppBarButtonStyle}">
+                    <AppBarToggleButton.Icon>
+                        <PathIcon Data="M389.433,72.762H19.611C8.797,72.762,0,81.558,0,92.374V316.67c0,10.818,8.797,19.611,19.611,19.611h369.822                               c10.812,0,19.609-8.793,19.609-19.611V92.374C409.042,81.558,400.246,72.762,389.433,72.762z M392.234,316.67                               c0,1.555-1.26,2.802-2.801,2.802H19.611c-1.546,0-2.802-1.247-2.802-2.802V92.374c0-1.546,1.256-2.802,2.802-2.802h369.822                               c1.541,0,2.801,1.255,2.801,2.802V316.67z" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="btnPenTool" Style="{StaticResource NoBorderAppBarButtonStyle}">
+                    <AppBarToggleButton.Icon>
+                        <PathIcon Data="M507.602,131.672L380.323,4.393c-5.857-5.858-15.355-5.858-21.213,0l-65.64,65.64c-5.858,5.858-5.858,15.355,0,21.213                            l6.498,6.498l-171.68,85.84c-3.286,1.643-5.855,4.435-7.219,7.846L1.121,491.297c-0.018,0.044-0.035,0.087-0.052,0.131                            c-0.154,0.384-0.287,0.773-0.407,1.164c-0.26,0.848-0.465,1.831-0.568,2.769c-0.441,4.033,0.741,7.883,3.113,10.897                            c0.088,0.112,0.175,0.225,0.267,0.335c3.611,4.334,9.154,6.135,14.351,5.136c0.384-0.073,0.763-0.171,1.142-0.275                            c0.079-0.022,0.16-0.035,0.239-0.059c0.506-0.147,1.005-0.322,1.496-0.523l299.865-119.946c3.411-1.364,6.203-3.933,7.846-7.219                            l85.84-171.68l6.498,6.498c2.929,2.929,6.768,4.394,10.606,4.394c3.838,0,7.678-1.464,10.606-4.394l65.64-65.64                            C513.46,147.028,513.46,137.531,507.602,131.672z M304.13,365.19L77.276,455.932l128.33-128.33                            c5.875,2.817,12.451,4.398,19.389,4.398c24.813,0,45-20.187,45-45s-20.187-45-45-45c-24.813,0-45,20.187-45,45                            c0,6.938,1.581,13.515,4.398,19.389l-128.33,128.33l90.741-226.854l175.524-87.761l69.563,69.563L304.13,365.19z M209.995,287                            c0-8.271,6.729-15,15-15s15,6.729,15,15s-6.729,15-15,15S209.995,295.271,209.995,287z M431.356,186.705l-10.799-10.799                            c-0.009-0.009-0.018-0.018-0.027-0.027l-84.413-84.413c-0.011-0.011-0.022-0.022-0.033-0.033L325.29,80.64l44.426-44.426                            l106.066,106.066L431.356,186.705z" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="btnTextTool" Style="{StaticResource NoBorderAppBarButtonStyle}">
+                    <AppBarToggleButton.Icon>
+                        <PathIcon Data="m58.471 0v87.706h58.471v-29.235h87.706v350.824h-58.471v58.471h175.412v-58.471h-58.471v-350.824h87.706v29.235h58.471v-87.706z" />
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+
+                <!--<AppBarSeparator Style="{StaticResource CompactAppBarSeparatorStyle}" />
+                <AppBarButton x:Name="btnImageTool">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xEB9F;" />
+                    </AppBarButton.Icon>
+                </AppBarButton>-->
+            </CommandBar>
+
+            <Rectangle Grid.Row="0"
+                       Height="1"
+                       VerticalAlignment="Bottom"
+                       Fill="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}" />
+        </Grid>
+
+        <Grid x:Name="pnlProjectArea" Grid.Row="1">
+            <muxc:TabView  IsAddTabButtonVisible="False">
+                <muxc:TabViewItem Header="Project" IsClosable="False">
+                    <controls:ProjectEditor />
+                </muxc:TabViewItem>
+                <muxc:TabViewItem Header="Effects" IsClosable="False"/>
+            </muxc:TabView>
+            <Rectangle Fill="{ThemeResource SystemChromeMediumColor}" Width="1" HorizontalAlignment="Right" />
+        </Grid>
+
+        <controls1:GridSplitter GripperCursor="Default" HorizontalAlignment="Right"
+                                Grid.Column="0" 
+                                Grid.Row="1"
+                                ResizeDirection="Auto" ResizeBehavior="BasedOnAlignment"
+                                CursorBehavior="ChangeOnSplitterHover"
+                                Opacity="0">
+            <controls1:GridSplitter.RenderTransform>
+                <TranslateTransform X="8" />
+            </controls1:GridSplitter.RenderTransform>
+        </controls1:GridSplitter>
+
+
+        <Grid x:Name="pnlTimelineArea" Grid.Row="3" Grid.ColumnSpan="3">
+            <muxc:TabView TabWidthMode="SizeToContent" IsAddTabButtonVisible="False">
+                <muxc:TabViewItem Header="Comp1"/>
+                <muxc:TabViewItem Header="Comp2"/>
+                <muxc:TabViewItem Header="Comp3"/>
+            </muxc:TabView>
+        </Grid>
+
+
+        <controls1:GridSplitter GripperCursor="Default" VerticalAlignment="Top"
+                                Grid.ColumnSpan="3" 
+                                Grid.Row="3"
+                                Opacity="0">
+            <controls1:GridSplitter.RenderTransform>
+                <TranslateTransform Y="-8" />
+            </controls1:GridSplitter.RenderTransform>
+        </controls1:GridSplitter>
     </Grid>
 </Page>
