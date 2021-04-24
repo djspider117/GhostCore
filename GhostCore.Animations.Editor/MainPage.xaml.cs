@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GhostCore.Animations.Editor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,14 +18,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GhostCore.Animations.Editor
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
+        public MainPageViewModel ViewModel => DataContext as MainPageViewModel;
+
         public MainPage()
         {
+            DataContext = new MainPageViewModel();
             InitializeComponent();
+            Loaded += MainPage_Loaded;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= MainPage_Loaded;
         }
     }
 }

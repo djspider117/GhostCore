@@ -122,6 +122,10 @@
     <Compile Include="Controls\ProjectEditor.xaml.cs">
       <DependentUpon>ProjectEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProjectItemIcon.xaml.cs">
+      <DependentUpon>ProjectItemIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ColorGroupToSCBConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -129,6 +133,10 @@
     <Compile Include="PrototypePage.xaml.cs">
       <DependentUpon>PrototypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\ProjectAsset.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\ToolbarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -146,6 +154,7 @@
     <Content Include="Assets\Icons\pen-tool.svg" />
     <Content Include="Assets\Icons\picture.svg" />
     <Content Include="Assets\Icons\rectangle-tool.svg" />
+    <Content Include="Assets\Icons\svg.svg" />
     <Content Include="Assets\Icons\text-tool.svg" />
     <Content Include="Assets\Map\bg.jpg" />
     <Content Include="Assets\Map\dlrIcon.png" />
@@ -165,6 +174,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\ProjectEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProjectItemIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +232,14 @@
     <ProjectReference Include="..\GhostCore.Graphics.Colors\GhostCore.Graphics.Colors.csproj">
       <Project>{3b8ef2db-5789-44be-b373-450a76c780b9}</Project>
       <Name>GhostCore.Graphics.Colors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.IoC\GhostCore.IoC.csproj">
+      <Project>{49ee16e0-f613-4f55-9b57-f804d90f31ff}</Project>
+      <Name>GhostCore.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.MVVM\GhostCore.MVVM.csproj">
+      <Project>{bb7de607-2429-45dd-aeee-66b12bc1595a}</Project>
+      <Name>GhostCore.MVVM</Name>
     </ProjectReference>
     <ProjectReference Include="..\GhostCore.SafeTaskResult\GhostCore.SafeTaskResult.csproj">
       <Project>{10c712ec-142e-4476-8015-892f78fd9927}</Project>

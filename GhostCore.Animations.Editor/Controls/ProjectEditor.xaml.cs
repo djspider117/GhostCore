@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GhostCore.Animations.Editor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,15 +14,76 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace GhostCore.Animations.Editor.Controls
 {
     public sealed partial class ProjectEditor : UserControl
     {
+        public static readonly DependencyProperty CurrentProjectProperty =
+            DependencyProperty.Register(nameof(CurrentProject), typeof(ProjectViewModel), typeof(ProjectEditor), new PropertyMetadata(null));
+
+        private List<Grid> _treeViewItemRootGrids = new List<Grid>();
+
+        public ProjectViewModel CurrentProject
+        {
+            get { return (ProjectViewModel)GetValue(CurrentProjectProperty); }
+            set { SetValue(CurrentProjectProperty, value); }
+        }
+
         public ProjectEditor()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
+
+        #region Tree Column Resizing
+
+        private void TreeViewItemContentPresenterGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            grid.Unloaded += TreeViewItemContentPresenterGrid_Unloaded;
+
+            _treeViewItemRootGrids.Add(grid);
+
+            int i = 0;
+            foreach (var item in grid.ColumnDefinitions)
+            {
+                item.Width = pnlTreeColumnIndicator.ColumnDefinitions[i].Width;
+                i++;
+            }
+        }
+        private void TreeViewItemContentPresenterGrid_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            grid.Unloaded -= TreeViewItemContentPresenterGrid_Unloaded;
+
+            _treeViewItemRootGrids.Remove(grid);
+        }
+
+        private void pnlTreeColumnIndicator_Loaded(object sender, RoutedEventArgs e)
+        {
+            pnlTreeColumnIndicator.ColumnDefinitions[0].RegisterPropertyChangedCallback(ColumnDefinition.WidthProperty, NameColumnWidthPropertyChanged);
+            pnlTreeColumnIndicator.ColumnDefinitions[2].RegisterPropertyChangedCallback(ColumnDefinition.WidthProperty, TypeColumnWidthPropertyChanged);
+        }
+
+        private void TypeColumnWidthPropertyChanged(DependencyObject sender, DependencyProperty dp)
+        {
+            foreach (var grid in _treeViewItemRootGrids)
+            {
+                grid.ColumnDefinitions[2].Width = (GridLength)sender.GetValue(dp);
+            }
+        }
+        private void NameColumnWidthPropertyChanged(DependencyObject sender, DependencyProperty dp)
+        {
+            foreach (var grid in _treeViewItemRootGrids)
+            {
+                grid.ColumnDefinitions[0].Width = (GridLength)sender.GetValue(dp);
+            }
+        }
+
+        #endregion
+
+        private void TreeViewItem_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.None;
         }
     }
 }
