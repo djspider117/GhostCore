@@ -132,7 +132,7 @@
                             <TextBlock Grid.Column="2"
                                        VerticalAlignment="Center"
                                        Text="{Binding FriendlyType}" />
-                            
+
                             <TextBlock Grid.Column="3"
                                        VerticalAlignment="Center"
                                        Text="{Binding Path}" />
@@ -227,6 +227,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+
     <Grid Padding="5" Background="#11FFFFFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
@@ -263,98 +264,104 @@
                  VerticalAlignment="Center"
                  PlaceholderText="Search" />
 
-        <Grid x:Name="pnlTreeColumnIndicator"
-              Loaded="pnlTreeColumnIndicator_Loaded"
-              Grid.Row="6"
-              Background="#11FFFFFF">
-            <Grid.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                </Style>
+        <ScrollViewer Grid.Row="6"
+                      HorizontalScrollMode="Enabled"
+                      HorizontalScrollBarVisibility="Auto">
+            <Grid x:Name="pnlTreeColumnIndicator"
+                  Loaded="pnlTreeColumnIndicator_Loaded"
+                  Background="#11FFFFFF">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
 
-                <Style TargetType="Rectangle">
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                    <Setter Property="Fill" Value="#55FFFFFF" />
-                    <Setter Property="Width" Value="1" />
-                    <Setter Property="Margin" Value="-11,5" />
-                </Style>
-            </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="NameColumn" Width="320" MinWidth="200" />
-                <ColumnDefinition x:Name="GroupColumn" Width="45" />
-                <ColumnDefinition x:Name="TypeColumn" Width="105" />
-                <ColumnDefinition x:Name="PathColumn" Width="500" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="10" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                        <Setter Property="Fill" Value="#55FFFFFF" />
+                        <Setter Property="Width" Value="1" />
+                        <Setter Property="Margin" Value="-11,5" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="NameColumn"
+                                      Width="320"
+                                      MinWidth="200" />
+                    <ColumnDefinition x:Name="GroupColumn" Width="45" />
+                    <ColumnDefinition x:Name="TypeColumn" Width="105" />
+                    <ColumnDefinition x:Name="PathColumn" Width="500" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <Rectangle Margin="29,5" />
-            <TextBlock Margin="40,0,0,0" Text="Name" />
+                <Rectangle Margin="29,5" />
+                <TextBlock Margin="40,0,0,0" Text="Name" />
 
-            <Rectangle Grid.Column="1" />
-            <FontIcon Grid.Column="1"
-                      HorizontalAlignment="Left"
-                      FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                      Glyph="&#xE1CB;" />
+                <Rectangle Grid.Column="1" />
+                <FontIcon Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                          Glyph="&#xE1CB;" />
 
-            <Rectangle Grid.Column="2" />
-            <TextBlock Grid.Column="2" Text="Type" />
+                <Rectangle Grid.Column="2" />
+                <TextBlock Grid.Column="2" Text="Type" />
 
-            <Rectangle Grid.Column="3" />
-            <TextBlock Grid.Column="3" Text="Path" />
+                <Rectangle Grid.Column="3" />
+                <TextBlock Grid.Column="3" Text="Path" />
 
-            <muxc:TreeView Grid.Row="2"
-                           Grid.ColumnSpan="12"
-                           ItemContainerStyle="{StaticResource CustomTreeViewItemStyle}"
-                           ItemsSource="{x:Bind CurrentProject.Assets}">
-                <muxc:TreeView.ItemTemplate>
-                    <DataTemplate>
-                        <muxc:TreeViewItem Padding="0,4"
-                                           DragOver="TreeViewItem_DragOver"
-                                           AllowDrop="{Binding CanNestChildren}"
-                                           Style="{StaticResource CustomTreeViewItemStyle}"
-                                           ItemsSource="{Binding SubItems}">
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                                <local:ProjectItemIcon Type="{Binding Type}" />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
-                        </muxc:TreeViewItem>
-                    </DataTemplate>
-                </muxc:TreeView.ItemTemplate>
-            </muxc:TreeView>
+                <muxc:TreeView Grid.Row="2"
+                               Grid.ColumnSpan="12"
+                               ItemContainerStyle="{StaticResource CustomTreeViewItemStyle}"
+                               ItemsSource="{x:Bind CurrentProject.Assets}">
+                    <muxc:TreeView.ItemTemplate>
+                        <DataTemplate>
+                            <muxc:TreeViewItem Padding="0,4"
+                                               DragOver="TreeViewItem_DragOver"
+                                               AllowDrop="{Binding CanNestChildren}"
+                                               Style="{StaticResource CustomTreeViewItemStyle}"
+                                               ItemsSource="{Binding SubItems}">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <local:ProjectItemIcon Type="{Binding Type}" />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </muxc:TreeViewItem>
+                        </DataTemplate>
+                    </muxc:TreeView.ItemTemplate>
+                </muxc:TreeView>
 
-            <controls1:GridSplitter Grid.Row="0"
-                                    Grid.RowSpan="66"
-                                    Grid.Column="0"
-                                    HorizontalAlignment="Right"
-                                    GripperCursor="Default"
-                                    ResizeDirection="Auto"
-                                    ResizeBehavior="BasedOnAlignment"
-                                    CursorBehavior="ChangeOnSplitterHover"
-                                    Opacity="0">
-                <controls1:GridSplitter.RenderTransform>
-                    <TranslateTransform X="-2" />
-                </controls1:GridSplitter.RenderTransform>
-            </controls1:GridSplitter>
+                <controls1:GridSplitter Grid.Row="0"
+                                        Grid.RowSpan="66"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Right"
+                                        GripperCursor="Default"
+                                        ResizeDirection="Auto"
+                                        ResizeBehavior="BasedOnAlignment"
+                                        CursorBehavior="ChangeOnSplitterHover"
+                                        Opacity="0">
+                    <controls1:GridSplitter.RenderTransform>
+                        <TranslateTransform X="-2" />
+                    </controls1:GridSplitter.RenderTransform>
+                </controls1:GridSplitter>
 
-            <controls1:GridSplitter Grid.Row="0"
-                                    Grid.RowSpan="66"
-                                    Grid.Column="2"
-                                    HorizontalAlignment="Right"
-                                    GripperCursor="Default"
-                                    ResizeDirection="Auto"
-                                    ResizeBehavior="BasedOnAlignment"
-                                    CursorBehavior="ChangeOnSplitterHover"
-                                    Opacity="0">
-                <controls1:GridSplitter.RenderTransform>
-                    <TranslateTransform X="-2" />
-                </controls1:GridSplitter.RenderTransform>
-            </controls1:GridSplitter>
+                <controls1:GridSplitter Grid.Row="0"
+                                        Grid.RowSpan="66"
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Right"
+                                        GripperCursor="Default"
+                                        ResizeDirection="Auto"
+                                        ResizeBehavior="BasedOnAlignment"
+                                        CursorBehavior="ChangeOnSplitterHover"
+                                        Opacity="0">
+                    <controls1:GridSplitter.RenderTransform>
+                        <TranslateTransform X="-2" />
+                    </controls1:GridSplitter.RenderTransform>
+                </controls1:GridSplitter>
 
-        </Grid>
+            </Grid>
+        </ScrollViewer>
 
     </Grid>
+
 </UserControl>

@@ -66,9 +66,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="250" />
+            <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="320" Width="Auto"/>
+            <ColumnDefinition MinWidth="320" Width="575"/>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -234,7 +235,7 @@
             <Rectangle Fill="{ThemeResource SystemChromeMediumColor}" Width="1" HorizontalAlignment="Right" />
         </Grid>
 
-        <Grid x:Name="pnlTimelineArea" Grid.Row="3" Grid.ColumnSpan="3">
+        <Grid x:Name="pnlTimelineArea" Grid.Row="2" Grid.ColumnSpan="3">
             <muxc:TabView TabWidthMode="SizeToContent" IsAddTabButtonVisible="False">
                 <muxc:TabViewItem Header="Comp1"/>
                 <muxc:TabViewItem Header="Comp2"/>
@@ -256,10 +257,10 @@
         </controls1:GridSplitter>
         <controls1:GridSplitter GripperCursor="Default" VerticalAlignment="Top"
                                 Grid.ColumnSpan="3" 
-                                Grid.Row="3"
+                                Grid.Row="2"
                                 Opacity="0">
             <controls1:GridSplitter.RenderTransform>
-                <TranslateTransform Y="-8" />
+                <TranslateTransform Y="0" />
             </controls1:GridSplitter.RenderTransform>
         </controls1:GridSplitter>
 
