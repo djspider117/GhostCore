@@ -20,11 +20,11 @@ namespace GhostCore.Animations.Data.Layers
 
         public TransformData Transform { get; set; } = TransformData.Default;
         public Vector2 Anchor { get; set; }
+        public LayerBlendMode BlendMode { get; set; }
 
 
         public IList<AnimationCurve> Animations { get; set; }
 
-        public LayerBlendMode BlendMode { get; set; }
         public IList<IMask> Masks { get; set; }
 
         public LayerBase()

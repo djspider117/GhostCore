@@ -119,13 +119,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EditorUserControl.cs" />
     <Compile Include="Controls\ProjectEditor.xaml.cs">
       <DependentUpon>ProjectEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ProjectItemIcon.xaml.cs">
       <DependentUpon>ProjectItemIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TimelineEditor.xaml.cs">
+      <DependentUpon>TimelineEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ColorGroupToSCBConverter.cs" />
+    <Compile Include="Extensions\CheckBoxExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -133,9 +138,14 @@
     <Compile Include="PrototypePage.xaml.cs">
       <DependentUpon>PrototypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ColorGroup.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\Project.cs" />
     <Compile Include="ViewModels\ProjectAsset.cs" />
+    <Compile Include="ViewModels\ProjectAssetViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\RenderInfoViewModel.cs" />
+    <Compile Include="ViewModels\TestProject.cs" />
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProjectItemIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimelineEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,6 +263,9 @@
       <Project>{e9a0b3cb-ce20-4e27-a778-a66b486b894e}</Project>
       <Name>GhostCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

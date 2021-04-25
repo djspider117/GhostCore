@@ -6,38 +6,62 @@ using System.Text;
 
 namespace GhostCore.MVVM
 {
-    public class ViewModelCollection<T, K> : ObservableCollection<T> where T : ViewModelBase<K>
+    public class ViewModelCollection<TViewModel, TModel> : ObservableCollection<TViewModel> where TViewModel : ViewModelBase<TModel>
     {
-        private readonly IList<K> _modelCollection;
+        private readonly IList<TModel> _modelCollection;
+
+        private bool _disableCollectionAdd;
 
         public ViewModelCollection()
         {
-            _modelCollection = new List<K>();
+            _modelCollection = new List<TModel>();
         }
 
-        public ViewModelCollection(IList<K> modelCollection)
+        public ViewModelCollection(IList<TModel> modelCollection)
         {
             _modelCollection = modelCollection;
+            InitializeItems();
         }
 
-        public ViewModelCollection(IList<K> modelCollection, IEnumerable<T> col) : base(col)
+        public ViewModelCollection(IList<TModel> modelCollection, IEnumerable<TViewModel> col) : base(col)
         {
             _modelCollection = modelCollection;
+            InitializeItems();
         }
 
-        public ViewModelCollection(IList<K> modelCollection, List<T> list) : base(list)
+        public ViewModelCollection(IList<TModel> modelCollection, List<TViewModel> list) : base(list)
         {
             _modelCollection = modelCollection;
+            InitializeItems();
+        }
+
+        protected void InitializeItems()
+        {
+            if (_modelCollection == null)
+                return;
+
+            _disableCollectionAdd = true;
+
+            var ctor = typeof(TViewModel).GetConstructor(new Type[] { typeof(TModel) });
+            foreach (var item in _modelCollection)
+            {
+                var vmItem = (TViewModel)ctor.Invoke(new object[] { item });
+                Add(vmItem);
+            }
+            _disableCollectionAdd = false;
         }
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
+            if (_disableCollectionAdd)
+                return;
+
             base.OnCollectionChanged(e);
             
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (T x in e.NewItems)
+                    foreach (TViewModel x in e.NewItems)
                     {
                         _modelCollection.Insert(e.NewStartingIndex, x.Model);
                     }
@@ -45,7 +69,7 @@ namespace GhostCore.MVVM
                 case NotifyCollectionChangedAction.Move:
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (T x in e.OldItems)
+                    foreach (TViewModel x in e.OldItems)
                     {
                         _modelCollection.Remove(x.Model);
                     }

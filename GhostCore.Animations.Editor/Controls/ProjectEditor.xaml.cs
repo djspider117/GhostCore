@@ -1,5 +1,4 @@
-﻿using GhostCore.Animations.Editor.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,19 +15,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GhostCore.Animations.Editor.Controls
 {
-    public sealed partial class ProjectEditor : UserControl
+    public sealed partial class ProjectEditor : EditorUserControl
     {
-        public static readonly DependencyProperty CurrentProjectProperty =
-            DependencyProperty.Register(nameof(CurrentProject), typeof(ProjectViewModel), typeof(ProjectEditor), new PropertyMetadata(null));
-
         private List<Grid> _treeViewItemRootGrids = new List<Grid>();
-
-        public ProjectViewModel CurrentProject
-        {
-            get { return (ProjectViewModel)GetValue(CurrentProjectProperty); }
-            set { SetValue(CurrentProjectProperty, value); }
-        }
-
         public ProjectEditor()
         {
             InitializeComponent();

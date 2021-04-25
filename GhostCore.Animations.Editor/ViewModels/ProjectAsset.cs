@@ -3,50 +3,18 @@ using System.Collections.Generic;
 
 namespace GhostCore.Animations.Editor.ViewModels
 {
-    public enum ColorGroup
-    {
-        Red,
-        Green,
-        Blue,
-        Violet,
-        Yellow,
-        Orange,
-        White,
-        Gray,
-        Brown
-    }
 
     public class ProjectAsset : ViewModelBase
     {
-        private bool _isExpanded;
-
-        public string Name { get; set; } // TODO make inpc
+        public string Name { get; set; } 
         public string Type { get; set; } 
-        public List<ProjectAsset> SubItems { get; set; } // TODO make obscol
+        public List<ProjectAsset> SubItems { get; set; } 
         public ColorGroup Group { get; set; }
         public string Path { get; set; }
-        public string FriendlyType
-        {
-            get
-            {
-                switch (Type)
-                {
-                    case nameof(FolderAsset): return "Folder";
-                    case nameof(SvgAsset): return "SVG Asset";
-                    case nameof(ImageAsset): return "Image Asset";
-                    case nameof(SceneAsset): return "Scene";
-                    default: return null;
-                }
-            }
-        }
 
         public bool CanNestChildren { get; protected set; }
 
-        public bool IsExpanded
-        {
-            get { return _isExpanded; }
-            set { _isExpanded = value; OnPropertyChanged(nameof(IsExpanded)); }
-        }
+        public bool IsExpanded { get; set; }
 
         public ProjectAsset()
         {

@@ -65,7 +65,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="250" />
+            <RowDefinition Height="336" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -226,8 +226,11 @@
 
         <Grid x:Name="pnlProjectArea" Grid.Row="1">
             <muxc:TabView  IsAddTabButtonVisible="False" 
+                           CanReorderTabs="False"
+                           CanDragTabs="False"
+                           CanDrag="False"
                            VerticalAlignment="Stretch">
-                <muxc:TabViewItem Header="Project" IsClosable="False">
+                <muxc:TabViewItem Header="Project" IsClosable="False" CanDrag="False">
                     <controls:ProjectEditor CurrentProject="{x:Bind ViewModel.CurrentProject, Mode=OneWay}"/>
                 </muxc:TabViewItem>
                 <muxc:TabViewItem Header="Effects" IsClosable="False"/>
@@ -236,11 +239,20 @@
         </Grid>
 
         <Grid x:Name="pnlTimelineArea" Grid.Row="2" Grid.ColumnSpan="3">
-            <muxc:TabView TabWidthMode="SizeToContent" IsAddTabButtonVisible="False">
-                <muxc:TabViewItem Header="Comp1"/>
-                <muxc:TabViewItem Header="Comp2"/>
-                <muxc:TabViewItem Header="Comp3"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <muxc:TabView TabWidthMode="SizeToContent" IsAddTabButtonVisible="False" 
+                          TabItemsSource="{x:Bind ViewModel.CurrentProject.Scenes, Mode=OneWay}">
+                <muxc:TabView.TabItemTemplate>
+                    <DataTemplate>
+                        <muxc:TabViewItem Header="{Binding Name}" Content="{x:Null}"/>
+                    </DataTemplate>
+                </muxc:TabView.TabItemTemplate>
             </muxc:TabView>
+
+            <controls:TimelineEditor CurrentProject="{x:Bind ViewModel.CurrentProject, Mode=OneWay}" Grid.Row="1"/>
         </Grid>
 
         <!--#region Grid Splitters-->

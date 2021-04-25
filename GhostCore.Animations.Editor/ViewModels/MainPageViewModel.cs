@@ -22,8 +22,7 @@ namespace GhostCore.Animations.Editor.ViewModels
         public MainPageViewModel()
         {
             ToolbarViewModel = new ToolbarViewModel();
-            _currentProject = new ProjectViewModel();
+            _currentProject = new ProjectViewModel(new TestProject());
         }
     }
-
 }

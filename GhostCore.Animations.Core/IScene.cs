@@ -5,7 +5,7 @@ namespace GhostCore.Animations.Core
 {
     public interface IScene : INamed, IResourceDependentLayerExtractor
     {
-        IEnumerable<ILayer> Layers { get; set; }
+        IList<ILayer> Layers { get; set; }
         RGBA BackdropColor { get; set; }
         RenderInfo RenderInfo { get; set; }
     }

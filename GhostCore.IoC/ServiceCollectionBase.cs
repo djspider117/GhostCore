@@ -13,7 +13,7 @@ namespace GhostCore.IoC
 
         #endregion
 
-        public virtual string Name { get; internal set; }
+        public virtual string Name { get; set; }
 
         #region Ctor and Init
 

@@ -2,7 +2,7 @@
 
 namespace GhostCore.Animations.Core
 {
-    public struct RenderInfo
+    public class RenderInfo
     {
         public Vector2 RenderSize { get; set; }
         public float RenderScale { get; set; }

@@ -6,7 +6,7 @@
     }
     public interface INamed
     {
-        string Name { get; }
+        string Name { get; set; }
     }
 
     public interface INamedIdentifiable : IIdentifiable, INamed
