@@ -77,6 +77,7 @@ namespace GhostCore.Animations.Editor.ViewModels
                     new ImageLayer()
                     {
                         Name = "bg",
+                        Duration = 5,
                         Source = "ms-appx:///Assets/Map/bg.jpg",
                         Type = ImageType.Bitmap
                     },
@@ -99,11 +100,13 @@ namespace GhostCore.Animations.Editor.ViewModels
                     RenderScale = 1,
                     RenderSize = new Vector2(960, 540)
                 },
-                Layers = layers
+                Layers = layers,
+                Duration = 5
             };
 
             var ugIcon = new ImageLayer()
             {
+                Duration = 5,
                 Name = "undergroundIcon",
                 Transform = new TransformData(center, Vector2.Zero, Vector2.One, 0),
                 Source = "ms-appx:///Assets/Map/ugIcon.png",
@@ -130,6 +133,7 @@ namespace GhostCore.Animations.Editor.ViewModels
 
             var dlrIcon = new ImageLayer()
             {
+                Duration = 5,
                 Name = "dlrIcon",
                 Transform = new TransformData(center, new Vector2(52, 0), Vector2.One, 0),
                 Source = "ms-appx:///Assets/Map/dlrIcon.png",
@@ -157,6 +161,7 @@ namespace GhostCore.Animations.Editor.ViewModels
 
             var bankText = new TextLayer()
             {
+                Duration = 5,
                 Name = "bankText",
                 Transform = new TransformData(Vector2.Zero, new Vector2(0, 60), Vector2.One, 0),
                 Text = "Bank",
@@ -184,6 +189,7 @@ namespace GhostCore.Animations.Editor.ViewModels
 
             var btrem = new TextLayer()
             {
+                Duration = 5,
                 Name = "bankTimeText",
                 Transform = new TransformData(Vector2.Zero, new Vector2(0, 87), Vector2.One, 0),
                 Text = "11",
@@ -219,6 +225,7 @@ namespace GhostCore.Animations.Editor.ViewModels
 
             var compositeLayer = new CompositeLayer()
             {
+                Duration = 2.5f,
                 Name = "bankLayer",
                 Transform = new TransformData(Vector2.Zero, new Vector2(250, 100), Vector2.One, 0),
                 Children = new List<ILayer>()

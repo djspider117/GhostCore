@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace GhostCore.Animations.Editor.ViewModels
 {
+    // TODO move to shared
     public class Project
     {
         public List<ProjectAsset> Assets { get; set; }

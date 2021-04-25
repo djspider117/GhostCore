@@ -11,6 +11,7 @@ namespace GhostCore.Animations.Data
         public RenderInfo RenderInfo { get; set; }
         public RGBA BackdropColor { get; set; }
         public IList<ILayer> Layers { get; set; }
+        public float Duration { get; set; }
 
         public IEnumerable<IResourceDependentLayer> ExtractResourceDependentLayers()
         {

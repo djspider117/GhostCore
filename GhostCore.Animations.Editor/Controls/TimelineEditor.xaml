@@ -1032,6 +1032,8 @@
 
             <Grid x:Name="pnlHeaderTimeline1" Grid.Column="2" Margin="12,0,12,0">
                 <Rectangle Fill="DarkGoldenrod" />
+
+                <Slider x:Name="slider" Width="500" Minimum="0" Maximum="3" Value="0" StepFrequency="0.001" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
 
@@ -1040,9 +1042,11 @@
                        VerticalAlignment="Bottom"
                        Fill="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}" />
 
-        <ListView ItemsSource="{x:Bind CurrentProject.SelectedScene.Layers}" 
+        <ListView x:Name="lvLayers" 
+                  ItemsSource="{x:Bind CurrentProject.SelectedScene.Layers, Mode=OneWay}" 
                   ItemContainerStyle="{StaticResource TimelineListViewItem}"
-                  Grid.ColumnSpan="2"
+                  SelectionMode="Extended"
+                  SelectionChanged="ListView_SelectionChanged"
                   Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:LayerViewModel">
@@ -1099,14 +1103,19 @@
                             <ComboBoxItem>SourceOver</ComboBoxItem>
                         </ComboBox>
 
-                        <Rectangle Grid.Column="4" Fill="{Binding PreviewColor}" />
-                        <TextBlock Grid.Column="4"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Text="TIMELINE GOES HERE" />
+                        <!--<Grid x:Name="pnlTimeline" Grid.Column="4">
+                            <Rectangle Fill="{Binding PreviewColor}" />
+                        </Grid>-->
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Canvas x:Name="pnlTimelineArea" Grid.Column="2" Grid.Row="1" Margin="542,0,12,0"
+                Loaded="pnlTimelineArea_Loaded"
+                SizeChanged="pnlTimelineArea_SizeChanged">
+            <!--<Rectangle Fill="DarkBlue" />-->
+        </Canvas>
+
     </Grid>
 </local:EditorUserControl>

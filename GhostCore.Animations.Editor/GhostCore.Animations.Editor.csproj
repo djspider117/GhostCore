@@ -129,6 +129,9 @@
     <Compile Include="Controls\TimelineEditor.xaml.cs">
       <DependentUpon>TimelineEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TimelineItemView.xaml.cs">
+      <DependentUpon>TimelineItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ColorGroupToSCBConverter.cs" />
     <Compile Include="Extensions\CheckBoxExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -138,14 +141,17 @@
     <Compile Include="PrototypePage.xaml.cs">
       <DependentUpon>PrototypePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ColorGroup.cs" />
+    <Compile Include="Data\ColorGroup.cs" />
+    <Compile Include="ViewModels\LayerViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\Project.cs" />
-    <Compile Include="ViewModels\ProjectAsset.cs" />
+    <Compile Include="Data\Project.cs" />
+    <Compile Include="Data\ProjectAsset.cs" />
     <Compile Include="ViewModels\ProjectAssetViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\RenderInfoViewModel.cs" />
-    <Compile Include="ViewModels\TestProject.cs" />
+    <Compile Include="ViewModels\SceneViewModel.cs" />
+    <Compile Include="Data\TEMP__TestProject.cs" />
+    <Compile Include="ViewModels\TimelineViewModel.cs" />
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TimelineEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TimelineItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,9 +274,7 @@
       <Name>GhostCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
