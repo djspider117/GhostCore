@@ -4,7 +4,7 @@
                          xmlns:local="using:GhostCore.Animations.Editor.Controls"
                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                         xmlns:viewmodels="using:GhostCore.Animations.Editor.ViewModels" xmlns:extensions="using:GhostCore.Animations.Editor.Extensions"
+                         xmlns:viewmodels="using:GhostCore.Animations.Editor.ViewModels" xmlns:extensions="using:GhostCore.Animations.Editor.Extensions" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
                          d:DesignHeight="300"
                          d:DesignWidth="400"
                          mc:Ignorable="d">
@@ -1031,9 +1031,10 @@
             </Grid>
 
             <Grid x:Name="pnlHeaderTimeline1" Grid.Column="2" Margin="12,0,12,0">
-                <Rectangle Fill="DarkGoldenrod" />
+                <controls:RangeSelector x:Name="slTimeRange" Minimum="0" Maximum="1" RangeStart="0" RangeEnd="1"
+                                        StepFrequency="0.001" 
+                                        ValueChanged="slTimeRange_ValueChanged"/>
 
-                <Slider x:Name="slider" Width="500" Minimum="0" Maximum="4" Value="1" StepFrequency="0.001" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
 
@@ -1116,6 +1117,12 @@
                 SizeChanged="pnlTimelineArea_SizeChanged">
             <!--<Rectangle Fill="DarkBlue" />-->
         </Canvas>
+        
+        <Slider x:Name="slider" Width="200" Minimum="0" Maximum="1" Value="0" StepFrequency="0.001" 
+                Grid.Row="2"
+                Margin="542,0,12,0"
+                HorizontalAlignment="Left"
+                ValueChanged="Slider_ValueChanged" VerticalAlignment="Center"/>
 
     </Grid>
 </local:EditorUserControl>

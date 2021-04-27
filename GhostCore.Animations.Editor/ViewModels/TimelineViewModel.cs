@@ -9,6 +9,13 @@ namespace GhostCore.Animations.Editor.ViewModels
         private float _horiOffset;
         private float _vertOffset;
         private float _currentTime;
+        private float _maxZoomFactor = 55;
+
+        public float MaxZoomFactor
+        {
+            get { return _maxZoomFactor; }
+            set { _maxZoomFactor = value; OnPropertyChanged(nameof(MaxZoomFactor)); }
+        }
 
         public float StartTime
         {

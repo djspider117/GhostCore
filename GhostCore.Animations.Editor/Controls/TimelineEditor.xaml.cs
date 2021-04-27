@@ -17,13 +17,18 @@ using Windows.UI.Xaml.Shapes;
 
 namespace GhostCore.Animations.Editor.Controls
 {
+    // TODO: update timeline item views when current scene changes
+
     public sealed partial class TimelineEditor : EditorUserControl
     {
         private Dictionary<LayerViewModel, TimelineItemView> _uiMapping;
+        private ScrollViewer _svLayersScrollViewer;
+
         public TimelineEditor()
         {
             _uiMapping = new Dictionary<LayerViewModel, TimelineItemView>();
             InitializeComponent();
+
         }
 
         protected override void OnLoadedInternal(object sender, RoutedEventArgs e)
@@ -31,14 +36,17 @@ namespace GhostCore.Animations.Editor.Controls
             base.OnLoadedInternal(this, e);
             CurrentProject.PropertyChanged += CurrentProject_PropertyChanged;
             SetSelectedLayers();
-        }
 
+            _svLayersScrollViewer = lvLayers.GetFirstDescendantOfType<ScrollViewer>();
+            _svLayersScrollViewer.ViewChanged += svLayersScrollViewer_ViewChanged;
+        }
         protected override void OnUnloadedInternal(object sender, RoutedEventArgs e)
         {
             base.OnUnloadedInternal(sender, e);
             CurrentProject.PropertyChanged -= CurrentProject_PropertyChanged;
             pnlTimelineArea.Loaded -= pnlTimelineArea_Loaded;
             pnlTimelineArea.SizeChanged -= pnlTimelineArea_SizeChanged;
+            _svLayersScrollViewer.ViewChanged -= svLayersScrollViewer_ViewChanged;
         }
 
         #region Manual binding for selected layers GG MICROSOFT no propdp for 
@@ -80,6 +88,8 @@ namespace GhostCore.Animations.Editor.Controls
 
         #endregion
 
+        #region Timeline Layout
+
         private void pnlTimelineArea_Loaded(object sender, RoutedEventArgs e)
         {
             var canvas = sender as Canvas;
@@ -96,37 +106,40 @@ namespace GhostCore.Animations.Editor.Controls
 
                 var x = relStart * canvas.ActualWidth;
 
-                var rect = new TimelineItemView
+                var view = new TimelineItemView
                 {
                     Layer = layer,
                     Height = layerHeight,
                     Width = relDuration * canvas.ActualWidth
                 };
 
-                Canvas.SetLeft(rect, x);
-                Canvas.SetTop(rect, i * layerHeight);
+                view.InitialX = x;
+                view.InitialY = i * layerHeight;
 
-                _uiMapping.Add(layer, rect);
-                canvas.Children.Add(rect);
+                Canvas.SetLeft(view, view.InitialX);
+                Canvas.SetTop(view, view.InitialY);
+
+                _uiMapping.Add(layer, view);
+                canvas.Children.Add(view);
 
                 i++;
             }
         }
-
-        private void pnlTimelineArea_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateLayerCanvas();
-        }
-
         private void UpdateLayerCanvas()
         {
+            pnlTimelineArea.Clip = new RectangleGeometry() { Rect = new Rect(0, 0, pnlTimelineArea.ActualWidth, pnlTimelineArea.ActualHeight) };
+
             if (!_isLoaded)
                 return;
 
+            var vOffset = _svLayersScrollViewer.VerticalOffset;
+
             int i = 0;
             var sceneDuration = CurrentProject.SelectedScene.Duration;
-            var relativeIn = CurrentProject.SelectedScene.Timeline.StartTime / sceneDuration;
-            var relativeOut = CurrentProject.SelectedScene.Timeline.EndTime / sceneDuration;
+            var relativeIn = CurrentProject.SelectedScene.Timeline.StartTime / sceneDuration + slTimeRange.RangeStart;
+            var relativeOut = CurrentProject.SelectedScene.Timeline.EndTime * slTimeRange.RangeEnd / sceneDuration;
+
+            relativeOut = System.Math.Max(relativeOut, 0.003);
 
             var relDuration = (relativeOut - relativeIn) * sceneDuration;
 
@@ -138,25 +151,52 @@ namespace GhostCore.Animations.Editor.Controls
                 var relativeLayerDuration = layer.Duration / relDuration;
 
                 var x = (relativeLayerStart - relativeIn) * pnlTimelineArea.ActualWidth;
-
+                var y = view.InitialY - vOffset;
                 view.Width = relativeLayerDuration * pnlTimelineArea.ActualWidth;
                 Canvas.SetLeft(view, x);
+                Canvas.SetTop(view, y);
+
+                view.IsLeftOverflowing = x < 0;
+                view.IsRightOverflowing = (x + view.Width) > pnlTimelineArea.ActualWidth;
+                view.LeftOverflowIndicatorOffset = -x;
+                view.RightOverflowIndicatorOffset = (x + view.Width) - pnlTimelineArea.ActualWidth;
 
                 i++;
             }
         }
+
+        #endregion
+
+        #region Canvas Update Triggers
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (!_isLoaded)
                 return;
 
-            var et = CurrentProject.SelectedScene.Timeline.InitialEndTime;
-            var zf = MathF.Max((float)e.NewValue, 0.1f);
+            var initialEndTime = CurrentProject.SelectedScene.Timeline.InitialEndTime;
+            var maxZoomFactor = CurrentProject.SelectedScene.Timeline.MaxZoomFactor;
+            var zoomFactor = (float)(e.NewValue + 1 + e.NewValue * maxZoomFactor);
 
             CurrentProject.SelectedScene.Timeline.StartTime = 0;
-            CurrentProject.SelectedScene.Timeline.EndTime = et/zf;
+            CurrentProject.SelectedScene.Timeline.EndTime = initialEndTime / zoomFactor;
             UpdateLayerCanvas();
         }
+        private void pnlTimelineArea_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            UpdateLayerCanvas();
+        }
+        private void svLayersScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            UpdateLayerCanvas();
+        }
+        private void slTimeRange_ValueChanged(object sender, Microsoft.Toolkit.Uwp.UI.Controls.RangeChangedEventArgs e)
+        {
+            UpdateLayerCanvas();
+        }
+
+        #endregion
+
     }
 }

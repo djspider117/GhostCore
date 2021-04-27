@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Converters\ColorGroupToSCBConverter.cs" />
     <Compile Include="Extensions\CheckBoxExtensions.cs" />
+    <Compile Include="Extensions\VisualTreeHelperExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

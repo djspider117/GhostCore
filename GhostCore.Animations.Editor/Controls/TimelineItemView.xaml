@@ -5,16 +5,27 @@
     xmlns:local="using:GhostCore.Animations.Editor.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:DefaultBindMode="OneWay"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
     <Grid>
         <Rectangle Fill="{x:Bind Layer.PreviewColor, Mode=OneWay}" Opacity="0.5"
-                   Visibility="{x:Bind Layer.IsNotSelected, Mode=OneWay}"/>
+                   Visibility="{x:Bind Layer.IsNotSelected}"/>
 
         <Grid Visibility="{x:Bind Layer.IsSelected, Mode=OneWay}">
-            <Rectangle Fill="{x:Bind Layer.PreviewColor, Mode=OneWay}" />
+            <Rectangle Fill="{x:Bind Layer.PreviewColor}" />
         </Grid>
+
+        <FontIcon x:Name="lblLeftIndicator" 
+                  FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE00E;" 
+                  HorizontalAlignment="Left" VerticalAlignment="Center"
+                  Visibility="{x:Bind IsLeftOverflowing}" Foreground="{ThemeResource SystemBaseHighColor}"/>
+        
+        <FontIcon x:Name="lblRightIndicator" 
+                  FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE00F;" 
+                  HorizontalAlignment="Right" VerticalAlignment="Center"
+                  Visibility="{x:Bind IsRightOverflowing}" Foreground="{ThemeResource SystemBaseHighColor}"/>
     </Grid>
 </UserControl>
