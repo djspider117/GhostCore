@@ -53,7 +53,7 @@ namespace GhostCore.Animations.Editor.ViewModels
             {
                 Layers[i].DisplayIndex = i + 1;
             }
-            Timeline = new TimelineViewModel { EndTime = model.Duration };
+            Timeline = new TimelineViewModel(0, model.Duration);
         }
     }
 

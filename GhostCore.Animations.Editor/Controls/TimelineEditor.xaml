@@ -1033,7 +1033,7 @@
             <Grid x:Name="pnlHeaderTimeline1" Grid.Column="2" Margin="12,0,12,0">
                 <Rectangle Fill="DarkGoldenrod" />
 
-                <Slider x:Name="slider" Width="500" Minimum="0" Maximum="3" Value="0" StepFrequency="0.001" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center"/>
+                <Slider x:Name="slider" Width="500" Minimum="0" Maximum="4" Value="1" StepFrequency="0.001" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
 

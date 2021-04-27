@@ -10,6 +10,8 @@ namespace GhostCore.Animations.Editor.Controls
         public static readonly DependencyProperty CurrentProjectProperty =
             DependencyProperty.Register(nameof(CurrentProject), typeof(ProjectViewModel), typeof(EditorUserControl), new PropertyMetadata(null));
 
+        protected bool _isLoaded;
+
         public ProjectViewModel CurrentProject
         {
             get { return (ProjectViewModel)GetValue(CurrentProjectProperty); }
@@ -24,14 +26,16 @@ namespace GhostCore.Animations.Editor.Controls
 
         private void EditorUserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            OnLoadedInternal(sender, e);
+            OnUnloadedInternal(sender, e);
+            _isLoaded = false;
         }
 
         private void EditorUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             Loaded -= EditorUserControl_Loaded;
             Unloaded -= EditorUserControl_Unloaded;
-            OnUnloadedInternal(sender, e);
+            OnLoadedInternal(sender, e);
+            _isLoaded = true;
         }
 
         protected virtual void OnLoadedInternal(object sender, RoutedEventArgs e)

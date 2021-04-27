@@ -19,9 +19,7 @@ namespace GhostCore.Animations.Editor.Controls
 {
     public sealed partial class TimelineEditor : EditorUserControl
     {
-
         private Dictionary<LayerViewModel, TimelineItemView> _uiMapping;
-
         public TimelineEditor()
         {
             _uiMapping = new Dictionary<LayerViewModel, TimelineItemView>();
@@ -30,6 +28,7 @@ namespace GhostCore.Animations.Editor.Controls
 
         protected override void OnLoadedInternal(object sender, RoutedEventArgs e)
         {
+            base.OnLoadedInternal(this, e);
             CurrentProject.PropertyChanged += CurrentProject_PropertyChanged;
             SetSelectedLayers();
         }
@@ -121,6 +120,9 @@ namespace GhostCore.Animations.Editor.Controls
 
         private void UpdateLayerCanvas()
         {
+            if (!_isLoaded)
+                return;
+
             int i = 0;
             var sceneDuration = CurrentProject.SelectedScene.Duration;
             var relativeIn = CurrentProject.SelectedScene.Timeline.StartTime / sceneDuration;
@@ -142,6 +144,19 @@ namespace GhostCore.Animations.Editor.Controls
 
                 i++;
             }
+        }
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (!_isLoaded)
+                return;
+
+            var et = CurrentProject.SelectedScene.Timeline.InitialEndTime;
+            var zf = MathF.Max((float)e.NewValue, 0.1f);
+
+            CurrentProject.SelectedScene.Timeline.StartTime = 0;
+            CurrentProject.SelectedScene.Timeline.EndTime = et/zf;
+            UpdateLayerCanvas();
         }
     }
 }

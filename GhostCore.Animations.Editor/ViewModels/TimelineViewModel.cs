@@ -39,6 +39,17 @@ namespace GhostCore.Animations.Editor.ViewModels
             get { return _currentTime; }
             set { _currentTime = value; OnPropertyChanged(nameof(CurrentTime)); }
         }
+
+        public float InitialStartTime { get; private set; }
+        public float InitialEndTime { get; private set; }
+
+        public TimelineViewModel(float startTime, float endTime)
+        {
+            InitialStartTime = startTime;
+            InitialEndTime = endTime;
+            _startTime = startTime;
+            _endTime = endTime;
+        }
     }
 
 }
