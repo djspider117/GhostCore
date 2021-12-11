@@ -69,7 +69,23 @@ namespace GhostCore.Animations.Editor.Controls
         public TimelineItemView()
         {
             InitializeComponent();
+            Loaded += TimelineItemView_Loaded;
+            Unloaded += TimelineItemView_Unloaded;
+
         }
+
+        private void TimelineItemView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Tapped += TimelineItemView_Tapped;
+        }
+
+        private void TimelineItemView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= TimelineItemView_Loaded;
+            Unloaded -= TimelineItemView_Unloaded;
+            Tapped -= TimelineItemView_Tapped;
+        }
+
         private void OnLeftOverflowIndicatorChanged(DependencyPropertyChangedEventArgs e)
         {
             lblLeftIndicator.Margin = new Thickness((double)e.NewValue, 0, 0, 0);
@@ -79,5 +95,11 @@ namespace GhostCore.Animations.Editor.Controls
         {
             lblRightIndicator.Margin = new Thickness(0, 0, (double)e.NewValue, 0);
         }
+
+        private void TimelineItemView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Layer.IsSelected = true;  
+        }
+
     }
 }
