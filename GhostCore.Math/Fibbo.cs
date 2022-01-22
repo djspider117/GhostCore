@@ -12,6 +12,6 @@ namespace GhostCore.Math
         ///Calculates the nth fibbonaci number by using Binet's Formula
         ///https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula
         ///</summary>
-        public static uint Binet(int n) => ONE_OVER_SQRT_5 * (Math.Pow(0.5 + HALF_SQRT_5, n) - Math.Pow(0.5 - HALF_SQRT_5, n));
+        public static uint Binet(int n) => (uint)(ONE_OVER_SQRT_5 * (System.Math.Pow(0.5 + HALF_SQRT_5, n) - System.Math.Pow(0.5 - HALF_SQRT_5, n)));
     }
 }
