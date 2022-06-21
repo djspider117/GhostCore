@@ -218,7 +218,7 @@ namespace GhostCore.IoC
                 throw new ArgumentNullException(nameof(svcType));
 
             var idx = FindDefinitionIndex(svcType);
-            if (idx == -1)
+            if (idx != -1)
                 throw new InvalidOperationException("Duplicate type {svcType} found.");
 
             return idx;

@@ -2,7 +2,7 @@
 {
     public interface IIdentifiable
     {
-        int Id { get; set; }
+        long Id { get; set; }
     }
     public interface INamed
     {
