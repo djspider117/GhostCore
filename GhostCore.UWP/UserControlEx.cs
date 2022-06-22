@@ -1,4 +1,4 @@
-﻿using GhostCore.Services.Logging;
+﻿using GhostCore.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;

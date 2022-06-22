@@ -14,7 +14,7 @@ namespace GhostCore.UWP.Converters
 
                 decimal.TryParse(value.ToString(), out var dValue);
 
-                while (Math.Round(dValue / 1024) >= 1)
+                while (System.Math.Round(dValue / 1024) >= 1)
                 {
                     dValue /= 1024;
                     counter++;

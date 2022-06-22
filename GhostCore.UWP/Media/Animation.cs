@@ -3,10 +3,10 @@
     Public redistribution is not permitted.
 */
 
+using GhostCore.Numerics;
 using System;
 using System.Numerics;
 using System.Threading.Tasks;
-using GhostCore.Numerics;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
