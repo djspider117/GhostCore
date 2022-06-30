@@ -8,18 +8,19 @@ namespace GhostCore.Graphics.Colors
     /// </summary>
     public static class ColorGenerator
     {
+        private static Random _random = new Random();
+
         /// <summary>
         /// Generates a random pastel color with lightness greater than middle gray.
         /// </summary>
         /// <returns>An RGBA pastel color with alpha set to 1.</returns>
         public static RGBA RandomRGBPastelColor()
         {
-            var random = new Random();
 
             return new RGBA(
-                (random.Next(128) + 127) / byte.MaxValue,
-                (random.Next(128) + 127) / byte.MaxValue,
-                (random.Next(128) + 127) / byte.MaxValue,
+                (_random.Next(128) + 127) / byte.MaxValue,
+                (_random.Next(128) + 127) / byte.MaxValue,
+                (_random.Next(128) + 127) / byte.MaxValue,
                 1);
         }
 
@@ -30,12 +31,10 @@ namespace GhostCore.Graphics.Colors
         /// <returns>A random RGBA color.</returns>
         public static RGBA RandomRGBColor(bool randomAlpha = false)
         {
-            var random = new Random();
-
-            return new RGBA((float)random.NextDouble(), 
-                (float)random.NextDouble(), 
-                (float)random.NextDouble(), 
-                (float)(randomAlpha ? random.NextDouble() : 1));
+            return new RGBA((float)_random.NextDouble(), 
+                (float)_random.NextDouble(), 
+                (float)_random.NextDouble(), 
+                (float)(randomAlpha ? _random.NextDouble() : 1));
         }
 
         /// <summary>
@@ -44,12 +43,10 @@ namespace GhostCore.Graphics.Colors
         /// <param name="colorSpace">The color space preset.</param>
         public static HSLA RandomHSLColor(HSLColorSpace colorSpace)
         {
-            var random = new Random();
-
             return new HSLA(
-                (float)(random.NextDouble() * (colorSpace.HueRange.Y - colorSpace.HueRange.X) + colorSpace.HueRange.X),
-                (float)(random.NextDouble() * (colorSpace.SaturationRange.Y - colorSpace.SaturationRange.X) + colorSpace.SaturationRange.X),
-                (float)(random.NextDouble() * (colorSpace.LightnessValue.Y - colorSpace.LightnessValue.X) + colorSpace.LightnessValue.X),
+                (float)(_random.NextDouble() * (colorSpace.HueRange.Y - colorSpace.HueRange.X) + colorSpace.HueRange.X),
+                (float)(_random.NextDouble() * (colorSpace.SaturationRange.Y - colorSpace.SaturationRange.X) + colorSpace.SaturationRange.X),
+                (float)(_random.NextDouble() * (colorSpace.LightnessValue.Y - colorSpace.LightnessValue.X) + colorSpace.LightnessValue.X),
                 1);
         }
 
@@ -62,11 +59,10 @@ namespace GhostCore.Graphics.Colors
         /// <returns>A multi-dimensional array of HSLA values.</returns>
         public static HSLA[,] GenerateRandomColorGrid(int rows, int columns, HSLColorSpace preset)
         {
-            var random = new Random();
             var rv = new HSLA[rows, columns];
             for (int col = 0; col < columns; col++)
             {
-                var h = (float)random.NextDouble() * (preset.HueRange.Y - preset.HueRange.X) + preset.HueRange.X;
+                var h = (float)_random.NextDouble() * (preset.HueRange.Y - preset.HueRange.X) + preset.HueRange.X;
                 for (int row = 0; row < rows; row++)
                 {
                     var perc = ((float)row) / rows;

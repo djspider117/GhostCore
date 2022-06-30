@@ -129,6 +129,7 @@
     <Compile Include="AutoFormGeneration\ItemsControlType.cs" />
     <Compile Include="AutoFormGeneration\SliderFormItemAttribute.cs" />
     <Compile Include="AutoFormGeneration\TextBoxFormItemAttribute.cs" />
+    <Compile Include="Controls\UnrestrictedImage.cs" />
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToDoubleConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />

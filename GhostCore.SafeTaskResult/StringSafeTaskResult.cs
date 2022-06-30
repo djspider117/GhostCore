@@ -31,5 +31,13 @@ namespace GhostCore
         {
             return this as ISafeTaskResult<K>;
         }
+
+        public ISafeTaskResult<T> Convert<T>()
+        {
+            if (!IsFaulted)
+                throw new InvalidOperationException("Convert should only be used when the resault is faulted.");
+
+            return new SafeTaskResult<T>(FailReason, DetailedException, HResult);
+        }
     }
 }

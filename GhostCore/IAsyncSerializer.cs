@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Converters;
 using System.Xml.Serialization;
 using System.IO;
+using Newtonsoft.Json.Serialization;
+using System.Numerics;
 
 namespace GhostCore
 {
@@ -81,8 +83,8 @@ namespace GhostCore
             _seriSettings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects,
-                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-                NullValueHandling = NullValueHandling.Ignore
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
+                NullValueHandling = NullValueHandling.Ignore,
             };
 
 #if DEBUG

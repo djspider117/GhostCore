@@ -4,5 +4,6 @@
     {
         T ResultValue { get; }
         ISafeTaskResult<K> Cast<K>();
+        ISafeTaskResult<K> Convert<K>();
     }
 }
