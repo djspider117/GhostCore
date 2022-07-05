@@ -37,5 +37,19 @@ namespace GhostCore.Security.Extensions
         {
             return _sha1.Hash(value);
         }
+
+        public static long QuickHash(this string value)
+        {
+            const long p = 31;
+            const long m = (long)(1e9 + 9);
+            long hashValue = 0;
+            long p_pow = 1;
+            foreach (var c in value)
+            {
+                hashValue = (hashValue + (c - 'a' + 1) * p_pow) % m;
+                p_pow = (p_pow * p) % m;
+            }
+            return hashValue;
+        }
     }
 }

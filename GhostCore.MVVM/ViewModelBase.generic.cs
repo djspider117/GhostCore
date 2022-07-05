@@ -15,9 +15,9 @@ namespace GhostCore.MVVM
         #region Fields
 
         private readonly int _internalObjectId;
-        private T _model;
 
-        private object _parent;
+        protected T _model;
+        protected object _parent;
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace GhostCore.MVVM
         public int InternalObjectId => _internalObjectId;
 
         [JsonIgnore]
-        public object Parent
+        public virtual object Parent
         {
             get { return _parent; }
             set { _parent = value; OnPropertyChanged(nameof(Parent)); }

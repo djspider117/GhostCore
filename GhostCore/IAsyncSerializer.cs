@@ -82,7 +82,7 @@ namespace GhostCore
         {
             _seriSettings = new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameHandling = TypeNameHandling.All,
                 TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
                 NullValueHandling = NullValueHandling.Ignore,
             };
@@ -104,6 +104,12 @@ namespace GhostCore
 
         public Task<T> DeserializeAsync<T>(string str)
         {
+            //megahack because WHAT THE FUCK????
+            str = str.Replace("System.Numerics.Vector2, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+                "System.Numerics.Vector2, System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+
+            //var res = JsonConvert.DeserializeObject<T>(str, _seriSettings);
+            //return Task.FromResult(res);
             return Task.Run(() => JsonConvert.DeserializeObject<T>(str, _seriSettings));
         }
     }
