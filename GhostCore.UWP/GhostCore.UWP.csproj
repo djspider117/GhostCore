@@ -152,6 +152,8 @@
     <Compile Include="Converters\NullToColorConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\StringToFontFamilyConverter.cs" />
+    <Compile Include="Converters\StringToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\StringToTimeSpanConverter.cs" />
     <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="Converters\ToUpperConvertor.cs" />

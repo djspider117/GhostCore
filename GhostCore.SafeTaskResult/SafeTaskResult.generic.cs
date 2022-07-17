@@ -40,4 +40,12 @@ namespace GhostCore
             return new SafeTaskResult<K>(FailReason, DetailedException, HResult);
         }
     }
+
+    public static class STRFactory
+    {
+        public static SafeTaskResult<T> Make<T>(T result)
+        {
+            return new SafeTaskResult<T>(result);
+        }
+    }
 }

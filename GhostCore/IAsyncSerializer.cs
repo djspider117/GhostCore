@@ -78,6 +78,8 @@ namespace GhostCore
     {
         private JsonSerializerSettings _seriSettings;
 
+        public static readonly InheritSafeAsyncSerializer SharedInstance = new InheritSafeAsyncSerializer();
+
         public InheritSafeAsyncSerializer()
         {
             _seriSettings = new JsonSerializerSettings

@@ -32,8 +32,8 @@ namespace Bedrock.SDK.UI.Controls.Media.Imaging
         public static readonly DependencyProperty DecodePixelHeightProperty =
             DependencyProperty.Register(nameof(DecodePixelHeight), typeof(int), typeof(UnrestrictedImage), new PropertyMetadata(0));
 
-        public static readonly DependencyProperty UriSourceProperty =
-            DependencyProperty.Register(nameof(UriSource), typeof(Uri), typeof(UnrestrictedImage), new PropertyMetadata(null, (d, e) => (d as UnrestrictedImage).OnUriSourceChanged(e)));
+        public static readonly DependencyProperty StringSourceProperty =
+            DependencyProperty.Register(nameof(StringSource), typeof(string), typeof(UnrestrictedImage), new PropertyMetadata(null, (d, e) => (d as UnrestrictedImage).OnStringSourceChanged(e)));
 
         public static readonly DependencyProperty StretchProperty =
             DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(UnrestrictedImage), new PropertyMetadata(Stretch.Uniform));
@@ -66,11 +66,13 @@ namespace Bedrock.SDK.UI.Controls.Media.Imaging
             get { return (Stretch)GetValue(StretchProperty); }
             set { SetValue(StretchProperty, value); }
         }
-        public Uri UriSource
+
+        public string StringSource
         {
-            get { return (Uri)GetValue(UriSourceProperty); }
-            set { SetValue(UriSourceProperty, value); }
+            get { return (string)GetValue(StringSourceProperty); }
+            set { SetValue(StringSourceProperty, value); }
         }
+
         public int DecodePixelWidth
         {
             get { return (int)GetValue(DecodePixelWidthProperty); }
@@ -111,7 +113,10 @@ namespace Bedrock.SDK.UI.Controls.Media.Imaging
             _imageControl.Loaded += ImageControl_ImageOpened;
             _imageControl.Source = _bitmapImage;
 
-            await SetImageSource(UriSource);
+            if (string.IsNullOrEmpty(StringSource))
+                return;
+
+            await SetImageSource(new Uri(StringSource));
         }
 
         #endregion
@@ -150,10 +155,13 @@ namespace Bedrock.SDK.UI.Controls.Media.Imaging
 
         #endregion
 
-        private async void OnUriSourceChanged(DependencyPropertyChangedEventArgs e)
+        private async void OnStringSourceChanged(DependencyPropertyChangedEventArgs e)
         {
-            var uri = e.NewValue as Uri;
-            await SetImageSource(uri);
+            var urisrc = e.NewValue as string;
+            if (string.IsNullOrEmpty(urisrc))
+                return;
+
+            await SetImageSource(new Uri(urisrc));
         }
 
         protected virtual async Task SetImageSource(Uri uri)
