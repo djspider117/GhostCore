@@ -27,7 +27,7 @@ namespace GhostCore.UWP.Converters
                 //catch and handle the exception
                 return string.Empty;
             }
-		}
+        }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GhostCore.SimpleIoC
+﻿namespace GhostCore.SimpleIoC
 {
     public struct LazyService<T>
     {

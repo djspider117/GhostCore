@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GhostCore.ComponentModel;
+using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GhostCore.ComponentModel;
 
 namespace GhostCore.MVVM
 {
@@ -43,7 +39,7 @@ namespace GhostCore.MVVM
 
         protected virtual void DataContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            
+
         }
     }
 }

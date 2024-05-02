@@ -1,9 +1,6 @@
-﻿using GhostCore.Win32;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace GhostCore.Win32
 {

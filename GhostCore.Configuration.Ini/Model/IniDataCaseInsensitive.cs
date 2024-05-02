@@ -13,7 +13,7 @@ namespace GhostCore.Configuration.INI.Model
         ///     Initializes an empty IniData instance.
         /// </summary>
         public IniDataCaseInsensitive()
-            : base (new SectionDataCollection(StringComparer.OrdinalIgnoreCase))
+            : base(new SectionDataCollection(StringComparer.OrdinalIgnoreCase))
         {
             Global = new KeyDataCollection(StringComparer.OrdinalIgnoreCase);
         }
@@ -27,7 +27,7 @@ namespace GhostCore.Configuration.INI.Model
         ///     data with the sections of the file
         /// </param>
         public IniDataCaseInsensitive(SectionDataCollection sdc)
-            : base (new SectionDataCollection(sdc, StringComparer.OrdinalIgnoreCase))
+            : base(new SectionDataCollection(sdc, StringComparer.OrdinalIgnoreCase))
         {
             Global = new KeyDataCollection(StringComparer.OrdinalIgnoreCase);
         }
@@ -39,9 +39,9 @@ namespace GhostCore.Configuration.INI.Model
         public IniDataCaseInsensitive(IniData ori)
             : this(new SectionDataCollection(ori.Sections, StringComparer.OrdinalIgnoreCase))
         {
-            Global = (KeyDataCollection) ori.Global.Clone();
+            Global = (KeyDataCollection)ori.Global.Clone();
             Configuration = ori.Configuration.Clone();
         }
     }
-    
-} 
+
+}

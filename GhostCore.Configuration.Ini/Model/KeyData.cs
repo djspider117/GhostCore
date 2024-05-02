@@ -16,7 +16,7 @@ namespace GhostCore.Configuration.INI.Model
         /// </summary>
         public KeyData(string keyName)
         {
-            if(string.IsNullOrEmpty(keyName))
+            if (string.IsNullOrEmpty(keyName))
                 throw new ArgumentException("key name can not be empty");
 
             _comments = new List<string>();
@@ -52,7 +52,7 @@ namespace GhostCore.Configuration.INI.Model
         public List<string> Comments
         {
             get { return _comments; }
-            set { _comments = new List<string> (value) ; }
+            set { _comments = new List<string>(value); }
         }
 
         /// <summary>

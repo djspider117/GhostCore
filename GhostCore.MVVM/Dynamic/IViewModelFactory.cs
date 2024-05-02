@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace GhostCore.MVVM.Dynamic
+﻿namespace GhostCore.MVVM.Dynamic
 {
     public interface IViewModelFactory<TViewModel, TModel> where TViewModel : ViewModelBase<TModel>
     {

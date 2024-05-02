@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GhostCore.MVVM
@@ -12,7 +8,7 @@ namespace GhostCore.MVVM
         #region Events
 
         public event EventHandler CanExecuteChanged;
-       
+
         #endregion
 
         #region Fields

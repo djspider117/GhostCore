@@ -1,7 +1,4 @@
-﻿using GhostCore;
-using System.Diagnostics;
-
-namespace GhostCore.Logging
+﻿namespace GhostCore.Logging
 {
     public static class Logger
     {

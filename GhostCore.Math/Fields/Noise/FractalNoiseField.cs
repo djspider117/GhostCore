@@ -74,7 +74,7 @@ namespace GhostCore.Math
         /// Creates a new fractal noise using default source: gradient noise seeded by supplied seed value
         /// </summary>
         /// <param name="seed">seed value</param>
-        protected FractalNoiseField(int seed) 
+        protected FractalNoiseField(int seed)
             : this(new GradientNoiseField(seed))
         {
         }

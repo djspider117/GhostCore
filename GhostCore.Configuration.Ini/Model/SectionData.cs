@@ -13,9 +13,9 @@ namespace GhostCore.Configuration.INI.Model
         #region Initialization
 
         public SectionData(string sectionName)
-            :this(sectionName, EqualityComparer<string>.Default)
+            : this(sectionName, EqualityComparer<string>.Default)
         {
-            
+
         }
         /// <summary>
         ///     Initializes a new instance of the <see cref="SectionData"/> class.
@@ -58,7 +58,7 @@ namespace GhostCore.Configuration.INI.Model
 
         #endregion
 
-		#region Operations
+        #region Operations
 
         /// <summary>
         ///     Deletes all comments in this section and key/value pairs
@@ -73,9 +73,9 @@ namespace GhostCore.Configuration.INI.Model
         /// Deletes all the key-value pairs in this section.
         /// </summary>
 		public void ClearKeyData()
-		{
-			Keys.RemoveAllKeys();
-		}
+        {
+            Keys.RemoveAllKeys();
+        }
 
         /// <summary>
         ///     Merges otherSection into this, adding new keys if they don't exists
@@ -90,11 +90,11 @@ namespace GhostCore.Configuration.INI.Model
         {
             foreach (var comment in toMergeSection.Comments)
                 Comments.Add(comment);
-                
+
             Keys.Merge(toMergeSection.Keys);
         }
 
-		#endregion
+        #endregion
 
         #region Properties
 
@@ -119,7 +119,7 @@ namespace GhostCore.Configuration.INI.Model
         }
 
 
-		[Obsolete("Do not use this property, use property Comments instead")]
+        [Obsolete("Do not use this property, use property Comments instead")]
         public List<string> LeadingComments
         {
             get
@@ -143,7 +143,7 @@ namespace GhostCore.Configuration.INI.Model
         {
             get
             {
-				return _leadingComments;
+                return _leadingComments;
             }
             set
             {
@@ -152,7 +152,7 @@ namespace GhostCore.Configuration.INI.Model
 
         }
 
-		[Obsolete("Do not use this property, use property Comments instead")]
+        [Obsolete("Do not use this property, use property Comments instead")]
         public List<string> TrailingComments
         {
             get

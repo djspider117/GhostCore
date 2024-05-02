@@ -3,17 +3,17 @@
     Public redistribution is not permitted.
 */
 
+using GhostCore.Numerics;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Composition;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
-using System.Linq;
-using GhostCore.Numerics;
 
 namespace GhostCore.UWP.Media
 {
@@ -328,10 +328,10 @@ namespace GhostCore.UWP.Media
         /// <param name="color">Default color of the shadow</param>
         /// <returns></returns>
         public static (SpriteVisual ContainerVisual, DropShadow Shadow) CreateDropShadow(
-            FrameworkElement sourceElement, 
-            FrameworkElement shadowHost, 
-            double blurRadius, 
-            Color color, 
+            FrameworkElement sourceElement,
+            FrameworkElement shadowHost,
+            double blurRadius,
+            Color color,
             float opacity = 1f,
             float offsetX = 0f,
             float offsetY = 0f,

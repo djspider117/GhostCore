@@ -1,13 +1,10 @@
-﻿using System;
-using GhostCore;
-
+﻿using GhostCore.Utility;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+using System;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using GhostCore.Utility;
 
 namespace GhostCore.Networking
 {
@@ -424,7 +421,7 @@ namespace GhostCore.Networking
                 return new SafeTaskResult<T>(ex.Message, ex);
             }
         }
-        
+
         #endregion
     }
 }

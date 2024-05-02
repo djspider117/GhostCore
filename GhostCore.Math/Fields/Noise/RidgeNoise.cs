@@ -84,7 +84,7 @@ namespace GhostCore.Math
             _weight = signal * Gain;
             if (_weight > 1)
                 _weight = 1;
-            
+
             if (_weight < 0)
                 _weight = 0;
 

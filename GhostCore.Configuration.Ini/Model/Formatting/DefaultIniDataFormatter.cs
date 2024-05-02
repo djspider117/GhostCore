@@ -5,20 +5,20 @@ using System.Text;
 
 namespace GhostCore.Configuration.INI.Model.Formatting
 {
-    
+
     public class DefaultIniDataFormatter : IIniDataFormatter
     {
         IniParserConfiguration _configuration;
-        
+
         #region Initialization
-        public DefaultIniDataFormatter():this(new IniParserConfiguration()) {}
-        
+        public DefaultIniDataFormatter() : this(new IniParserConfiguration()) { }
+
         public DefaultIniDataFormatter(IniParserConfiguration configuration)
         {
             Configuration = configuration ?? throw new ArgumentNullException("configuration");
         }
         #endregion
-        
+
         public virtual string IniDataToString(IniData iniData)
         {
             var sb = new StringBuilder();
@@ -38,7 +38,7 @@ namespace GhostCore.Configuration.INI.Model.Formatting
 
             return sb.ToString();
         }
-        
+
         /// <summary>
         ///     Configuration used to write an ini file with the proper
         ///     delimiter characters and data.
@@ -67,10 +67,10 @@ namespace GhostCore.Configuration.INI.Model.Formatting
             WriteComments(section.Comments, sb);
 
             //Write section name
-            sb.Append(string.Format("{0}{1}{2}{3}", 
-                Configuration.SectionStartChar, 
-                section.SectionName, 
-                Configuration.SectionEndChar, 
+            sb.Append(string.Format("{0}{1}{2}{3}",
+                Configuration.SectionStartChar,
+                section.SectionName,
+                Configuration.SectionEndChar,
                 Configuration.NewLineStr));
 
             WriteKeyValueData(section.Keys, sb);
@@ -91,11 +91,11 @@ namespace GhostCore.Configuration.INI.Model.Formatting
                 WriteComments(keyData.Comments, sb);
 
                 //Write key and value
-                sb.Append(string.Format("{0}{3}{1}{3}{2}{4}", 
+                sb.Append(string.Format("{0}{3}{1}{3}{2}{4}",
                     keyData.KeyName,
-                    Configuration.KeyValueAssigmentChar, 
-                    keyData.Value, 
-                    Configuration.AssigmentSpacer, 
+                    Configuration.KeyValueAssigmentChar,
+                    keyData.Value,
+                    Configuration.AssigmentSpacer,
                     Configuration.NewLineStr));
             }
         }
@@ -106,7 +106,7 @@ namespace GhostCore.Configuration.INI.Model.Formatting
                 sb.Append(string.Format("{0}{1}{2}", Configuration.CommentString, comment, Configuration.NewLineStr));
         }
         #endregion
-        
+
     }
-    
-} 
+
+}

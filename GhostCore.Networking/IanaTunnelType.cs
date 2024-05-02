@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GhostCore.Networking
+﻿namespace GhostCore.Networking
 {
     /// The encapsulation method used by a tunnel. The value
     /// direct indicates that a packet is encapsulated

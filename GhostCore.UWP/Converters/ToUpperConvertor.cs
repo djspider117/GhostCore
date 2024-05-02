@@ -7,7 +7,7 @@ namespace GhostCore.UWP.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if(value is string text)
+            if (value is string text)
                 return text.ToUpperInvariant();
 
             throw new ArgumentException(nameof(value));

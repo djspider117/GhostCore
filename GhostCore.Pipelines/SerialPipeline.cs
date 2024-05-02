@@ -28,7 +28,7 @@ namespace GhostCore.Pipelines
 
             // BIG HACK pls fix
             int retryCount = 100;
-            while(_pdata != null && retryCount > 0)
+            while (_pdata != null && retryCount > 0)
             {
                 await Task.Delay(25);
                 retryCount--;
@@ -50,7 +50,7 @@ namespace GhostCore.Pipelines
                 var procResult = await Process(ipp, _pdata);
                 if (procResult.IsFaulted)
                     return;
-                
+
             }
 
             if (_processors.Count == 0 && _pdata.ProcessedObject == null)

@@ -1,5 +1,4 @@
 ﻿using CsvHelper;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
-using Windows.UI.WebUI;
 
 namespace GhostCore.UWP.Helpers
 {

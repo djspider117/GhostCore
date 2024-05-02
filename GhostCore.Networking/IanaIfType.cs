@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GhostCore.Networking
+﻿namespace GhostCore.Networking
 {
     /// <summary>
     /// This data type is used as the syntax of the ifType

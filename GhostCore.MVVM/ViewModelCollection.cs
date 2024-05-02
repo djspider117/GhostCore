@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Text;
 
 namespace GhostCore.MVVM
 {
@@ -57,7 +56,7 @@ namespace GhostCore.MVVM
                 return;
 
             base.OnCollectionChanged(e);
-            
+
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:

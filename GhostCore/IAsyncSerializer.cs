@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Converters;
-using System.Xml.Serialization;
 using System.IO;
-using Newtonsoft.Json.Serialization;
-using System.Numerics;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace GhostCore
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GhostCore.Security.Cryptography;
+﻿using GhostCore.Security.Cryptography;
 
 namespace GhostCore.Security.Extensions
 {

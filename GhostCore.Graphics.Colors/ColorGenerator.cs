@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Numerics;
 
 namespace GhostCore.Graphics.Colors
 {
@@ -31,9 +30,9 @@ namespace GhostCore.Graphics.Colors
         /// <returns>A random RGBA color.</returns>
         public static RGBA RandomRGBColor(bool randomAlpha = false)
         {
-            return new RGBA((float)_random.NextDouble(), 
-                (float)_random.NextDouble(), 
-                (float)_random.NextDouble(), 
+            return new RGBA((float)_random.NextDouble(),
+                (float)_random.NextDouble(),
+                (float)_random.NextDouble(),
                 (float)(randomAlpha ? _random.NextDouble() : 1));
         }
 
@@ -91,7 +90,7 @@ namespace GhostCore.Graphics.Colors
             var rv = new HSLA[rows, columns];
             for (int col = 0; col < columns; col++)
             {
-                var h = ((float)col /columns) * (preset.HueRange.Y - preset.HueRange.X) + preset.HueRange.X;
+                var h = ((float)col / columns) * (preset.HueRange.Y - preset.HueRange.X) + preset.HueRange.X;
                 for (int row = 0; row < rows; row++)
                 {
                     var perc = ((float)row) / rows;

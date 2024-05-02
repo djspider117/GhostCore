@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -41,7 +40,7 @@ namespace GhostCore.IoC
             {
                 if (serviceDefinition.SyncFactoryMethod != null || serviceDefinition.ConcreteInstance != null)
                 {
-                    var temp = serviceDefinition.Scope; 
+                    var temp = serviceDefinition.Scope;
                     serviceDefinition.Scope = ServiceScope.LazySingleton;
                     var mockObj = serviceDefinition.GetValue(this, true);
                     serviceDefinition.Scope = temp;

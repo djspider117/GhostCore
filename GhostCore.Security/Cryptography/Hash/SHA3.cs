@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GhostCore.Security.Cryptography.Hash.Abstract;
+﻿using GhostCore.Security.Cryptography.Hash.Abstract;
+using System;
 
 namespace GhostCore.Security.Cryptography.Hash
 {

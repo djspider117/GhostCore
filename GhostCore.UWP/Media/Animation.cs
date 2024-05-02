@@ -417,7 +417,7 @@ namespace GhostCore.UWP.Media
             return storyboard;
         }
 
-        public static DoubleAnimation EnableDependentAnimation(this DoubleAnimation storyboard, bool value) 
+        public static DoubleAnimation EnableDependentAnimation(this DoubleAnimation storyboard, bool value)
         {
             storyboard.EnableDependentAnimation = value;
             return storyboard;
@@ -521,6 +521,6 @@ namespace GhostCore.UWP.Media
 
         #endregion
 
- 
+
     }
 }

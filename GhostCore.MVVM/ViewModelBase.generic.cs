@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GhostCore.ComponentModel;
+﻿using GhostCore.ComponentModel;
 using GhostCore.MVVM.Internal;
 using Newtonsoft.Json;
+using System;
 
 namespace GhostCore.MVVM
 {

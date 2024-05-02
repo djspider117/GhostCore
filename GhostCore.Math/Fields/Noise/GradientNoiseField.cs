@@ -1,5 +1,4 @@
-﻿using GhostCore.Math;
-using GhostCore.Math.Interpolation;
+﻿using GhostCore.Math.Interpolation;
 using System.Numerics;
 
 namespace GhostCore.Math
@@ -99,11 +98,11 @@ namespace GhostCore.Math
                 y %= Period;
                 z %= Period;
 
-                if (x < 0) 
+                if (x < 0)
                     x += Period;
-                if (y < 0) 
+                if (y < 0)
                     y += Period;
-                if (z < 0) 
+                if (z < 0)
                     z += Period;
             }
 

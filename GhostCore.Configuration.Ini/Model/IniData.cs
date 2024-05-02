@@ -40,7 +40,7 @@ namespace GhostCore.Configuration.INI.Model
             SectionKeySeparator = '.';
         }
 
-        public IniData(IniData ori): this((SectionDataCollection)ori.Sections)
+        public IniData(IniData ori) : this((SectionDataCollection)ori.Sections)
         {
             Global = (KeyDataCollection)ori.Global.Clone();
             Configuration = ori.Configuration.Clone();
@@ -160,7 +160,7 @@ namespace GhostCore.Configuration.INI.Model
         {
             Global.ClearComments();
 
-            foreach(var section in Sections)
+            foreach (var section in Sections)
             {
                 section.ClearComments();
             }

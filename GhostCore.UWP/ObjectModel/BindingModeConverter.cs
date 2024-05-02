@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GhostCore.UWP.ObjectModel
+﻿namespace GhostCore.UWP.ObjectModel
 {
     public static class BindingModeConverter
     {

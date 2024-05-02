@@ -1,6 +1,6 @@
-using System;
 using GhostCore.Configuration.INI.Model;
 using GhostCore.Configuration.INI.Parser;
+using System;
 
 namespace GhostCore.Configuration.INI
 {
@@ -24,7 +24,7 @@ namespace GhostCore.Configuration.INI
         /// <summary>
         ///     Ctor
         /// </summary>
-        public StringIniParser() : this (new IniDataParser()) {}
+        public StringIniParser() : this(new IniDataParser()) { }
 
         /// <summary>
         ///     Ctor
