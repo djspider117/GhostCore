@@ -196,7 +196,15 @@ namespace GhostCore.Networking
             if (useAuth)
                 await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
 
-            var httpResponse = await cli.GetAsync(url);
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await cli.GetAsync(url);
+            }
+            catch (HttpRequestException ex)
+            {
+                return new SafeTaskResult<T>("Failed due to network error.", ex);
+            }
 
             if (!httpResponse.IsSuccessStatusCode)
             {
