@@ -1,7 +1,5 @@
 using GhostCore.Configuration.INI.Model;
 using GhostCore.Configuration.INI.Model.Configuration;
-using System;
-using System.Collections.Generic;
 
 namespace GhostCore.Configuration.INI.Parser
 {
@@ -21,12 +19,12 @@ namespace GhostCore.Configuration.INI.Parser
         }
 
         public ConcatenateDuplicatedKeysIniDataParser()
-            :this(new ConcatenateDuplicatedKeysIniParserConfiguration())
-        {}
+            : this(new ConcatenateDuplicatedKeysIniParserConfiguration())
+        { }
 
         public ConcatenateDuplicatedKeysIniDataParser(ConcatenateDuplicatedKeysIniParserConfiguration parserConfiguration)
-            :base(parserConfiguration)
-        {}
+            : base(parserConfiguration)
+        { }
 
         protected override void HandleDuplicatedKeyInCollection(string key, string value, KeyDataCollection keyDataCollection, string sectionName)
         {

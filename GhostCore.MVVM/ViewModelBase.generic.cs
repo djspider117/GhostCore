@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GhostCore.ComponentModel;
+﻿using GhostCore.ComponentModel;
 using GhostCore.MVVM.Internal;
 using Newtonsoft.Json;
+using System;
 
 namespace GhostCore.MVVM
 {
@@ -15,9 +10,9 @@ namespace GhostCore.MVVM
         #region Fields
 
         private readonly int _internalObjectId;
-        private T _model;
 
-        private object _parent;
+        protected T _model;
+        protected object _parent;
 
         #endregion
 
@@ -32,7 +27,7 @@ namespace GhostCore.MVVM
         public int InternalObjectId => _internalObjectId;
 
         [JsonIgnore]
-        public object Parent
+        public virtual object Parent
         {
             get { return _parent; }
             set { _parent = value; OnPropertyChanged(nameof(Parent)); }

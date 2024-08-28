@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace GhostCore.IoC
         #endregion
 
         public virtual string Name { get; set; }
+        public bool ShouldMock { get; set; }
 
         #region Ctor and Init
 
@@ -25,6 +27,54 @@ namespace GhostCore.IoC
         #endregion
 
         #region Add & Remove
+
+        public void AssignMockProvider(Type serviceType, Type mockType, ServiceScope scope)
+        {
+            var serviceDefinition = _serviceDefinitions.FirstOrDefault(x => x.RegisteredServiceType == serviceType);
+            if (serviceDefinition == null)
+                throw new ServiceNotRegisteredException($"Service of type {serviceType.Name} not registered.");
+
+            serviceDefinition.SetMockProvider(mockType);
+
+            if (scope == ServiceScope.Singleton)
+            {
+                if (serviceDefinition.SyncFactoryMethod != null || serviceDefinition.ConcreteInstance != null)
+                {
+                    var temp = serviceDefinition.Scope;
+                    serviceDefinition.Scope = ServiceScope.LazySingleton;
+                    var mockObj = serviceDefinition.GetValue(this, true);
+                    serviceDefinition.Scope = temp;
+                    serviceDefinition.SetMockObject(mockObj);
+                    return;
+                }
+
+                throw new InvalidOperationException($"Service {serviceType} is an async service. Please use {nameof(AssignMockProviderAsync)}");
+            }
+        }
+        public async Task AssignMockProviderAsync(Type serviceType, Type mockType, ServiceScope scope)
+        {
+            var serviceDefinition = _serviceDefinitions.FirstOrDefault(x => x.RegisteredServiceType == serviceType);
+            if (serviceDefinition == null)
+                throw new ServiceNotRegisteredException($"Service of type {serviceType.Name} not registered.");
+
+            serviceDefinition.SetMockProvider(mockType);
+
+            if (scope == ServiceScope.Singleton)
+            {
+                if (serviceDefinition.AsyncFactoryMethod != null || serviceDefinition.ConcreteInstance != null)
+                {
+                    var temp = serviceDefinition.Scope;
+                    serviceDefinition.Scope = ServiceScope.LazySingleton;
+                    var mockObj = await serviceDefinition.GetValueAsync(this, true);
+                    serviceDefinition.Scope = temp;
+                    serviceDefinition.SetMockObject(mockObj);
+                    return;
+                }
+
+                throw new InvalidOperationException($"Service {serviceType} is a non-async service. Please use {nameof(AssignMockProvider)}");
+            }
+        }
+
 
         public void Add(Type serviceType, ServiceScope scope) => InternalAdd(scope, (_) => _.Invoke(null), (_) => Task.Run(() => _.Invoke(null)), serviceType, serviceType);
 
@@ -113,7 +163,10 @@ namespace GhostCore.IoC
         public virtual TService Get<TService>(bool tryInitialize = true)
         {
             var item = FindDefinition(typeof(TService));
-            var svc = (TService)item.GetValue(this);
+            var svc = (TService)item.GetValue(this, ShouldMock);
+
+            if (ShouldMock && svc == null)
+                throw new MockProviderMissingException($"No mock object was created for {typeof(TService)}. Have you assigned a mock provider for this type?");
 
             if (tryInitialize && svc is IInitializedService svcinit)
                 svcinit.Initialize();
@@ -125,7 +178,10 @@ namespace GhostCore.IoC
         public virtual async Task<TService> GetAsync<TService>(bool tryInitialize = true)
         {
             var item = FindDefinition(typeof(TService));
-            var svc = (TService)(await item.GetValueAsync(this));
+            var svc = (TService)(await item.GetValueAsync(this, ShouldMock));
+
+            if (ShouldMock && svc == null)
+                throw new MockProviderMissingException($"No mock object was created for {typeof(TService)}. Have you assigned a mock provider for this type?");
 
             if (tryInitialize && svc is IAsyncServiceInitializer svcinit)
                 await svcinit.Initialize();
@@ -174,6 +230,7 @@ namespace GhostCore.IoC
             {
                 return (true, func());
             }
+            catch (MockProviderMissingException) { throw; }
             catch (Exception)
             {
                 return (false, default);
@@ -218,7 +275,7 @@ namespace GhostCore.IoC
                 throw new ArgumentNullException(nameof(svcType));
 
             var idx = FindDefinitionIndex(svcType);
-            if (idx == -1)
+            if (idx != -1)
                 throw new InvalidOperationException("Duplicate type {svcType} found.");
 
             return idx;

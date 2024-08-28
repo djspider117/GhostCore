@@ -1,8 +1,8 @@
+using GhostCore.Configuration.INI.Model;
+using GhostCore.Configuration.INI.Model.Formatting;
+using GhostCore.Configuration.INI.Parser;
 using System;
 using System.IO;
-using GhostCore.Configuration.INI.Model;
-using GhostCore.Configuration.INI.Parser;
-using GhostCore.Configuration.INI.Model.Formatting;
 
 namespace GhostCore.Configuration.INI
 {
@@ -20,7 +20,7 @@ namespace GhostCore.Configuration.INI
         /// <summary>
         ///     Ctor
         /// </summary>
-        public StreamIniDataParser() : this (new IniDataParser()) {}
+        public StreamIniDataParser() : this(new IniDataParser()) { }
 
         /// <summary>
         ///     Ctor
@@ -46,7 +46,7 @@ namespace GhostCore.Configuration.INI
         {
             if (reader == null)
                 throw new ArgumentNullException("reader");
-            
+
             return Parser.Parse(reader.ReadToEnd());
         }
 
@@ -68,7 +68,7 @@ namespace GhostCore.Configuration.INI
             writer.Write(iniData.ToString());
         }
 
-        
+
         /// <summary>
         ///     Writes the ini data to a stream.
         /// </summary>

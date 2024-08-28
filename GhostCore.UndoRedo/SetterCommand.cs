@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-
-namespace GhostCore.UndoRedo
+﻿namespace GhostCore.UndoRedo
 {
     public class SetterCommand : IUndoRedoCommand
     {

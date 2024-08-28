@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-using System.Xml.Serialization;
-
-namespace GhostCore.Math
+﻿namespace GhostCore.Math
 {
     public struct TransformData
     {

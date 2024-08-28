@@ -1,5 +1,3 @@
-using System;
-
 namespace GhostCore.Math
 {
     public static class Fibbo

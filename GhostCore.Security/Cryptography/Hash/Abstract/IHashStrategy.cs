@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GhostCore.Security.Cryptography.Hash.Abstract
+﻿namespace GhostCore.Security.Cryptography.Hash.Abstract
 {
     public interface IHashStrategy
     {

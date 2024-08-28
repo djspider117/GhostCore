@@ -35,6 +35,7 @@ Some older GhostCore classes have been deleted from this to tighten the scope of
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Icons\GhostCoreIcon.png">

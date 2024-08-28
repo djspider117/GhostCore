@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Converters;
-using System.Xml.Serialization;
 using System.IO;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace GhostCore
 {
@@ -76,13 +73,15 @@ namespace GhostCore
     {
         private JsonSerializerSettings _seriSettings;
 
+        public static readonly InheritSafeAsyncSerializer SharedInstance = new InheritSafeAsyncSerializer();
+
         public InheritSafeAsyncSerializer()
         {
             _seriSettings = new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.Objects,
-                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-                NullValueHandling = NullValueHandling.Ignore
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
+                NullValueHandling = NullValueHandling.Ignore,
             };
 
 #if DEBUG
@@ -102,6 +101,12 @@ namespace GhostCore
 
         public Task<T> DeserializeAsync<T>(string str)
         {
+            //megahack because WHAT THE FUCK????
+            str = str.Replace("System.Numerics.Vector2, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+                "System.Numerics.Vector2, System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+
+            //var res = JsonConvert.DeserializeObject<T>(str, _seriSettings);
+            //return Task.FromResult(res);
             return Task.Run(() => JsonConvert.DeserializeObject<T>(str, _seriSettings));
         }
     }

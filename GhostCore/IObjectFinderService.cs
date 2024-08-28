@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace GhostCore
+﻿namespace GhostCore
 {
     public interface IObjectFinderService
     {

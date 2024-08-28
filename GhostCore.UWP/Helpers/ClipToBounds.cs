@@ -45,6 +45,7 @@ namespace GhostCore.UWP.Helpers
         {
             var element = sender as FrameworkElement;
 
+            element.Loaded -= Element_Loaded;
             element.SizeChanged -= Element_SizeChanged;
             element.Unloaded -= Element_Unloaded;
         }

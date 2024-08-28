@@ -1,13 +1,10 @@
-﻿using System;
-using GhostCore;
-
+﻿using GhostCore.Utility;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+using System;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using GhostCore.Utility;
 
 namespace GhostCore.Networking
 {
@@ -63,6 +60,10 @@ namespace GhostCore.Networking
             _baseUrl = baseUrl;
             _endpoint = endpoint;
             AuthenticationHandler = authHandler;
+
+#if DEBUG
+            IgnoreSSL = true;
+#endif
         }
 
 
@@ -73,6 +74,9 @@ namespace GhostCore.Networking
 
         public HttpContent CreateHttpContent(object data)
         {
+            if (data == null)
+                return null;
+
             if (data is string str)
                 return new StringContent(str, Encoding.UTF8, "application/json");
 
@@ -83,6 +87,8 @@ namespace GhostCore.Networking
 
         public string GetUrlForRoute(string routeName)
         {
+            if (string.IsNullOrWhiteSpace(routeName))
+                return CoreRequestURL;
             return $"{CoreRequestURL}/{routeName}";
         }
 
@@ -129,57 +135,34 @@ namespace GhostCore.Networking
         protected async Task<ISafeTaskResult> SafePostAsync(string url, object req, bool useAuth = false)
         {
             using var cli = MakeHttpClientWrapper(IgnoreSSL);
-
-            if (useAuth)
-                await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
-
-            var content = CreateHttpContent(req);
-            string requestUri = url;
-            var httpResponse = await cli.PostAsync(requestUri, content);
-
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                if (httpResponse.Content != null)
-                {
-                    var data = await httpResponse.Content.ReadAsStringAsync();
-                    return new SafeTaskResult(data, (int)httpResponse.StatusCode);
-                }
-
-                return new SafeTaskResult($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
-            }
-            else
-            {
-                return SafeTaskResult.Ok;
-            }
+            return await SafeExecuteAsync(cli, url, req, cli.PostAsync, useAuth);
         }
         protected async Task<ISafeTaskResult<T>> SafePostAsync<T>(string url, object req, bool useAuth = false)
         {
             using var cli = MakeHttpClientWrapper(IgnoreSSL);
+            return await SafeExecuteAsync<T>(cli, url, req, cli.PostAsync, useAuth);
+        }
 
-            if (useAuth)
-                await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
+        protected async Task<ISafeTaskResult> SafePutAsync(string url, object req, bool useAuth = false)
+        {
+            using var cli = MakeHttpClientWrapper(IgnoreSSL);
+            return await SafeExecuteAsync(cli, url, req, cli.PutAsync, useAuth);
+        }
+        protected async Task<ISafeTaskResult<T>> SafePutAsync<T>(string url, object req, bool useAuth = false)
+        {
+            using var cli = MakeHttpClientWrapper(IgnoreSSL);
+            return await SafeExecuteAsync<T>(cli, url, req, cli.PutAsync, useAuth);
+        }
 
-            var content = CreateHttpContent(req);
-            string requestUri = url;
-            var httpResponse = await cli.PostAsync(requestUri, content);
-
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                if (httpResponse.Content != null)
-                {
-                    var data = await httpResponse.Content.ReadAsStringAsync();
-                    return new SafeTaskResult<T>(data, (int)httpResponse.StatusCode);
-                }
-
-                return new SafeTaskResult<T>($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
-            }
-            else
-            {
-                var respString = await httpResponse.Content.ReadAsStringAsync();
-                var data = await Task.Run(() => JsonConvert.DeserializeObject<T>(respString));
-
-                return new SafeTaskResult<T>(data);
-            }
+        protected async Task<ISafeTaskResult> SafeDeleteAsync(string url, bool useAuth = false)
+        {
+            using var cli = MakeHttpClientWrapper(IgnoreSSL);
+            return await SafeExecuteAsync(cli, url, null, cli.DeleteAsync, useAuth);
+        }
+        protected async Task<ISafeTaskResult<T>> SafeDeleteAsync<T>(string url, bool useAuth = false)
+        {
+            using var cli = MakeHttpClientWrapper(IgnoreSSL);
+            return await SafeExecuteAsync<T>(cli, url, null, cli.DeleteAsync, useAuth);
         }
 
         protected async Task<ISafeTaskResult> SafeGetAsync(string url, bool useAuth = false)
@@ -213,7 +196,15 @@ namespace GhostCore.Networking
             if (useAuth)
                 await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
 
-            var httpResponse = await cli.GetAsync(url);
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await cli.GetAsync(url);
+            }
+            catch (HttpRequestException ex)
+            {
+                return new SafeTaskResult<T>("Failed due to network error.", ex);
+            }
 
             if (!httpResponse.IsSuccessStatusCode)
             {
@@ -367,6 +358,76 @@ namespace GhostCore.Networking
         protected virtual Task<bool> IsServerReachable()
         {
             return Task.FromResult(NetworkInterface.GetIsNetworkAvailable());
+        }
+
+        #endregion
+
+        #region Internal
+
+        internal async Task<ISafeTaskResult> SafeExecuteAsync(HttpClientWrapper cli, string url, object req, AsyncFunc<string, HttpContent, HttpResponseMessage> executor, bool useAuth = false)
+        {
+            try
+            {
+                if (useAuth)
+                    await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
+
+                var content = CreateHttpContent(req);
+                string requestUri = url;
+                var httpResponse = await executor(requestUri, content);
+
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    if (httpResponse.Content != null)
+                    {
+                        var data = await httpResponse.Content.ReadAsStringAsync();
+                        return new SafeTaskResult(data, (int)httpResponse.StatusCode);
+                    }
+
+                    return new SafeTaskResult($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
+                }
+                else
+                {
+                    return SafeTaskResult.Ok;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new SafeTaskResult(ex.Message, ex);
+            }
+        }
+        internal async Task<ISafeTaskResult<T>> SafeExecuteAsync<T>(HttpClientWrapper cli, string url, object req, AsyncFunc<string, HttpContent, HttpResponseMessage> executor, bool useAuth = false)
+        {
+            try
+            {
+                if (useAuth)
+                    await AuthenticationHandler.AddAuthenticationHeader(cli.Client);
+
+                var content = CreateHttpContent(req);
+                string requestUri = url;
+                var httpResponse = await executor(requestUri, content);
+
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    if (httpResponse.Content != null)
+                    {
+                        var data = await httpResponse.Content.ReadAsStringAsync();
+                        return new SafeTaskResult<T>(data, (int)httpResponse.StatusCode);
+                    }
+
+                    return new SafeTaskResult<T>($"Failed with status code {httpResponse.StatusCode}", (int)httpResponse.StatusCode);
+                }
+                else
+                {
+                    var respString = await httpResponse.Content.ReadAsStringAsync();
+                    var data = await Task.Run(() => JsonConvert.DeserializeObject<T>(respString));
+
+                    return new SafeTaskResult<T>(data);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new SafeTaskResult<T>(ex.Message, ex);
+            }
         }
 
         #endregion

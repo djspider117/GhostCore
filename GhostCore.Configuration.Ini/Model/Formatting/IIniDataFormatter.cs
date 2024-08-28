@@ -19,7 +19,7 @@ namespace GhostCore.Configuration.INI.Model.Formatting
         ///     Configuration used by this formatter when converting IniData
         ///     to an string
         /// </summary>
-        IniParserConfiguration Configuration {get;set;}
+        IniParserConfiguration Configuration { get; set; }
     }
-    
-} 
+
+}

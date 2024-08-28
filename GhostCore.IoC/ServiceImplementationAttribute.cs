@@ -7,17 +7,20 @@ namespace GhostCore.IoC
     {
         public Type ServiceType { get; set; }
         public ServiceScope Scope { get; set; }
+        public Type MockProviderType { get; set; }
 
         public ServiceImplementationAttribute(Type serviceType)
         {
             ServiceType = serviceType;
         }
 
-        public ServiceImplementationAttribute(Type serviceType, ServiceScope scope)
+        public ServiceImplementationAttribute(Type serviceType, ServiceScope scope, Type mockProviderType = null)
         {
             Scope = scope;
             ServiceType = serviceType;
+            MockProviderType = mockProviderType;
         }
     }
+
 
 }

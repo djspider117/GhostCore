@@ -3,10 +3,10 @@
     Public redistribution is not permitted.
 */
 
+using GhostCore.Numerics;
 using System;
 using System.Numerics;
 using System.Threading.Tasks;
-using GhostCore.Numerics;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -417,7 +417,7 @@ namespace GhostCore.UWP.Media
             return storyboard;
         }
 
-        public static DoubleAnimation EnableDependentAnimation(this DoubleAnimation storyboard, bool value) 
+        public static DoubleAnimation EnableDependentAnimation(this DoubleAnimation storyboard, bool value)
         {
             storyboard.EnableDependentAnimation = value;
             return storyboard;
@@ -521,6 +521,6 @@ namespace GhostCore.UWP.Media
 
         #endregion
 
- 
+
     }
 }

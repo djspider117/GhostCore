@@ -89,6 +89,8 @@ namespace GhostCore.MVVM.Messaging
                 var bus = _busses[busName] as EventBus;
                 if (bus._isDisposed)
                     throw new ObjectDisposedException(nameof(bus));
+
+                return bus;
             }
 
             return CreateBus(busName);
@@ -100,6 +102,8 @@ namespace GhostCore.MVVM.Messaging
                 var bus = _busses[busName] as EventBus<T>;
                 if (bus._isDisposed)
                     throw new ObjectDisposedException(nameof(bus));
+
+                return bus;
             }
 
             return CreateBus<T>(busName);

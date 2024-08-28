@@ -11,7 +11,10 @@ namespace GhostCore.IoC
         ServiceScope Scope { get; }
         Func<IServiceCollection, object> SyncFactoryMethod { get; }
 
-        object GetValue(IServiceCollection svcCol);
-        Task<object> GetValueAsync(IServiceCollection svcCol);
+        void SetMockProvider(Type mockProvider);
+        void SetMockObject(object obj);
+
+        object GetValue(IServiceCollection svcCol, bool mock = false);
+        Task<object> GetValueAsync(IServiceCollection svcCol, bool mock = false);
     }
 }

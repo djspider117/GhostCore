@@ -11,8 +11,8 @@
     <AssemblyName>GhostCore.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -129,6 +129,7 @@
     <Compile Include="AutoFormGeneration\ItemsControlType.cs" />
     <Compile Include="AutoFormGeneration\SliderFormItemAttribute.cs" />
     <Compile Include="AutoFormGeneration\TextBoxFormItemAttribute.cs" />
+    <Compile Include="Controls\UnrestrictedImage.cs" />
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToDoubleConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
@@ -151,6 +152,8 @@
     <Compile Include="Converters\NullToColorConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\StringToFontFamilyConverter.cs" />
+    <Compile Include="Converters\StringToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\StringToTimeSpanConverter.cs" />
     <Compile Include="Converters\TimeSpanToStringConverter.cs" />
     <Compile Include="Converters\ToUpperConvertor.cs" />
@@ -206,6 +209,22 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GhostCore.Bindings\GhostCore.Bindings.csproj">
+      <Project>{931452c8-b8c9-4a76-bbdc-49e0366e4f72}</Project>
+      <Name>GhostCore.Bindings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.ComponentModel\GhostCore.ComponentModel.csproj">
+      <Project>{b561f020-0c8a-4902-9f92-06067578c07a}</Project>
+      <Name>GhostCore.ComponentModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Logging\GhostCore.Logging.csproj">
+      <Project>{8a46f0dd-ae6e-458f-a8e9-b271f009f7dc}</Project>
+      <Name>GhostCore.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GhostCore.Math\GhostCore.Math.csproj">
+      <Project>{5f81a3fb-44fa-4aa8-b087-45b948cadba2}</Project>
+      <Name>GhostCore.Math</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GhostCore\GhostCore.csproj">
       <Project>{5187556b-a7ed-4efe-91f6-1dc981376424}</Project>
       <Name>GhostCore</Name>

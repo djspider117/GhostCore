@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace GhostCore.MVVM.Messaging
 {
@@ -22,6 +21,14 @@ namespace GhostCore.MVVM.Messaging
 
         public void Publish(T data) => Publish(null, data, null);
         public void Publish(T data, object originalSource) => Publish(null, data, originalSource);
+
+        public void Publish(object source, params T[] data)
+        {
+            foreach (var item in data)
+            {
+                Publish(item, source);
+            }
+        }
 
         public virtual void Publish(string evtFilter, T data, object originalSource)
         {

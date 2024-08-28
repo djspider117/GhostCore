@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GhostCore.SDK
+﻿namespace GhostCore.SDK
 {
     public static class SDKVersion
     {

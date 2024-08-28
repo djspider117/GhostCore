@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GhostCore.Security.Cryptography.Hash;
+﻿using GhostCore.Security.Cryptography.Hash;
 
 namespace GhostCore.Security.Extensions
 {
@@ -36,6 +31,20 @@ namespace GhostCore.Security.Extensions
         public static byte[] SHA1_BytesToBytes(this byte[] value)
         {
             return _sha1.Hash(value);
+        }
+
+        public static long QuickHash(this string value)
+        {
+            const long p = 31;
+            const long m = (long)(1e9 + 9);
+            long hashValue = 0;
+            long p_pow = 1;
+            foreach (var c in value)
+            {
+                hashValue = (hashValue + (c - 'a' + 1) * p_pow) % m;
+                p_pow = (p_pow * p) % m;
+            }
+            return hashValue;
         }
     }
 }

@@ -21,6 +21,7 @@ namespace GhostCore.Networking
         public Task<HttpResponseMessage> DeleteAsync(string requestUri, CancellationToken cancellationToken) => Client.DeleteAsync(requestUri, cancellationToken);
         public Task<HttpResponseMessage> DeleteAsync(string requestUri) => Client.DeleteAsync(requestUri);
         public Task<HttpResponseMessage> DeleteAsync(Uri requestUri) => Client.DeleteAsync(requestUri);
+        public Task<HttpResponseMessage> DeleteAsync(string requestUri, HttpContent _) => Client.DeleteAsync(requestUri);
 
         public Task<HttpResponseMessage> GetAsync(Uri requestUri) => Client.GetAsync(requestUri);
         public Task<HttpResponseMessage> GetAsync(string requestUri) => Client.GetAsync(requestUri);

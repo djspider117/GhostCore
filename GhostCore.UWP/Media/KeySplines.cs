@@ -14,7 +14,7 @@ namespace GhostCore.UWP.Media
         /// to replicate the easing of the EntranceThemeTransition
         /// </summary>
         /// <returns></returns>
-        public static KeySpline EntranceTheme => 
+        public static KeySpline EntranceTheme =>
             Animation.CreateKeySpline(0.1, 0.9, 0.2, 1);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace GhostCore.UWP.Media
         /// <summary>
         /// Intended for 500 millisecond opacity animation for depth animations
         /// </summary>
-        public static KeySpline DepthZoomOpacity => 
+        public static KeySpline DepthZoomOpacity =>
             Animation.CreateKeySpline(0.2, 0.6, 0.3, 0.9);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace GhostCore.UWP.Media
                 Translation Animations  : <= 500ms
         */
 
-        
+
         /// <summary>
         /// Analogous to Exponential EaseIn, Exponent 4.5
         /// </summary>

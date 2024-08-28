@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using GhostCore.Configuration.INI.Exceptions;
+﻿using GhostCore.Configuration.INI.Exceptions;
 using GhostCore.Configuration.INI.Model;
 using GhostCore.Configuration.INI.Parser;
+using System;
+using System.IO;
+using System.Text;
 
 namespace GhostCore.Configuration.INI
 {
@@ -15,7 +15,7 @@ namespace GhostCore.Configuration.INI
         /// <summary>
         ///     Ctor
         /// </summary>
-        public FileIniDataParser() {}
+        public FileIniDataParser() { }
 
         /// <summary>
         ///     Ctor
@@ -105,7 +105,7 @@ namespace GhostCore.Configuration.INI
         {
             WriteFile(filePath, parsedData, Encoding.UTF8);
         }
-                             
+
         /// <summary>
         ///     Writes INI data to a text file.
         /// </summary>
@@ -122,8 +122,8 @@ namespace GhostCore.Configuration.INI
         {
             // The default value can't be assigned as a default parameter value because it is not
             // a constant expression.
-			if (fileEncoding == null)
-				fileEncoding = Encoding.UTF8;
+            if (fileEncoding == null)
+                fileEncoding = Encoding.UTF8;
 
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentException("Bad filename.");

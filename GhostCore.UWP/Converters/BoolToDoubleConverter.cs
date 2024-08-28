@@ -12,7 +12,7 @@ namespace GhostCore.UWP.Converters
         {
             if (value is bool b)
             {
-                if (b) 
+                if (b)
                     return TrueValue;
 
                 return FalseValue;

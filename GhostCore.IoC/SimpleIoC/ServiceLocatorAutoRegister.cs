@@ -1,7 +1,5 @@
 ﻿using GhostCore.Utility;
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace GhostCore.SimpleIoC
 {
