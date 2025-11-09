@@ -108,21 +108,30 @@ public class EvaluatableSourceGenerator : IIncrementalGenerator
         sb.AppendLine($"                .Build();");
         sb.AppendLine($"        }}");
         sb.AppendLine();
-        sb.AppendLine($"        protected override void UpdateInputs(EvaluationContext context)");
-        sb.AppendLine($"        {{");
-        sb.AppendLine($"            PortConnection? pc = null;");
-        foreach (var prop in inputs ?? [])
+        if (inputs?.Count > 0)
         {
-            sb.AppendLine($"            if (InputConnections.TryGetValue(GetInputPort(nameof({prop.Name})), out pc))");
-            sb.AppendLine($"            {{");
-            sb.AppendLine($"                var val = pc.SourceObject.GetOutputValue(pc.SourcePort, context);");
-            sb.AppendLine($"                if (val != null)");
-            sb.AppendLine($"                    {prop.Name} = ({prop.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)})val;");
-            sb.AppendLine($"            }}");
+            sb.AppendLine($"        protected override void UpdateInputs(EvaluationContext context)");
+            sb.AppendLine($"        {{");
+            sb.AppendLine($"            PortConnection? pc = null;");
+            foreach (var prop in inputs ?? [])
+            {
+                var propType = prop.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+                sb.AppendLine($"            if (InputConnections.TryGetValue(GetInputPort(nameof({prop.Name})), out pc))");
+                sb.AppendLine($"            {{");
+                sb.AppendLine($"                var val = pc.SourceObject.GetOutputValue(pc.SourcePort, context);");
+                sb.AppendLine($"                if (val != null)");
+                sb.AppendLine($"                {{");
+                sb.AppendLine($"                    if (pc.Converter == null)");
+                sb.AppendLine($"                        {prop.Name} = ({propType})val;");
+                sb.AppendLine($"                    else");
+                sb.AppendLine($"                        {prop.Name} = ({propType})pc.Converter.Convert(val, val?.GetType(), typeof({propType}));");
+                sb.AppendLine($"                }}");
+                sb.AppendLine($"            }}");
+                sb.AppendLine();
+            }
+            sb.AppendLine($"        }}");
             sb.AppendLine();
         }
-        sb.AppendLine($"        }}");
-        sb.AppendLine();
         sb.AppendLine($"        public override object? GetOutputValueInternal(PortInfo port, EvaluationContext context)");
         sb.AppendLine($"        {{");
         foreach (var prop in outputs ?? [])

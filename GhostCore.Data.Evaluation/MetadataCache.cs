@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace GhostCore.Data.Evaluation;
@@ -27,14 +28,18 @@ public static class MetadataCache
         }
     }
 
-    public static DynamicTypeDefinition GetOrRegisterTypeDefinition(string name)
+    public static DynamicTypeDefinition GetOrRegisterTypeDefinition(string name, out bool newlyCreated)
     {
         if (string.IsNullOrEmpty(name))
             throw new ArgumentNullException(nameof(name));
 
         if (_nameTypeCache.TryGetValue(name, out var existing))
+        {
+            newlyCreated = false;
             return existing;
+        }
 
+        newlyCreated = true;
         var id = GetNextId();
         var node = new DynamicTypeDefinition(id, name);
         _typeCache.Add(node.TypeId, node);
@@ -47,8 +52,12 @@ public static class MetadataCache
         if (!_typeCache.TryGetValue(nodeType, out var existing))
             throw new InvalidOperationException("Not found");
 
+        var existingOutput = existing.Inputs.FirstOrDefault(x => x.Name == name);
+        if (existingOutput != null && existingOutput.Id != 0)
+            return existingOutput;
+
         var prop = new PortInfo(GetNextId(), propTypeId, name);
-        existing.Inputs.Add(prop);
+        //existing.Inputs.Add(prop); // TODO: i don't like this is commented, assumes external knowledge
 
         _portCache.Add(prop.Id, prop);
 
@@ -59,8 +68,12 @@ public static class MetadataCache
         if (!_typeCache.TryGetValue(nodeType, out var existing))
             throw new InvalidOperationException("Not found");
 
+        var existingOutput = existing.Outputs.FirstOrDefault(x => x.Name == name);
+        if (existingOutput != null && existingOutput.Id != 0)
+            return existingOutput;
+
         var prop = new PortInfo(GetNextId(), propTypeId, name);
-        existing.Outputs.Add(prop);
+        //existing.Outputs.Add(prop);
 
         _portCache.Add(prop.Id, prop);
 

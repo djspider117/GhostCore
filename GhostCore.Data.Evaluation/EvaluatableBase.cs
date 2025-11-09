@@ -15,28 +15,30 @@ public abstract class EvaluatableBase : IEvaluatable
         TypeDefinition = typeDefinition;
     }
 
-    public void ConnectToPort(string portName, IEvaluatable source)
+    public PortConnection ConnectToPort(string portName, IEvaluatable source, IConverter? converter = null)
     {
         if (source is not EvaluatableBase evb)
             throw new ArgumentException($"To use this override of {nameof(ConnectToPort)} the provided source must have a base type of {nameof(EvaluatableBase)}. Consider using ConnectToPort(PortInfo, IEvaluatable, PortInfo).", nameof(source));
 
-        ConnectToPort(GetInputPort(portName), source, evb.GetOutputPort("Output"));
+        return ConnectToPort(GetInputPort(portName), source, evb.GetOutputPort("Output"), converter);
     }
-    public void ConnectToPort(string portName, IEvaluatable source, string sourcePortName)
+    public PortConnection ConnectToPort(string portName, IEvaluatable source, string sourcePortName, IConverter? converter = null)
     {
         if (source is not EvaluatableBase evb)
             throw new ArgumentException($"To use this override of {nameof(ConnectToPort)} the provided source must have a base type of {nameof(EvaluatableBase)}. Consider using ConnectToPort(PortInfo, IEvaluatable, PortInfo)", nameof(source));
 
-        ConnectToPort(GetInputPort(portName), source, evb.GetOutputPort(sourcePortName));
+        return ConnectToPort(GetInputPort(portName), source, evb.GetOutputPort(sourcePortName), converter);
     }
 
-    public void ConnectToPort(PortInfo targetPort, IEvaluatable sourceObject, PortInfo sourcePort)
+    public PortConnection ConnectToPort(PortInfo targetPort, IEvaluatable sourceObject, PortInfo sourcePort, IConverter? converter = null)
     {
-        var pc = new PortConnection(sourcePort, sourceObject);
+        var pc = new PortConnection(sourcePort, sourceObject, converter);
         if (_inputConnections.ContainsKey(targetPort))
             _inputConnections[targetPort] = pc;
         else
             _inputConnections.Add(targetPort, pc);
+
+        return pc;
     }
 
     public object?[] GetOutputValues(EvaluationContext context)
@@ -51,7 +53,7 @@ public abstract class EvaluatableBase : IEvaluatable
         return GetOutputValueInternal(port, context);
     }
 
-    protected abstract void UpdateInputs(EvaluationContext context);
+    protected virtual void UpdateInputs(EvaluationContext context) { }
 
     public abstract object?[] GetOutputValuesInternal(EvaluationContext context);
     public abstract object? GetOutputValueInternal(PortInfo port, EvaluationContext context);

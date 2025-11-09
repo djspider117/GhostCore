@@ -15,4 +15,6 @@ public class DynamicTypeDefinition
         TypeId = id;
         TypeName = name;
     }
+
+    public override string ToString() => $"[{TypeId}, {TypeName}]";
 }

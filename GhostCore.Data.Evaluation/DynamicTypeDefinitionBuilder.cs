@@ -2,16 +2,24 @@
 
 namespace GhostCore.Data.Evaluation;
 
+internal class ExistingTypeDefinitionBuilder : DynamicTypeDefinitionBuilder
+{
+    internal ExistingTypeDefinitionBuilder(DynamicTypeDefinition node) : base(node) {}
+
+    public override DynamicTypeDefinitionBuilder WithInputProperty(string propName, uint typeId) => this;
+    public override DynamicTypeDefinitionBuilder WithOutputProperty(string propName, uint typeId) => this;
+}
+
 public class DynamicTypeDefinitionBuilder
 {
     private readonly DynamicTypeDefinition _curNode;
     private bool _built = false;
 
-    private DynamicTypeDefinitionBuilder(uint id, string name)
+    protected DynamicTypeDefinitionBuilder(uint id, string name)
     {
         _curNode = new DynamicTypeDefinition(id, name);
     }
-    private DynamicTypeDefinitionBuilder(DynamicTypeDefinition node) => _curNode = node;
+    protected DynamicTypeDefinitionBuilder(DynamicTypeDefinition node) => _curNode = node;
 
     public static DynamicTypeDefinitionBuilder Create(uint id, string name)
     {
@@ -20,18 +28,21 @@ public class DynamicTypeDefinitionBuilder
 
     public static DynamicTypeDefinitionBuilder Create(string name)
     {
-        var node = MetadataCache.GetOrRegisterTypeDefinition(name);
+        var node = MetadataCache.GetOrRegisterTypeDefinition(name, out var isNew);
+        if (!isNew)
+            return new ExistingTypeDefinitionBuilder(node);
+
         return new DynamicTypeDefinitionBuilder(node);
     }
 
-    public DynamicTypeDefinitionBuilder WithInputProperty(string propName, uint typeId)
+    public virtual DynamicTypeDefinitionBuilder WithInputProperty(string propName, uint typeId)
     {
-        MetadataCache.RegisterInputPortForType(_curNode.TypeId, propName, typeId);
+        _curNode.Inputs.Add(MetadataCache.RegisterInputPortForType(_curNode.TypeId, propName, typeId));
         return this;
     }
-    public DynamicTypeDefinitionBuilder WithOutputProperty(string propName, uint typeId)
+    public virtual DynamicTypeDefinitionBuilder WithOutputProperty(string propName, uint typeId)
     {
-        MetadataCache.RegisterOutputPortForType(_curNode.TypeId, propName, typeId);
+        _curNode.Outputs.Add(MetadataCache.RegisterOutputPortForType(_curNode.TypeId, propName, typeId));
         return this;
     }
 
