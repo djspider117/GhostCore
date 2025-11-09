@@ -4,7 +4,29 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>13</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>1.0.0</Version>
+		<Authors>Ionut Popovici</Authors>
+		<Company>Ionut Popovici</Company>
+		<Product>GhostCore</Product>
+		<Description>A package to create runtime evaluation graphs. Think of this as the backend for a node-graph system like UE blueprints or Unity shadergraph.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/djspider117/GhostCore</PackageProjectUrl>
+		<PackageIcon>GhostCoreIcon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/djspider117/GhostCore</RepositoryUrl>
+		<RepositoryType>GitHub</RepositoryType>
+		<PackageTags>data evaluation node graph</PackageTags>
+		<PackageReleaseNotes>Version 1.0
+			Initial release.
+		</PackageReleaseNotes>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\Icons\GhostCoreIcon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\GhostCore.Data.Evaluation.SourceGen\GhostCore.Data.Evaluation.SourceGen.csproj" />
